@@ -1,8 +1,30 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>MSB.UI_WPF</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>MSB</RootNamespace>
+		<LangVersion>latest</LangVersion>
+		<Nullable>disable</Nullable>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Version>1.4.13</Version>
+		<Company>MSB Studios</Company>
+		<Authors>MSB Studios</Authors>
+		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<PackageIcon>Icon.png</PackageIcon>
+		<Description>MSB.UI (Windows Presentation) is a .NET library designed to provide WPF solutions.</Description>
+		<PackageProjectUrl>https://github.com/MSB-Studios/MSB.UI-Windows-Presentation</PackageProjectUrl>
+		<AssemblyName>MSB.UI-WPF</AssemblyName>
+		<PackageId>MSB.UI-WPF</PackageId>
+	</PropertyGroup>
 
+	<ItemGroup>
+		<None Include="Icon.png" Pack="True" PackagePath="\" />
+		<None Include="../LICENSE.txt" Pack="True" PackagePath="\" />
+		<None Include="../README.md" Pack="True" PackagePath="\" />
+	</ItemGroup>
 </Project>

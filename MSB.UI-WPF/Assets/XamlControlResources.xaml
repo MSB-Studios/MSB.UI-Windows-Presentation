@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    x:Class="MSB.UI.Controls.XamlControlResources"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Themes/Default.xaml"/>
+        <ResourceDictionary /> <!--...-->
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/Button.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ToggleButton.xaml"/>
+        <ResourceDictionary />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

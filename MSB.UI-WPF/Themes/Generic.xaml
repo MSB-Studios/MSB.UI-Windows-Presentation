@@ -1,0 +1,257 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:msuc="clr-namespace:MSB.UI.Controls"
+    xmlns:msui="clr-namespace:MSB.UI">
+
+    <!--
+    *****************************
+            RESOURCES
+    *****************************
+    -->
+
+    <Style x:Key="WindowCaptionButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource CaptionButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CaptionButtonForeground}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="GridRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Path x:Name="Icon" Width="16" Height="16" Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Content}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="GridRoot" Property="Background" Value="{DynamicResource CaptionButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource CaptionButtonForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="GridRoot" Property="Background" Value="{DynamicResource CaptionButtonBackgroundPressed}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource CaptionButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="GridRoot" Property="Background" Value="{DynamicResource CaptionButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource CaptionButtonForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WindowCloseButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource CaptionButtonBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource CaptionButtonForeground}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="GridRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Path x:Name="Icon" Width="16" Height="16" Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Content}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="GridRoot" Property="Background" Value="#E81123"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="#FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="GridRoot" Property="Background" Value="#8B0A14"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="#FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="GridRoot" Property="Background" Value="{DynamicResource CaptionButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource CaptionButtonForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    *****************************
+            STYLES
+    *****************************
+    -->
+
+    <Style TargetType="msui:RichWindow">
+        <Setter Property="Background" Value="{DynamicResource WindowChromeBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome NonClientFrameEdges="None" CaptionHeight="0" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msui:RichWindow">
+                    <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="32"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" x:Name="PART_TitleBar" Panel.ZIndex="2" Background="{DynamicResource WindowTitleBarBackground}" WindowChrome.IsHitTestVisibleInChrome="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="144"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarRect" Fill="{DynamicResource ApplicationTransparentBrush}" MinWidth="48"/>
+                                <StackPanel >
+                                    <ContentPresenter x:Name="IconPresenter" Width="16" Height="16" Margin="8" Content="{TemplateBinding Icon}"/>
+                                    <TextBlock x:Name="TitlePresenter" Text="{TemplateBinding Title}" Margin="15, 5"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                                    <Button x:Name="Minimize" Style="{StaticResource WindowCaptionButtonStyle}">
+                                        <PathGeometry>
+                                            M14 8v1H3V8h11z
+                                        </PathGeometry>
+                                    </Button>
+                                    <Button x:Name="MaxRest" Style="{StaticResource WindowCaptionButtonStyle}">
+                                        <PathGeometry>
+                                            M3 3v10h10V3H3zm9 9H4V4h8v8z
+                                        </PathGeometry>
+                                    </Button>
+                                    <Button x:Name="Close" Style="{StaticResource WindowCloseButtonStyle}">
+                                        <PathGeometry>
+                                            M7.116 8l-4.558 4.558.884.884L8 8.884l4.558 4.558.884-.884L8.884
+                                            8l4.558-4.558-.884-.884L8 7.116 3.442 2.558l-.884.884L7.116 8z
+                                        </PathGeometry>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <Border Grid.Row="1" x:Name="PART_Content" Panel.ZIndex="0" Background="{TemplateBinding Background}">
+                                <ContentPresenter Grid.Row="1" x:Name="ContentPresenter" Content="{TemplateBinding Content}"/>
+                            </Border>
+                            <!--Flyout-->
+                            <Grid x:Name="PART_Flyout" Grid.RowSpan="2" Panel.ZIndex="1" Visibility="Collapsed">
+                                <Rectangle x:Name="LightDismissLayer" Fill="{DynamicResource LightDismissLayerBrush}"/>
+                                <Grid MinWidth="100" MinHeight="50" Margin="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ContentPresenter Margin="10" Content="{TemplateBinding Flyout}"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="Minimize" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="MaxRest" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter TargetName="MaxRest" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="MaxRest" Property="Content">
+                                <Setter.Value>
+                                    <PathGeometry>
+                                        M3 5v9h9V5H3zm8 8H4V6h7v7z
+                                        M5 5h1V4h7v7h-1v1h2V3H5v2z
+                                    </PathGeometry>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter TargetName="BorderRoot" Property="Padding" Value="6"/>
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WindowChromeBorderBrushInactive}"/>
+                        </Trigger>
+                        <!--Custom props triggers...-->
+                        <Trigger Property="ExtendViewIntoTitleBar" Value="True">
+                            <Setter TargetName="PART_TitleBar" Property="Background" Value="{x:Null}"/>
+                            <Setter TargetName="PART_Content" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="PART_Content" Property="Grid.RowSpan" Value="2"/>
+                            <Setter TargetName="TitlePresenter" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="TitleBarRect" Property="HorizontalAlignment" Value="Right"/>
+                        </Trigger>
+                        <Trigger Property="IsIconVisible" Value="False">
+                            <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsTitleVisible" Value="False">
+                            <Setter TargetName="TitlePresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <!--Flyout triggers...-->
+                        <Trigger Property="IsFlyoutOpen" Value="True">
+                            <Setter TargetName="PART_Flyout" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="msuc:Flyout">
+        <Setter Property="Background" Value="{DynamicResource FlyoutBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource FlyoutBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height" Value="150"/>
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:Flyout">
+                    <Grid x:Name="GridRoot" Visibility="Collapsed" Opacity="0">
+                        <Grid.Resources>
+                            <Storyboard x:Key="ClosedToOpenStoryboard">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                                <DoubleAnimation Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Opacity"
+                                                 To="1" Duration="0:0:0.15"/>
+                            </Storyboard>
+                            <Storyboard x:Key="OpenToClosedStoryboard">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.26" Value="{x:Static Visibility.Collapsed}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                                <DoubleAnimation Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Opacity"
+                                                 To="0" Duration="0:0:0.25"/>
+                            </Storyboard>
+                            <Storyboard x:Key="OpenStoryboard">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                                <DoubleAnimation Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Opacity"
+                                                 To="1" Duration="0:0:0"/>
+                            </Storyboard>
+                        </Grid.Resources>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Closed" To="Open"
+                                                      Storyboard="{StaticResource ClosedToOpenStoryboard}"/>
+                                    <VisualTransition From="Open" To="Closed"
+                                                      Storyboard="{StaticResource OpenToClosedStoryboard}"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Closed"/>
+                                <VisualState x:Name="Open" Storyboard="{StaticResource OpenStoryboard}"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}">
+                            <Border.Effect>
+                                <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="5" BlurRadius="5" Direction="270" Opacity="0.25"/>
+                            </Border.Effect>
+                        </Border>
+                        <ContentPresenter Content="{TemplateBinding Content}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
