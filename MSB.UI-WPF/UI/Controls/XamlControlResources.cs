@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using System.Windows.Media;
 using System.Windows;
 using System;
 
@@ -16,23 +15,12 @@ namespace MSB.UI.Controls
         public XamlControlResources()
         {
             this.InitializeComponent();
-
-            if (Application.Current is not RichApplication app)
-                return;
-
-            app.ThemeChanged += OnAppThemeChanged;
+            
+            if (Application.Current is RichApplication app)
+                app.ThemeChanged += OnAppThemeChanged;
         }
 
         #region Properties
-
-        /// <summary>
-        /// Gets or sets the color used as accent color.
-        /// </summary>
-        public Color AccentColor
-        {
-            get => accentColor;
-            set => SetValue(ref accentColor, value);
-        }
 
         /// <summary>
         /// Gets or sets an uri that contains the styles or brushes for the light theme.
@@ -88,38 +76,13 @@ namespace MSB.UI.Controls
         /// <param name="name">Name of the property that changed.</param>
         private void OnPropertyChanged(string name)
         {
-            switch (name)
-            {
-                case "AccentColor":
-                    UpdateAccentColor();
-
-                    break;
-                default:
-                    UpdateThemeDictionary();
-
-                    break;
-            }
-        }
-
-        private void UpdateAccentColor()
-        {
-            this["ApplicationAccentColor"] = this.AccentColor;
-
-            // lighter...
-            this["ApplicationAccentColorLight1"] = GetLighterColor(this.AccentColor, 26, 8, 13);
-            this["ApplicationAccentColorLight2"] = GetLighterColor(this.AccentColor, 52, 18, 26);
-            this["ApplicationAccentColorLight3"] = GetLighterColor(this.AccentColor, 78, 24, 39);
-
-            // darker...
-            this["ApplicationAccentColorDark1"] = GetDarkerColor(this.AccentColor, 26, 8, 13);
-            this["ApplicationAccentColorDark2"] = GetDarkerColor(this.AccentColor, 52, 18, 26);
-            this["ApplicationAccentColorDark3"] = GetDarkerColor(this.AccentColor, 78, 24, 39);
+            if (name is nameof(LightSource) || name is nameof(DarkSource))
+                UpdateThemeDictionary();
         }
 
         private void UpdateThemeDictionary()
         {
-            if (Application.Current is not RichApplication app)
-                return;
+            var app = (RichApplication)Application.Current;
 
             if (app.Theme is ApplicationTheme.Light)
                 this.MergedDictionaries[1].Source = LightSource;
@@ -127,49 +90,8 @@ namespace MSB.UI.Controls
                 this.MergedDictionaries[1].Source = DarkSource;
         }
 
-        static Color GetLighterColor(Color color, int r, int b, int g)
-        {
-            int lr = CheckMinMax(color.R + r);
-            int lg = CheckMinMax(color.G + g);
-            int lb = CheckMinMax(color.B + b);
-
-            return (Color)ColorConverter.ConvertFromString(
-                $"#{HexFromInteger(lr)}{HexFromInteger(lg)}{HexFromInteger(lb)}");
-        }
-
-        static Color GetDarkerColor(Color color, int r, int g, int b)
-        {
-            int dr = CheckMinMax(color.R - r);
-            int dg = CheckMinMax(color.G - g);
-            int db = CheckMinMax(color.B - b);
-
-            return (Color)ColorConverter.ConvertFromString(
-                $"#{HexFromInteger(dr)}{HexFromInteger(dg)}{HexFromInteger(db)}");
-        }
-
-        static int CheckMinMax(int value)
-        {
-            if (value > 255)
-                return 255;
-            else if (value < 0)
-                return 0;
-
-            return value;
-        }
-
-        static string HexFromInteger(int value)
-        {
-            var hex = value.ToString("X");
-
-            if (hex.Length < 2)
-                return $"0{hex}";
-
-            return hex;
-        }
-
         #endregion
 
-        Color accentColor;
         Uri lightSource, darkSource;
 
         // this.Source = new System.Uri("pack://application:,,,/MSB.UI-WPF;component/Assets/XamlControlResources.xaml");

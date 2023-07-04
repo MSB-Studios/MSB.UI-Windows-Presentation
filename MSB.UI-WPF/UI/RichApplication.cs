@@ -10,7 +10,7 @@ namespace MSB.UI
     public class RichApplication : Application
     {
         /// <summary>
-        /// 
+        /// Initializes a new instance of the 'RichApplication' class.
         /// </summary>
         public RichApplication()
         {
@@ -87,12 +87,13 @@ namespace MSB.UI
     {
         /// <summary>
         /// The app uses the light assets.
+        /// <para>Default value.</para>
         /// </summary>
-        Light,
+        Light = 0,
 
         /// <summary>
         /// The app uses the dark assets.
         /// </summary>
-        Dark
+        Dark = 1
     }
 }

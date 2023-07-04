@@ -4,26 +4,71 @@
 
     <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">12</CornerRadius>
+    
+    <!--
+    ***************************************************************
+    **********     COLORS
+    ***************************************************************
+    -->
 
     <Color x:Key="ApplicationAccentColor">#FF5182</Color>
 
     <Color x:Key="ControlDisabledBackColor">#F5F5F5</Color>
     <Color x:Key="ControlDisabledBorderColor">#E5E5E5</Color>
-    <Color x:Key="ControlDisabledForeColor">#9A9A9A</Color>
+    <Color x:Key="ControlDisabledForeColor">#646464</Color>
 
     <Color x:Key="DropShadowColor">#000000</Color>
 
+    <!--
+    ***************************************************************
+    **********     'WINDOWS CONTROLS' BRUSHES
+    ***************************************************************
+    -->
+
     <SolidColorBrush x:Key="ApplicationTransparentBrush"
                      Color="Transparent"/>
+
+    <SolidColorBrush x:Key="LightDismissLayerBrush"
+                     Color="#0C000000"/>
 
     <SolidColorBrush x:Key="WindowChromeBackground"
                      Color="#FFFFFF"/>
     <SolidColorBrush x:Key="WindowChromeBorderBrush"
                      Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="WindowChromeForeground"
+                     Color="#000000"/>
     <SolidColorBrush x:Key="WindowChromeBorderBrushInactive"
                      Color="#696969"/>
     <SolidColorBrush x:Key="WindowTitleBarBackground"
                      Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="ApplicationPageBackgroundBrush"
+                     Color="#FFFFFF"/>
+
+    <SolidColorBrush x:Key="ButtonBackground"
+                     Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush"
+                     Color="#CCCCCC"/>
+    <SolidColorBrush x:Key="ButtonForeground"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="ButtonBackgroundPointerOver"
+                     Color="#F6F6F6"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
+                     Color="#CCCCCC"/>
+    <SolidColorBrush x:Key="ButtonForegroundPointerOver"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="ButtonBackgroundPressed"
+                     Color="#F5F5F5"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushPressed"
+                     Color="#E5E5E5"/>
+    <SolidColorBrush x:Key="ButtonForegroundPressed"
+                     Color="#9B9B9B"/>
+    <SolidColorBrush x:Key="ButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled"
+                     Color="{DynamicResource ControlDisabledBorderColor}"/>
+    <SolidColorBrush x:Key="ButtonForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
 
     <SolidColorBrush x:Key="CaptionButtonBackground"
                      Color="Transparent"/>
@@ -42,12 +87,58 @@
     <SolidColorBrush x:Key="CaptionButtonForegroundDisabled"
                      Color="#9A9A9A"/>
 
-    <SolidColorBrush x:Key="LightDismissLayerBrush"
-                     Color="#0C000000"/>
+    <SolidColorBrush x:Key="AccentButtonBackground"
+                     Color="Transparent"/>
+    <SolidColorBrush x:Key="AccentButtonForeground"
+                     Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver"
+                     Color="#21000000"/>
+    <SolidColorBrush x:Key="AccentButtonForegroundPointerOver"
+                     Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundPressed"
+                     Color="#11000000"/>
+    <SolidColorBrush x:Key="AccentButtonForegroundPressed"
+                     Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="AccentButtonForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
+
+    <SolidColorBrush x:Key="NavigationButtonBackground"
+                     Color="Transparent"/>
+    <SolidColorBrush x:Key="NavigationButtonForeground"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundPointerOver"
+                     Color="#21000000"/>
+    <SolidColorBrush x:Key="NavigationButtonForegroundPointerOver"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundPressed"
+                     Color="#11000000"/>
+    <SolidColorBrush x:Key="NavigationButtonForegroundPressed"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI CONTROLS' BRUSHES
+    ***************************************************************
+    -->
+
+    <SolidColorBrush x:Key="MessageDialogBackground"
+                     Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="MessageDialogBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="MessageDialogForeground"
+                     Color="#000000"/>
 
     <SolidColorBrush x:Key="FlyoutBackground"
                      Color="#FFFFFF"/>
     <SolidColorBrush x:Key="FlyoutBorderBrush"
                      Color="#969696"/>
+    <SolidColorBrush x:Key="FlyoutForeground"
+                     Color="#000000"/>
 
 </ResourceDictionary>
