@@ -7,9 +7,9 @@ using System.Windows;
 [assembly: XmlnsPrefix("http://ui.msb-studios.com/winfx/xaml", "msb")]
 
 [assembly: XmlnsDefinition("http://ui.msb-studios.com/winfx/xaml", "MSB.UI")]
-//[assembly: XmlnsDefinition("http://ui.msb-studios.com/winfx/xaml", "MSB.Converters")]
+[assembly: XmlnsDefinition("http://ui.msb-studios.com/winfx/xaml", "MSB.Converters")]
 [assembly: XmlnsDefinition("http://ui.msb-studios.com/winfx/xaml", "MSB.UI.Controls")]
-//[assembly: XmlnsDefinition("http://ui.msb-studios.com/winfx/xaml", "MSB.Media.Animations")]
+[assembly: XmlnsDefinition("http://ui.msb-studios.com/winfx/xaml", "MSB.Media.Animations")]
 
 // In SDK-style projects such as this one, several assembly attributes that were historically
 // defined in this file are now automatically added during build and populated with

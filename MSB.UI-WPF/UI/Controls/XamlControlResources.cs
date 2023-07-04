@@ -82,12 +82,21 @@ namespace MSB.UI.Controls
 
         private void UpdateThemeDictionary()
         {
-            var app = (RichApplication)Application.Current;
+            try
+            {
+                var app = Application.Current as RichApplication;
 
-            if (app.Theme is ApplicationTheme.Light)
-                this.MergedDictionaries[1].Source = LightSource;
-            else
-                this.MergedDictionaries[1].Source = DarkSource;
+                if (app.Theme is ApplicationTheme.Light)
+                    this.MergedDictionaries[1].Source = LightSource;
+                else
+                    this.MergedDictionaries[1].Source = DarkSource;
+            }
+            catch (Exception ex)
+            {
+#if DEBUG
+                System.Diagnostics.Debug.WriteLine($"-- Error: {ex.Message}.");
+#endif
+            }
         }
 
         #endregion
