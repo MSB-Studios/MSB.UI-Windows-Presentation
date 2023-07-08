@@ -20,11 +20,20 @@
 		<PackageProjectUrl>https://github.com/MSB-Studios/MSB.UI-Windows-Presentation</PackageProjectUrl>
 		<AssemblyName>MSB.UI-WPF</AssemblyName>
 		<PackageId>MSB.UI-WPF</PackageId>
+		<PackageReleaseNotes>
+			- RichApplication type added;
+			- ModernWindow renamed to RichWindow;
+		</PackageReleaseNotes>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Include="Icon.png" Pack="True" PackagePath="\" />
 		<None Include="../LICENSE.txt" Pack="True" PackagePath="\" />
 		<None Include="../README.md" Pack="True" PackagePath="\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Assets\SegMDL2.ttf" />
 	</ItemGroup>
 </Project>

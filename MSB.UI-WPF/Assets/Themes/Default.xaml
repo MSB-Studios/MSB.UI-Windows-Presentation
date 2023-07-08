@@ -10,8 +10,8 @@
 
     <Color x:Key="ApplicationAccentColor">#FF5182</Color>
 
-    <Color x:Key="ControlDisabledBackColor">#F5F5F5</Color>
-    <Color x:Key="ControlDisabledBorderColor">#E5E5E5</Color>
+    <Color x:Key="ControlDisabledBackColor">#00000000</Color>
+    <Color x:Key="ControlDisabledBorderColor">#23000000</Color>
     <Color x:Key="ControlDisabledForeColor">#646464</Color>
 
     <Color x:Key="DropShadowColor">#000000</Color>
@@ -43,21 +43,21 @@
                      Color="#FFFFFF"/>
 
     <SolidColorBrush x:Key="ButtonBackground"
-                     Color="#FFFFFF"/>
+                     Color="#07000000"/>
     <SolidColorBrush x:Key="ButtonBorderBrush"
-                     Color="#CCCCCC"/>
+                     Color="#33000000"/>
     <SolidColorBrush x:Key="ButtonForeground"
                      Color="#000000"/>
     <SolidColorBrush x:Key="ButtonBackgroundPointerOver"
-                     Color="#F6F6F6"/>
+                     Color="#0C000000"/>
     <SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
-                     Color="#CCCCCC"/>
+                     Color="#3A000000"/>
     <SolidColorBrush x:Key="ButtonForegroundPointerOver"
                      Color="#000000"/>
     <SolidColorBrush x:Key="ButtonBackgroundPressed"
-                     Color="#F5F5F5"/>
+                     Color="#0C000000"/>
     <SolidColorBrush x:Key="ButtonBorderBrushPressed"
-                     Color="#E5E5E5"/>
+                     Color="#2B000000"/>
     <SolidColorBrush x:Key="ButtonForegroundPressed"
                      Color="#9B9B9B"/>
     <SolidColorBrush x:Key="ButtonBackgroundDisabled"
@@ -89,13 +89,13 @@
     <SolidColorBrush x:Key="AccentButtonForeground"
                      Color="#FFFFFF"/>
     <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver"
-                     Color="#21000000"/>
+                     Color="#0C000000"/>
     <SolidColorBrush x:Key="AccentButtonForegroundPointerOver"
                      Color="#FFFFFF"/>
     <SolidColorBrush x:Key="AccentButtonBackgroundPressed"
-                     Color="#11000000"/>
+                     Color="#0C000000"/>
     <SolidColorBrush x:Key="AccentButtonForegroundPressed"
-                     Color="#FFFFFF"/>
+                     Color="#7FFFFFFF"/>
     <SolidColorBrush x:Key="AccentButtonBackgroundDisabled"
                      Color="{DynamicResource ControlDisabledBackColor}"/>
     <SolidColorBrush x:Key="AccentButtonForegroundDisabled"
@@ -106,16 +106,66 @@
     <SolidColorBrush x:Key="NavigationButtonForeground"
                      Color="#000000"/>
     <SolidColorBrush x:Key="NavigationButtonBackgroundPointerOver"
-                     Color="#21000000"/>
+                     Color="#0C000000"/>
     <SolidColorBrush x:Key="NavigationButtonForegroundPointerOver"
                      Color="#000000"/>
     <SolidColorBrush x:Key="NavigationButtonBackgroundPressed"
-                     Color="#11000000"/>
+                     Color="#0C000000"/>
     <SolidColorBrush x:Key="NavigationButtonForegroundPressed"
                      Color="#000000"/>
     <SolidColorBrush x:Key="NavigationButtonBackgroundDisabled"
                      Color="{DynamicResource ControlDisabledBackColor}"/>
     <SolidColorBrush x:Key="NavigationButtonForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
+
+    <SolidColorBrush x:Key="ToggleButtonBackground"
+                     Color="#07000000"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrush"
+                     Color="#33000000"/>
+    <SolidColorBrush x:Key="ToggleButtonForeground"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver"
+                     Color="#0C000000"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushPointerOver"
+                     Color="#3A000000"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundPointerOver"
+                     Color="#000000"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundPressed"
+                     Color="#0C000000"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushPressed"
+                     Color="#2B000000"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundPressed"
+                     Color="#9B9B9B"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushDisabled"
+                     Color="{DynamicResource ControlDisabledBorderColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundDisabled"
+                     Color="{DynamicResource ControlDisabledForeColor}"/>
+
+    <SolidColorBrush x:Key="TextBoxBackground"
+                     Color="#07000000"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrush"
+                     Color="#33000000"/>
+    <SolidColorBrush x:Key="TextBoxForeground"
+                     Color="#FF323232"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundPointerOver"
+                     Color="#07000000"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrushPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundPointerOver"
+                     Color="#FF000000"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundFocused"
+                     Color="Transparent"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrushFocused"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundFocused"
+                     Color="#FF000000"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundDisabled"
+                     Color="{DynamicResource ControlDisabledBackColor}"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrushDisabled"
+                     Color="{DynamicResource ControlDisabledBorderColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundDisabled"
                      Color="{DynamicResource ControlDisabledForeColor}"/>
 
     <!--

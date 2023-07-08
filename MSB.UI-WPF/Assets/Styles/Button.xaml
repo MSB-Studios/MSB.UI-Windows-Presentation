@@ -29,11 +29,14 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="DefaultedButtonTemplate" TargetType="Button">
-        <Border x:Name="BorderRoot" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+        <Border x:Name="BorderRoot" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 CornerRadius="{DynamicResource ControlCornerRadius}">
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource ApplicationAccentColor}"/>
             </Border.Background>
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource ApplicationAccentColor}"/>
+            </Border.BorderBrush>
             
             <Border x:Name="BorderMask" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}">
                 <ContentPresenter x:Name="ContentPresenter" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
@@ -72,7 +75,6 @@
             <Trigger Property="IsDefault" Value="True">
                 <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
                 <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
-                <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="Template" Value="{StaticResource DefaultedButtonTemplate}"/>
             </Trigger>
         </Style.Triggers>
@@ -81,7 +83,6 @@
     <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
         <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template" Value="{StaticResource DefaultedButtonTemplate}"/>
     </Style>
 
