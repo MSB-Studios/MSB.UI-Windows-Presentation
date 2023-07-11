@@ -36,7 +36,32 @@ namespace MSB.UI.Controls
         /// Identifies the Foreground dependency property.
         /// </summary>
         public static readonly DependencyProperty ForegroundProperty =
-                TextElement.ForegroundProperty.AddOwner(typeof(IconElement), new FrameworkPropertyMetadata(null));
+                TextElement.ForegroundProperty.AddOwner(typeof(IconElement), new FrameworkPropertyMetadata(null, ForegroundChanged_Callback));
+
+        #endregion
+
+        #region Callbacks
+
+        private static void ForegroundChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue != e.NewValue && d is IconElement iconElement)
+            {
+                iconElement.OnForegroundChanged(e);
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Invoked when the effective property value of the Foreground property changes.
+        /// </summary>
+        /// <param name="e">The data for the event. </param>
+        protected virtual void OnForegroundChanged(DependencyPropertyChangedEventArgs e)
+        {
+
+        }
 
         #endregion
     }

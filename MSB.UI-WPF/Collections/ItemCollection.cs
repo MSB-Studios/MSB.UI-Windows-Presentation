@@ -1,175 +1,80 @@
-﻿using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Collections;
+﻿using System.Collections;
 using System;
 
 namespace MSB.Collections
 {
     /// <summary>
-    /// Represents a collection of objects.
+    /// 
     /// </summary>
-    [Serializable]
-    public sealed class ItemCollection : ICollection<object>, INotifyCollectionChanged, INotifyPropertyChanged
+    public sealed class ItemCollection : CollectionBase
     {
         /// <summary>
-        /// Initializes a new instance of the 'ItemCollection' class.
+        /// Gets or sets the item at the given zero-based index.
         /// </summary>
-        public ItemCollection()
-        {
-            data = new List<object>();
-        }
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the element at the specified index.
-        /// </summary>
-        /// <param name="index">The zero-based index of the element to get or set.</param>
-        /// <returns>The element at the specified index.</returns>
-        /// <exception cref="NotSupportedException"></exception>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        /// <param name="index">The zero-based index of the item.</param>
+        /// <returns>The object retrieved or the object that is being set to the specified index.</returns>
+        /// <exception cref="InvalidOperationException"/>
+        /// <exception cref="ArgumentOutOfRangeException"/>
         public object this[int index]
         {
-            get => data[index];
-            set
-            {
-                if (data.IsReadOnly)
-                    throw new NotSupportedException();
-
-                if (index < 0 || index >= data.Count)
-                    throw new ArgumentOutOfRangeException(nameof(index));
-
-                data[index] = value;
-            }
+            get => List[index];
+            set => List[index] = value;
         }
-
-        /// <summary>
-        /// Gets the number of elements contained in the collection.
-        /// </summary>
-        public int Count
-        {
-            get => data.Count;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether the collection is read-only.
-        /// </summary>
-        public bool IsReadOnly
-        {
-            get => data.IsReadOnly;
-        }
-
-        #endregion
-
-        #region Methods
 
         /// <summary>
         /// Adds an item to the collection.
         /// </summary>
-        /// <param name="item">The object to add to the collection.</param>
-        /// <exception cref="NotSupportedException"></exception>
-        public void Add(object item)
+        /// <param name="value">The item to add to the collection.</param>
+        /// <returns>The zero-based index at which the object is added
+        /// of -1 if the item cannot be added.</returns>
+        /// <exception cref="InvalidOperationException"/>
+        public int Add(object value)
         {
-            if (data.IsReadOnly)
-                throw new NotSupportedException();
-
-            data.Add(item);
-
-            // Notify listeners
-            PropertyChanged?.Invoke(this, new(nameof(Count)));
-            CollectionChanged?.Invoke(this, new(NotifyCollectionChangedAction.Add, item));
+            return List.Add(value);
         }
 
         /// <summary>
-        /// Removes all items from the collection.
+        /// Returns the index in this collection where the specified item is located.
         /// </summary>
-        /// <exception cref="NotSupportedException"></exception>
-        public void Clear()
+        /// <param name="value">The object to look for in the collection.</param>
+        /// <returns>The index of the item in the collection, or -1 if the item
+        /// does not exist in the collection.</returns>
+        public int IndexOf(object value)
         {
-            if (data.IsReadOnly)
-                throw new NotSupportedException();
-
-            data.Clear();
-
-            // Notify listeners
-            PropertyChanged?.Invoke(this, new(nameof(Count)));
-            CollectionChanged?.Invoke(this, new(NotifyCollectionChangedAction.Reset));
+            return List.IndexOf(value);
         }
 
         /// <summary>
-        /// Determines whether the collection contains a specific value.
+        /// Inserts an element into the collection at the specified index.
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public bool Contains(object item)
+        /// <param name="index">The zero-based index at which to insert the item.</param>
+        /// <param name="value">The item to insert.</param>
+        /// <exception cref="InvalidOperationException"/>
+        /// <exception cref="ArgumentOutOfRangeException"/>
+        public void Insert(int index, object value)
         {
-            return data.Contains(item);
+            List.Insert(index, value);
         }
 
         /// <summary>
-        /// Copies the elements of the collection to an array, starting at a particular array index.
+        /// Removes the specified item reference from the collecion or view.
         /// </summary>
-        /// <param name="array"> The one-dimensional array that is the destination of the elements copied from the collection.
-        /// The array must have zero-based indexing.</param>
-        /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        public void CopyTo(object[] array, int arrayIndex)
+        /// <param name="value">The object to remove.</param>
+        /// <exception cref="InvalidOperationException"/>
+        public void Remove(object value)
         {
-            data.CopyTo(array, arrayIndex);
+            List.Remove(value);
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the collection.
+        /// Returns a value that indicates whether the specified item is in this view.
         /// </summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<object> GetEnumerator()
+        /// <param name="value">The object to check.</param>
+        /// <returns>true to indicate that the item belongs to this collection and passes
+        /// the active filter; otherwise, false.</returns>
+        public bool Contains(object value)
         {
-            return data.GetEnumerator();
+            return List.Contains(value);
         }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return data.GetEnumerator();
-        }
-
-        /// <summary>
-        /// Removes the first occurrence of a specific object from the collection.
-        /// </summary>
-        /// <param name="item">The object to remove from the collection.</param>
-        /// <returns>**<see langword="true"/>** if item was successfully removed from the collection; otherwise, **<see langword="false"/>**.
-        /// This method also returns <see langword="false"/> if item is not found in the original collection.</returns>
-        /// <exception cref="NotSupportedException"></exception>
-        public bool Remove(object item)
-        {
-            if (data.IsReadOnly)
-                throw new NotSupportedException();
-
-            var index = data.IndexOf(item);
-
-            if (data.Remove(item))
-            {
-                // Notify listeners
-                PropertyChanged?.Invoke(this, new(nameof(Count)));
-                CollectionChanged?.Invoke(this, new(NotifyCollectionChangedAction.Remove, item, index));
-
-                return true;
-            }
-
-            return false;
-        }
-
-        #endregion
-
-        #region Events
-
-        /// <inheritdoc/>
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        /// <inheritdoc/>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
-
-        readonly IList<object> data = null;
     }
 }

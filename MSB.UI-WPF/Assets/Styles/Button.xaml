@@ -29,32 +29,26 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="DefaultedButtonTemplate" TargetType="Button">
-        <Border x:Name="BorderRoot" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                CornerRadius="{DynamicResource ControlCornerRadius}">
-            <Border.Background>
-                <SolidColorBrush Color="{DynamicResource ApplicationAccentColor}"/>
-            </Border.Background>
-            <Border.BorderBrush>
-                <SolidColorBrush Color="{DynamicResource ApplicationAccentColor}"/>
-            </Border.BorderBrush>
-            
-            <Border x:Name="BorderMask" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}">
-                <ContentPresenter x:Name="ContentPresenter" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-            </Border>
+        <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}">
+            <ContentPresenter x:Name="ContentPresenter" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
 
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="BorderMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
+                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource AccentButtonBackgroundPointerOver}"/>
+                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrushPointerOver}"/>
                 <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPointerOver}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="BorderMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
+                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource AccentButtonBackgroundPressed}"/>
+                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrushPressed}"/>
                 <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundPressed}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="BorderMask" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
+                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource AccentButtonBackgroundDisabled}"/>
+                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrushDisabled}"/>
                 <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource AccentButtonForegroundDisabled}"/>
             </Trigger>
         </ControlTemplate.Triggers>
@@ -74,6 +68,7 @@
         <Style.Triggers>
             <Trigger Property="IsDefault" Value="True">
                 <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrush}"/>
                 <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
                 <Setter Property="Template" Value="{StaticResource DefaultedButtonTemplate}"/>
             </Trigger>
@@ -82,6 +77,7 @@
 
     <Style x:Key="AccentButtonStyle" TargetType="Button" BasedOn="{StaticResource BaseButtonStyle}">
         <Setter Property="Background" Value="{DynamicResource AccentButtonBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentButtonBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource AccentButtonForeground}"/>
         <Setter Property="Template" Value="{StaticResource DefaultedButtonTemplate}"/>
     </Style>

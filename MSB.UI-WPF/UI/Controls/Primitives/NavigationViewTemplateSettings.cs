@@ -49,9 +49,9 @@ namespace MSB.UI.Controls.Primitives
         /// <summary>
         /// Gets the length of the buttons panel.
         /// </summary>
-        public GridLength ButtonsPanelGridLength
+        public double ButtonsPanelLength
         {
-            get => (GridLength)GetValue(ButtonsPanelGridLengthProperty);
+            get => (double)GetValue(ButtonsPanelLengthProperty);
         }
 
         #endregion
@@ -70,8 +70,8 @@ namespace MSB.UI.Controls.Primitives
         internal static readonly DependencyProperty TitleBarMarginProperty =
                 DependencyProperty.Register(nameof(TitleBarMargin), typeof(Thickness), typeof(NavigationViewTemplateSettings), new PropertyMetadata(new Thickness(0, 32, 0, 0)));
 
-        internal static readonly DependencyProperty ButtonsPanelGridLengthProperty =
-                DependencyProperty.Register(nameof(ButtonsPanelGridLength), typeof(GridLength), typeof(NavigationViewTemplateSettings), new PropertyMetadata(new GridLength(48d)));
+        internal static readonly DependencyProperty ButtonsPanelLengthProperty =
+                DependencyProperty.Register(nameof(ButtonsPanelLength), typeof(double), typeof(NavigationViewTemplateSettings), new PropertyMetadata(48d));
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace MSB.UI.Controls.Primitives
 
         internal void UpdateButtonsPanelLength(double length)
         {
-            SetValue(ButtonsPanelGridLengthProperty, new GridLength(length));
+            SetValue(ButtonsPanelLengthProperty, length);
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows.Documents;
+using System.Windows.Controls;
 using System.ComponentModel;
 using System.Windows.Media;
 using System.Windows;
@@ -58,7 +59,7 @@ namespace MSB.UI.Controls
         /// Identifies the FontSize dependency property.
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-                DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(FontIcon), new PropertyMetadata(12d, FontSizeChanged_Callback));
+                TextElement.ForegroundProperty.AddOwner(typeof(FontIcon));
 
         /// <summary>
         /// Identifies the Glyph dependency property.
@@ -69,14 +70,6 @@ namespace MSB.UI.Controls
         #endregion
 
         #region Callbacks
-
-        private static void FontSizeChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.OldValue != e.NewValue && d is FontIcon fontIcon)
-            {
-                fontIcon.child.FontSize = (double)e.NewValue;
-            }
-        }
 
         private static void GlyphChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -89,6 +82,12 @@ namespace MSB.UI.Controls
         #endregion
 
         #region Methods
+
+        /// <inheritdoc/>
+        protected override void OnForegroundChanged(DependencyPropertyChangedEventArgs e)
+        {
+            child.Foreground = (Brush)e.NewValue;
+        }
 
         /// <inheritdoc/>
         protected override Visual GetVisualChild(int index)

@@ -1,0 +1,315 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="ApplicationAccentColor">#FFFB5515</Color>
+    <Color x:Key="ApplicationAccentColor2">#FFEE5114</Color>
+    <Color x:Key="ApplicationAccentColor3">#FFE14C13</Color>
+    <Color x:Key="ApplicationAccentColor4">#FFD64812</Color>
+
+    <Color x:Key="ThemeBackgroundColor">#FF000000</Color>
+    <Color x:Key="ThemeBorderColor">#FF696969</Color>
+    <Color x:Key="ThemeForegroundColor">#FFFFFFFF</Color>
+
+    <Color x:Key="DropShadowColor">#FF000000</Color>
+
+    <Color x:Key="ControlBackgroundColor">#07FFFFFF</Color>
+    <Color x:Key="ControlBorderColor">#33FFFFFF</Color>
+    <Color x:Key="ControlForegroundColor">#FFFFFFFF</Color>
+
+    <Color x:Key="ControlBackgroundHoverColor">#0CFFFFFF</Color>
+    <Color x:Key="ControlBorderHoverColor">#3AFFFFFF</Color>
+    <Color x:Key="ControlForegroundHoverColor">#FFFFFFFF</Color>
+
+    <Color x:Key="ControlBackgroundPressedColor">#0CFFFFFF</Color>
+    <Color x:Key="ControlBorderPressedColor">#2BFFFFFF</Color>
+    <Color x:Key="ControlForegroundPressedColor">#FF646464</Color>
+
+    <Color x:Key="ControlForegroundCheckedColor">#FFFFFFFF</Color>
+    <Color x:Key="ControlForegroundSelectedColor">#FFFFFFFF</Color>
+    <Color x:Key="ControlForegroundFocusedColor">#FFFFFFFF</Color>
+
+    <Color x:Key="ControlBackgroundDisabledColor">#00FFFFFF</Color>
+    <Color x:Key="ControlBorderDisabledColor">#23FFFFFF</Color>
+    <Color x:Key="ControlForegroundDisabledColor">#FF9B9B9B</Color>
+
+    <Color x:Key="ControlTransparentColor">#00FFFFFF</Color>
+
+    <SolidColorBrush x:Key="ApplicationTransparentBrush">#00FFFFFF</SolidColorBrush>
+
+    <SolidColorBrush x:Key="ScrollBarBackground">#00FFFFFF</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarForeground">#FF565656</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarForegroundPointerOver">#FF6A6A6A</SolidColorBrush>
+    <SolidColorBrush x:Key="ScrollBarForegroundDragging">#FF2E2E2E</SolidColorBrush>
+
+    <SolidColorBrush x:Key="LightDismissLayerBrush">#07000000</SolidColorBrush>
+
+    <SolidColorBrush x:Key="WindowBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+    <SolidColorBrush x:Key="WindowBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="WindowBorderBrushInactive"
+                     Color="{DynamicResource ThemeBorderColor}"/>
+    <SolidColorBrush x:Key="WindowForeground"
+                     Color="{DynamicResource ThemeForegroundColor}"/>
+
+    <SolidColorBrush x:Key="WindowTitleBarBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="PageBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+    <SolidColorBrush x:Key="PageForeground"
+                     Color="{DynamicResource ThemeForegroundColor}"/>
+
+    <SolidColorBrush x:Key="ButtonBackground"
+                     Color="{DynamicResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrush"
+                     Color="{DynamicResource ControlBorderColor}"/>
+    <SolidColorBrush x:Key="ButtonForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushPointerOver"
+                     Color="{DynamicResource ControlBorderHoverColor}"/>
+    <SolidColorBrush x:Key="ButtonForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundPressed"
+                     Color="{DynamicResource ControlBackgroundPressedColor}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushPressed"
+                     Color="{DynamicResource ControlBorderPressedColor}"/>
+    <SolidColorBrush x:Key="ButtonForegroundPressed"
+                     Color="{DynamicResource ControlForegroundPressedColor}"/>
+    <SolidColorBrush x:Key="ButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="ButtonBorderBrushDisabled"
+                     Color="{DynamicResource ControlBorderDisabledColor}"/>
+    <SolidColorBrush x:Key="ButtonForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="CaptionButtonBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonBackgroundPressed"
+                     Color="{DynamicResource ControlBackgroundPressedColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonForegroundPressed"
+                     Color="{DynamicResource ControlForegroundPressedColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="CaptionButtonForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="AccentButtonBackground"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="AccentButtonForeground"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrushPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor3}"/>
+    <SolidColorBrush x:Key="AccentButtonForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundPressed"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrushPressed"
+                     Color="{DynamicResource ApplicationAccentColor3}"/>
+    <SolidColorBrush x:Key="AccentButtonForegroundPressed" Opacity="0.6"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="AccentButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="AccentButtonBorderBrushDisabled"
+                     Color="{DynamicResource ControlBorderDisabledColor}"/>
+    <SolidColorBrush x:Key="AccentButtonForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="NavigationButtonBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundPressed"
+                     Color="{DynamicResource ControlBackgroundPressedColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonForegroundPressed"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="NavigationButtonForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="ToggleButtonBackground"
+                     Color="{DynamicResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrush"
+                     Color="{DynamicResource ControlBorderColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushPointerOver"
+                     Color="{DynamicResource ControlBorderHoverColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundPressed"
+                     Color="{DynamicResource ControlBackgroundPressedColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushPressed"
+                     Color="{DynamicResource ControlBorderPressedColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundPressed"
+                     Color="{DynamicResource ControlForegroundPressedColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundChecked"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushChecked"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundChecked"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor3}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPointerOver"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushCheckedPressed"
+                     Color="{DynamicResource ApplicationAccentColor3}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundCheckedPressed" Opacity="0.6"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonBorderBrushDisabled"
+                     Color="{DynamicResource ControlBorderDisabledColor}"/>
+    <SolidColorBrush x:Key="ToggleButtonForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="TextBoxBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrush"
+                     Color="{DynamicResource ControlBorderColor}"/>
+    <SolidColorBrush x:Key="TextBoxForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundPointerOver"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrushPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundFocused"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrushFocused"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundFocused"
+                     Color="{DynamicResource ControlForegroundFocusedColor}"/>
+    <SolidColorBrush x:Key="TextBoxBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrushDisabled"
+                     Color="{DynamicResource ControlBorderDisabledColor}"/>
+    <SolidColorBrush x:Key="TextBoxForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="ListBoxItemBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemBackgroundSelected"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemForegroundSelected"
+                     Color="{DynamicResource ControlForegroundSelectedColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemBackgroundSelectedPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="ListBoxItemForegroundSelectedPointerOver"
+                     Color="{DynamicResource ControlForegroundSelectedColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="ListBoxItemForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="ComboBoxItemBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelected"
+                     Color="{DynamicResource ControlForegroundSelectedColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver"
+                     Color="{DynamicResource ControlForegroundSelectedColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="ComboBoxItemForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="ComboBoxGlyphBrush"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="ComboBoxDropDownBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="ComboBoxBackground"
+                     Color="{DynamicResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="ComboBoxBorderBrush"
+                     Color="{DynamicResource ControlBorderColor}"/>
+    <SolidColorBrush x:Key="ComboBoxForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI CONTROLS' BRUSHES
+    ***************************************************************
+    -->
+
+    <SolidColorBrush x:Key="MessageDialogBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+    <SolidColorBrush x:Key="MessageDialogBorderBrush"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="MessageDialogForeground"
+                     Color="{DynamicResource ThemeForegroundColor}"/>
+
+    <SolidColorBrush x:Key="FlyoutBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+    <SolidColorBrush x:Key="FlyoutBorderBrush"
+                     Color="{DynamicResource ThemeBorderColor}"/>
+    <SolidColorBrush x:Key="FlyoutForeground"
+                     Color="{DynamicResource ThemeForegroundColor}"/>
+
+    <SolidColorBrush x:Key="SplitViewBackground">#FF000000</SolidColorBrush>
+    <SolidColorBrush x:Key="SplitViewPaneBackground">#FF191919</SolidColorBrush>
+
+    <SolidColorBrush x:Key="NavigationViewItemBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelected"
+                     Color="{DynamicResource ControlBackgroundColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemForegroundSelected"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemBackgroundSelectedPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPointerOver"
+                     Color="{DynamicResource ControlForegroundHoverColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="NavigationViewItemForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+</ResourceDictionary>

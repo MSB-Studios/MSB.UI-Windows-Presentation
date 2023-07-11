@@ -17,19 +17,23 @@
                 <ControlTemplate TargetType="RepeatButton">
                     <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}"
                             BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter x:Name="ContentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ContentPresenter x:Name="ContentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}"
+                                          RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}"/>
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}"/>
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
+                            <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}"/>
                             <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>

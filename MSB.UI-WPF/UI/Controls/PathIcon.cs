@@ -18,6 +18,9 @@ namespace MSB.UI.Controls
         {
             this.DefaultStyleKey = typeof(PathIcon);
 
+            // set the child's fill to the default value...
+            child.Fill = this.Foreground;
+
             // add the child...
             AddVisualChild(child);
         }
@@ -42,8 +45,8 @@ namespace MSB.UI.Controls
 
         /// <summary>
         /// Gets or sets a value indicating when the geometric figure is closed.
-        /// <para>**<see langword="true"/>** causes the <see cref="IconElement.Foreground"/> property to affect the fill, and **<see langword="false"/>** affects the stroke.</para>
-        /// <para>The default is **<see langword="true"/>**.</para>
+        /// <para>**<see langword="true"/>** causes the <see cref="IconElement.Foreground"/> property to affect the stroke, and **<see langword="false"/>** affects the fill.</para>
+        /// <para>The default is **<see langword="false"/>**.</para>
         /// </summary>
         public bool IsInverted
         {
@@ -75,7 +78,7 @@ namespace MSB.UI.Controls
         /// Identifies the IsInverted dependency property.
         /// </summary>
         public static readonly DependencyProperty IsInvertedProperty =
-                DependencyProperty.Register(nameof(IsInverted), typeof(bool), typeof(PathIcon), new PropertyMetadata(true, InvertChanged_Callback));
+                DependencyProperty.Register(nameof(IsInverted), typeof(bool), typeof(PathIcon), new PropertyMetadata(false, IsInvertedChanged_Callback));
 
         /// <summary>
         /// Identifies the StrokeThickness dependency property.
@@ -95,23 +98,23 @@ namespace MSB.UI.Controls
             }
         }
 
-        private static void InvertChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void IsInvertedChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.OldValue != e.NewValue && d is PathIcon pathIcon)
             {
                 if ((bool)e.NewValue)
                 {
-                    pathIcon.child.Stroke = null;
-                    pathIcon.child.Fill = pathIcon.Foreground;
-
-                    pathIcon.StrokeThickness = 0d;
-                }
-                else
-                {
                     pathIcon.child.Fill = null;
                     pathIcon.child.Stroke = pathIcon.Foreground;
 
                     pathIcon.StrokeThickness = 1d;
+                }
+                else
+                {
+                    pathIcon.child.Stroke = null;
+                    pathIcon.child.Fill = pathIcon.Foreground;
+
+                    pathIcon.StrokeThickness = 0d;
                 }
             }
         }
@@ -120,7 +123,7 @@ namespace MSB.UI.Controls
         {
             if (e.OldValue != e.NewValue && d is PathIcon pathIcon)
             {
-                if (pathIcon.IsInverted)
+                if (!pathIcon.IsInverted)
                     throw new InvalidOperationException();
 
                 pathIcon.child.StrokeThickness = (double)e.NewValue;
@@ -130,6 +133,15 @@ namespace MSB.UI.Controls
         #endregion
 
         #region Methods
+
+        /// <inheritdoc/>
+        protected override void OnForegroundChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if (this.IsInverted)
+                this.child.Stroke = (Brush)e.NewValue;
+            else
+                this.child.Fill = (Brush)e.NewValue;
+        }
 
         /// <inheritdoc/>
         protected override Visual GetVisualChild(int index)

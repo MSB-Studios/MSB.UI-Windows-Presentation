@@ -1,0 +1,38 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="OverlayCornerRadius">12</CornerRadius>
+
+    <Style x:Key="FocusVisualStyle">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="3" RadiusX="8" RadiusY="8" StrokeDashArray="1, 2" StrokeThickness="1">
+                        <Rectangle.Stroke>
+                            <SolidColorBrush Color="{DynamicResource ControlForegroundColor}"/>
+                        </Rectangle.Stroke>
+                    </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/TextBlock.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/Button.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ToggleButton.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/RepeatButton.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/TextBox.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/PasswordBox.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ScrollBar.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ScrollViewer.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ListBoxItem.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ListBox.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ComboBoxItem.xaml"/>
+        <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/ComboBox.xaml"/>
+        <ResourceDictionary />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>
