@@ -1,0 +1,137 @@
+﻿{
+	"TemplateFile": "Theme.Template.xaml",
+	"DefaultValues": {
+		"MSB.Brushes.Transparent": "#00FFFFFF"
+	},
+	"BaseColorSchemes": [
+		{
+			"Name": "Light",
+			"Values": {
+				"MSB.Colors.ThemeBackground": "#FFFFFFFF",
+				"MSB.Colors.ThemeBorder": "#FF969696",
+				"MSB.Colors.ThemeForeground": "#FF000000",
+				"MSB.Colors.DropShadow": "#FF000000",
+				"MSB.Colors.Control.Background": "#07000000",
+				"MSB.Colors.Control.Border": "#33000000",
+				"MSB.Colors.Control.Foreground": "#FF000000",
+				"MSB.Colors.Control.Background.Hover": "#0C000000",
+				"MSB.Colors.Control.Border.Hover": "#3A000000",
+				"MSB.Colors.Control.Foreground.Hover": "#FF000000",
+				"MSB.Colors.Control.Background.Pressed": "#0C000000",
+				"MSB.Colors.Control.Border.Pressed": "#2B000000",
+				"MSB.Colors.Control.Foreground.Pressed": "#FF9B9B9B",
+				"MSB.Colors.Control.Foreground.Checked": "#FFFFFFFF",
+				"MSB.Colors.Control.Foreground.Selected": "#FFFFFFFF",
+				"MSB.Colors.Control.Foreground.Focused": "#FF000000",
+				"MSB.Colors.Control.Background.Disabled": "#00FFFFFF",
+				"MSB.Colors.Control.Border.Disabled": "#23000000",
+				"MSB.Colors.Control.Foreground.Disabled": "#FF646464",
+				"MSB.Brushes.ScrollBar.Background": "#00FFFFFF",
+				"MSB.Brushes.ScrollBar.Foreground": "#FFA9A9A9",
+				"MSB.Brushes.ScrollBar.Foreground.Hover": "#FF959595",
+				"MSB.Brushes.ScrollBar.Foreground.Dragging": "#FFD1D1D1",
+				"MSB.Brushes.SplitView.Background": "#FFFFFFFF",
+				"MSB.Brushes.SplitView.Pane.Background": "#FFE6E6E6",
+				"MSB.Brushes.LightDismissLayer": "#0C000000",
+				"MSB.Brushes.Foreground.PlaceholderText": "#FF646464"
+			}
+		},
+		{
+			"Name": "Dark",
+			"Values": {
+				"MSB.Colors.ThemeBackground": "#FF000000",
+				"MSB.Colors.ThemeBorder": "#FF696969",
+				"MSB.Colors.ThemeForeground": "#FFFFFFFF",
+				"MSB.Colors.DropShadow": "#FF000000",
+				"MSB.Colors.Control.Background": "#07FFFFFF",
+				"MSB.Colors.Control.Border": "#33FFFFFF",
+				"MSB.Colors.Control.Foreground": "#FFFFFFFF",
+				"MSB.Colors.Control.Background.Hover": "#0CFFFFFF",
+				"MSB.Colors.Control.Border.Hover": "#3AFFFFFF",
+				"MSB.Colors.Control.Foreground.Hover": "#FFFFFFFF",
+				"MSB.Colors.Control.Background.Pressed": "#0CFFFFFF",
+				"MSB.Colors.Control.Border.Pressed": "#2BFFFFFF",
+				"MSB.Colors.Control.Foreground.Pressed": "#FF646464",
+				"MSB.Colors.Control.Foreground.Checked": "#FFFFFFFF",
+				"MSB.Colors.Control.Foreground.Selected": "#FFFFFFFF",
+				"MSB.Colors.Control.Foreground.Focused": "#FFFFFFFF",
+				"MSB.Colors.Control.Background.Disabled": "#00FFFFFF",
+				"MSB.Colors.Control.Border.Disabled": "#23FFFFFF",
+				"MSB.Colors.Control.Foreground.Disabled": "#FF9B9B9B",
+				"MSB.Brushes.ScrollBar.Background": "#00FFFFFF",
+				"MSB.Brushes.ScrollBar.Foreground": "#FF565656",
+				"MSB.Brushes.ScrollBar.Foreground.Hover": "#FF6A6A6A",
+				"MSB.Brushes.ScrollBar.Foreground.Dragging": "#FF2E2E2E",
+				"MSB.Brushes.SplitView.Background": "#FF000000",
+				"MSB.Brushes.SplitView.Pane.Background": "#FF191919",
+				"MSB.Brushes.LightDismissLayer": "#07000000",
+				"MSB.Brushes.Foreground.PlaceholderText": "#FF9B9B9B"
+			}
+		}
+	],
+	"ColorSchemes": [
+		{
+			"Name": "Pink",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FFFF5182",
+				"MSB.Colors.ApplicationAccent2": "#FFF24D7B",
+				"MSB.Colors.ApplicationAccent3": "#FFE54975",
+				"MSB.Colors.ApplicationAccent4": "#FFD9456F"
+			}
+		},
+		{
+			"Name": "Blue",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FF3987FF",
+				"MSB.Colors.ApplicationAccent2": "#FF3680F2",
+				"MSB.Colors.ApplicationAccent3": "#FF3379E5",
+				"MSB.Colors.ApplicationAccent4": "#FF3173D9"
+			}
+		},
+		{
+			"Name": "Green",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FF92D050",
+				"MSB.Colors.ApplicationAccent2": "#FF8BC54C",
+				"MSB.Colors.ApplicationAccent3": "#FF83BB48",
+				"MSB.Colors.ApplicationAccent4": "#FF7CB144"
+			}
+		},
+		{
+			"Name": "Orange",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FFFB5515",
+				"MSB.Colors.ApplicationAccent2": "#FFEE5114",
+				"MSB.Colors.ApplicationAccent3": "#FFE14C13",
+				"MSB.Colors.ApplicationAccent4": "#FFD64812"
+			}
+		},
+		{
+			"Name": "Cyan",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FF008B8B",
+				"MSB.Colors.ApplicationAccent2": "#FF008484",
+				"MSB.Colors.ApplicationAccent3": "#FF007D7D",
+				"MSB.Colors.ApplicationAccent4": "#FF007676"
+			}
+		},
+		{
+			"Name": "Purple",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FF8237EC",
+				"MSB.Colors.ApplicationAccent2": "#FF7B34E0",
+				"MSB.Colors.ApplicationAccent3": "#FF7531D4",
+				"MSB.Colors.ApplicationAccent4": "#FF6F2FC9"
+			}
+		},
+		{
+			"Name": "Red",
+			"Values": {
+				"MSB.Colors.ApplicationAccent": "#FFEE2E31",
+				"MSB.Colors.ApplicationAccent2": "#FFE22C2F",
+				"MSB.Colors.ApplicationAccent3": "#FFD6292C",
+				"MSB.Colors.ApplicationAccent4": "#FFCB272A"
+			}
+		}
+	]
+}

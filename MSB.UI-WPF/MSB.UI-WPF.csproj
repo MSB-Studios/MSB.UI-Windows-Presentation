@@ -1,8 +1,59 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>MSB.UI_WPF</RootNamespace>
-  </PropertyGroup>
+	<!--Project properties-->
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWPF>true</UseWPF>
+		<RootNamespace>MSB</RootNamespace>
+		<LangVersion>latest</LangVersion>
+		<Nullable>disable</Nullable>
+		<Company>MSB Studios</Company>
+		<Authors>MSB Studios</Authors>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<AssemblyName>MSB.UI-WPF</AssemblyName>
+		<NoWarn>XDG0069</NoWarn>
+	</PropertyGroup>
+	
+	<!--NuGet properties-->
+	<PropertyGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Version>2.1.1</Version>
+		<PackageIcon>Icon.png</PackageIcon>
+		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>
+		<Description>MSB.UI (Windows Presentation) is a .NET library designed to provide WPF solutions.</Description>
+		<PackageProjectUrl>https://github.com/MSB-Studios/MSB.UI-Windows-Presentation</PackageProjectUrl>
+		<PackageId>MSB.UI-WPF</PackageId>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+	
+	<!--Assets include-->
+	<ItemGroup>
+		<None Include="Icon.png" Pack="True" PackagePath="\" />
+		<None Include="../LICENSE.txt" Pack="True" PackagePath="\" />
+		<None Include="../README.md" Pack="True" PackagePath="\" />
+	</ItemGroup>
 
+	<!--Fonts include-->
+	<ItemGroup>
+	  <Resource Include="Assets\Fonts\SegMDL2.ttf" />
+	</ItemGroup>
+
+	<!--Dependencies-->
+	<ItemGroup>
+		<PackageReference Include="XAMLTools.MSBuild" Version="1.0.0-alpha0121">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>build</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<!--Theme generator-->
+	<ItemGroup>
+		<XAMLColorSchemeGeneratorItems Include="Assets\Themes\Theme.Template.xaml">
+			<ParametersFile>Assets\Themes\GeneratorParameters.json</ParametersFile>
+			<OutputPath>Assets\Themes</OutputPath>
+		</XAMLColorSchemeGeneratorItems>
+	</ItemGroup>
 </Project>
