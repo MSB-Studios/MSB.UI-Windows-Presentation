@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
+using MSB.Collections;
 
 namespace MSB.UI.Controls.Primitives
 {
@@ -10,6 +12,9 @@ namespace MSB.UI.Controls.Primitives
         internal NavigationViewTemplateSettings(NavigationView nav)
         {
             this.owner = nav;
+
+            nav.MenuItems.PropertyChanged += OnMenuPropertyChanged;
+            nav.FooterItems.PropertyChanged += OnFooterPropertyChanged;
         }
 
         #region Properties
@@ -54,6 +59,22 @@ namespace MSB.UI.Controls.Primitives
             get => (double)GetValue(ButtonsPanelLengthProperty);
         }
 
+        /// <summary>
+        /// Gets the visibility of the menu items.
+        /// </summary>
+        public Visibility MenuItemsVisibility
+        {
+            get => (Visibility)GetValue(MenuItemsVisibilityProperty);
+        }
+
+        /// <summary>
+        /// Gets the visibility of the footer items.
+        /// </summary>
+        public Visibility FooterItemsVisibility
+        {
+            get => (Visibility)GetValue(FooterItemsVisibilityProperty);
+        }
+
         #endregion
 
         #region Dependency properties
@@ -73,6 +94,12 @@ namespace MSB.UI.Controls.Primitives
         internal static readonly DependencyProperty ButtonsPanelLengthProperty =
                 DependencyProperty.Register(nameof(ButtonsPanelLength), typeof(double), typeof(NavigationViewTemplateSettings), new PropertyMetadata(48d));
 
+        internal static readonly DependencyProperty MenuItemsVisibilityProperty =
+                DependencyProperty.Register(nameof(MenuItemsVisibility), typeof(Visibility), typeof(NavigationViewTemplateSettings), new PropertyMetadata(Visibility.Collapsed));
+
+        internal static readonly DependencyProperty FooterItemsVisibilityProperty =
+               DependencyProperty.Register(nameof(FooterItemsVisibility), typeof(Visibility), typeof(NavigationViewTemplateSettings), new PropertyMetadata(Visibility.Collapsed));
+
         #endregion
 
         #region Methods
@@ -90,6 +117,22 @@ namespace MSB.UI.Controls.Primitives
         internal void UpdateButtonsPanelLength(double length)
         {
             SetValue(ButtonsPanelLengthProperty, length);
+        }
+
+        private void OnMenuPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not ItemCollection collection)
+                return;
+
+            SetValue(MenuItemsVisibilityProperty, collection.Count > 0 ? Visibility.Visible : Visibility.Collapsed);
+        }
+
+        private void OnFooterPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not ItemCollection collection)
+                return;
+
+            SetValue(FooterItemsVisibilityProperty, collection.Count > 0 ? Visibility.Visible : Visibility.Collapsed);
         }
 
         #endregion

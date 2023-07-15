@@ -85,6 +85,15 @@ namespace MSB.UI.Controls
         }
 
         /// <summary>
+        /// Gets or sets the custom content placement in the pane.
+        /// </summary>
+        public PaneCustomContentPlacement CustomContentPlacement
+        {
+            get => (PaneCustomContentPlacement)GetValue(CustomContentPlacementProperty);
+            set => SetValue(CustomContentPlacementProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the width of the NavigationView pane in its compact display mode.
         /// <para>The default is 48 pixels.</para>
         /// </summary>
@@ -232,6 +241,12 @@ namespace MSB.UI.Controls
         /// </summary>
         public static readonly DependencyProperty PaneCustomContentProperty =
                 DependencyProperty.Register(nameof(PaneCustomContent), typeof(object), typeof(NavigationView), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Identifies the CustomContentPlacement dependency property.
+        /// </summary>
+        public static readonly DependencyProperty CustomContentPlacementProperty =
+                DependencyProperty.Register(nameof(CustomContentPlacement), typeof(PaneCustomContentPlacement), typeof(NavigationView), new PropertyMetadata(PaneCustomContentPlacement.Top));
 
         /// <summary>
         /// Identifies the CompactPaneLength dependency property.

@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Collections;
 using System;
 
 namespace MSB.Collections
 {
     /// <summary>
-    /// 
+    /// Represents a collection of objects that can be individually accessed by index.
     /// </summary>
-    public sealed class ItemCollection : CollectionBase
+    public sealed class ItemCollection : CollectionBase, INotifyCollectionChanged, INotifyPropertyChanged
     {
         /// <summary>
         /// Gets or sets the item at the given zero-based index.
@@ -30,7 +32,15 @@ namespace MSB.Collections
         /// <exception cref="InvalidOperationException"/>
         public int Add(object value)
         {
-            return List.Add(value);
+            var index = List.Add(value);
+
+            if (index != -1)
+            {
+                this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+                this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, value, index));
+            }
+
+            return index;
         }
 
         /// <summary>
@@ -76,5 +86,44 @@ namespace MSB.Collections
         {
             return List.Contains(value);
         }
+
+        #region Methods
+
+        /// <inheritdoc/>
+        protected override void OnInsertComplete(int index, object value)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, value, index));
+        }
+
+        /// <inheritdoc/>
+        protected override void OnClearComplete()
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
+
+        /// <inheritdoc/>
+        protected override void OnRemoveComplete(int index, object value)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+            this.CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, value));
+        }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Occurs when the collection changes.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        #endregion
     }
 }

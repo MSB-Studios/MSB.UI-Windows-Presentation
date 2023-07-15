@@ -6,16 +6,6 @@
     public enum LabelPosition
     {
         /// <summary>
-        /// The label is positioned below the icon.
-        /// </summary>
-        Top,
-
-        /// <summary>
-        /// The label is positioned above the icon.
-        /// </summary>
-        Left,
-
-        /// <summary>
         /// The label is positioned to the left of the icon.
         /// </summary>
         Right,

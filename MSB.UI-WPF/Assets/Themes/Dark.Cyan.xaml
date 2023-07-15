@@ -44,6 +44,8 @@
 
     <SolidColorBrush x:Key="LightDismissLayerBrush">#07000000</SolidColorBrush>
 
+    <SolidColorBrush x:Key="PlaceholderTextForeground">{{MSB.Brushes.Foreground.PlaceholderText}}</SolidColorBrush>
+
     <SolidColorBrush x:Key="WindowBackground"
                      Color="{DynamicResource ThemeBackgroundColor}"/>
     <SolidColorBrush x:Key="WindowBorderBrush"

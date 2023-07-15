@@ -6,8 +6,9 @@
     xmlns:msui="clr-namespace:MSB.UI">
 
     <!--
-    ********************************************************************     STYLES RESOURCES
-    ***************************************************************
+    ********************************************************************     
+    **********     STYLES RESOURCES
+    ********************************************************************
     -->
 
     <Style x:Key="NavigationListScrollViewerStyle" TargetType="ScrollViewer">
@@ -1213,8 +1214,10 @@
                                             <ContentPresenter x:Name="PaneHeaderPresenter" Height="48" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"/>
                                         </Grid>
                                         <ContentPresenter x:Name="PaneCustomContentPresenter" DockPanel.Dock="Top" Content="{TemplateBinding PaneCustomContent}"/>
-                                        <msuc:NavigationViewList x:Name="FooterItems" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" ItemsSource="{TemplateBinding FooterItems}" Margin="0, 48, 0, 0"/>
-                                        <msuc:NavigationViewList x:Name="MenuItems" ItemsSource="{TemplateBinding MenuItems}" Margin="0, 5, 0, 0"/>
+                                        <msuc:NavigationViewList x:Name="FooterItems" ItemsSource="{TemplateBinding FooterItems}" Visibility="{Binding TemplateSettings.FooterItemsVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                 DockPanel.Dock="Bottom" VerticalAlignment="Bottom"  Margin="0, 48, 0, 0"/>
+                                        <msuc:NavigationViewList x:Name="MenuItems" ItemsSource="{TemplateBinding MenuItems}" Visibility="{Binding TemplateSettings.MenuItemsVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                 Margin="0, 5, 0, 0"/>
                                     </DockPanel>
                                 </msuc:SplitView.Pane>
 
@@ -1267,6 +1270,9 @@
                         <Trigger Property="PaneCustomContent" Value="{x:Null}">
                             <Setter TargetName="PaneCustomContentPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
+                        <Trigger Property="CustomContentPlacement" Value="Bottom">
+                            <Setter TargetName="PaneCustomContentPresenter" Property="DockPanel.Dock" Value="Bottom"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -1279,95 +1285,26 @@
     ***************************************************************
     -->
 
-    <ControlTemplate x:Key="AppBarButonWidthLeftLabelTemplate" TargetType="msuc:AppBarButton">
-        <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}">
-            <StackPanel Orientation="Horizontal">
-                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Label}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}" MinWidth="36" MinHeight="36"/>
-            </StackPanel>
-        </Border>
-
-        <ControlTemplate.Triggers>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
-            </Trigger>
-            <Trigger Property="Label" Value="">
-                <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
-                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}"/>
-                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
-                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}"/>
-                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
-                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}"/>
-                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="AppBarButonWidthTopLabelTemplate" TargetType="msuc:AppBarButton">
-        <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}">
-            <StackPanel >
-                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Label}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}" MinWidth="36" MinHeight="36"/>
-            </StackPanel>
-        </Border>
-
-        <ControlTemplate.Triggers>
-            <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
-            </Trigger>
-            <Trigger Property="Label" Value="">
-                <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed"/>
-            </Trigger>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
-                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPointerOver}"/>
-                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPointerOver}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
-                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushPressed}"/>
-                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundPressed}"/>
-            </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
-                <Setter TargetName="BorderRoot" Property="BorderBrush" Value="{DynamicResource ButtonBorderBrushDisabled}"/>
-                <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource ButtonForegroundDisabled}"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
     <ControlTemplate x:Key="AppBarButonWidthRightLabelTemplate" TargetType="msuc:AppBarButton">
-        <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}">
-            <StackPanel Orientation="Horizontal">
-                <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}" MinWidth="36" MinHeight="36"/>
-                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Label}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+        <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" x:Name="IconContainer" Width="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                    <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}"/>
+                </Grid>
+                <ContentPresenter Grid.Column="1" x:Name="ContentPresenter" Content="{TemplateBinding Label}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-            </StackPanel>
+            </Grid>
         </Border>
 
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="IconContainer" Property="Visibility" Value="Collapsed"/>
             </Trigger>
             <Trigger Property="Label" Value="">
                 <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed"/>
@@ -1396,16 +1333,23 @@
     <ControlTemplate x:Key="AppBarButonWidthBottomLabelTemplate" TargetType="msuc:AppBarButton">
         <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                 BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource ControlCornerRadius}">
-            <StackPanel >
-                <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}" MinWidth="36" MinHeight="36"/>
-                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Label}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" x:Name="IconContainer" Width="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                    <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}"/>
+                </Grid>
+                <ContentPresenter Grid.Row="1" x:Name="ContentPresenter" Content="{TemplateBinding Label}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-            </StackPanel>
+            </Grid>
         </Border>
 
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
-                <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="IconContainer" Property="Visibility" Value="Collapsed"/>
             </Trigger>
             <Trigger Property="Label" Value="">
                 <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed"/>
@@ -1444,12 +1388,6 @@
         <Setter Property="MinWidth" Value="36"/>
         <Setter Property="Template" Value="{StaticResource AppBarButonWidthBottomLabelTemplate}"/>
         <Style.Triggers>
-            <Trigger Property="LabelPosition" Value="Left">
-                <Setter Property="Template" Value="{StaticResource AppBarButonWidthLeftLabelTemplate}"/>
-            </Trigger>
-            <Trigger Property="LabelPosition" Value="Top">
-                <Setter Property="Template" Value="{StaticResource AppBarButonWidthTopLabelTemplate}"/>
-            </Trigger>
             <Trigger Property="LabelPosition" Value="Right">
                 <Setter Property="Template" Value="{StaticResource AppBarButonWidthRightLabelTemplate}"/>
             </Trigger>
