@@ -64,7 +64,8 @@
 				"MSB.Brushes.ScrollBar.Foreground.Dragging": "#FF2E2E2E",
 				"MSB.Brushes.SplitView.Background": "#FF000000",
 				"MSB.Brushes.SplitView.Pane.Background": "#FF191919",
-				"MSB.Brushes.LightDismissLayer": "#07000000"
+				"MSB.Brushes.LightDismissLayer": "#07000000",
+				"MSB.Brushes.Foreground.PlaceholderText": "#FF9B9B9B"
 			}
 		}
 	],
