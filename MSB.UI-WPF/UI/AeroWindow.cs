@@ -11,14 +11,14 @@ namespace MSB.UI
     /// Represents a window with new functions, such as the ability to hide the icon,
     /// the title or cover the title bar with its contents.
     /// </summary>
-    public class RichWindow : Window
+    public class AeroWindow : Window
     {
         /// <summary>
-        /// Initializes a new instance of the 'RichWindow' class.
+        /// Initializes a new instance of the 'AeroWindow' class.
         /// </summary>
-        public RichWindow()
+        public AeroWindow()
         {
-            this.DefaultStyleKey = typeof(RichWindow);
+            this.DefaultStyleKey = typeof(AeroWindow);
         }
 
         #region Properties
@@ -80,31 +80,31 @@ namespace MSB.UI
         /// Identifies the ExtendViewIntoTitleBar dependency property.
         /// </summary>
         public static readonly DependencyProperty ExtendViewIntoTitleBarProperty =
-                DependencyProperty.Register(nameof(ExtendViewIntoTitleBar), typeof(bool), typeof(RichWindow), new PropertyMetadata(false));
+                DependencyProperty.Register(nameof(ExtendViewIntoTitleBar), typeof(bool), typeof(AeroWindow), new PropertyMetadata(false));
 
         /// <summary>
         /// Identifies the IsIconVisible dependency property.
         /// </summary>
         public static readonly DependencyProperty IsIconVisibleProperty =
-                DependencyProperty.Register(nameof(IsIconVisible), typeof(bool), typeof(RichWindow), new PropertyMetadata(true));
+                DependencyProperty.Register(nameof(IsIconVisible), typeof(bool), typeof(AeroWindow), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the IsTitleVisible dependency property.
         /// </summary>
         public static readonly DependencyProperty IsTitleVisibleProperty =
-                DependencyProperty.Register(nameof(IsTitleVisible), typeof(bool), typeof(RichWindow), new PropertyMetadata(true));
+                DependencyProperty.Register(nameof(IsTitleVisible), typeof(bool), typeof(AeroWindow), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the FlyoutContent dependency property.
         /// </summary>
         public static readonly DependencyProperty FlyoutProperty =
-                DependencyProperty.Register(nameof(Flyout), typeof(Flyout), typeof(RichWindow), new PropertyMetadata(null, FlyoutChanged_Callback));
+                DependencyProperty.Register(nameof(Flyout), typeof(Flyout), typeof(AeroWindow), new PropertyMetadata(null, FlyoutChanged_Callback));
 
         /// <summary>
         /// Identifies the IsFlyoutOpen dependency property.
         /// </summary>
         public static readonly DependencyProperty IsFlyoutOpenProperty =
-                DependencyProperty.Register(nameof(IsFlyoutOpen), typeof(bool), typeof(RichWindow), new PropertyMetadata(false));
+                DependencyProperty.Register(nameof(IsFlyoutOpen), typeof(bool), typeof(AeroWindow), new PropertyMetadata(false));
 
         #endregion
 
@@ -112,7 +112,7 @@ namespace MSB.UI
 
         static void FlyoutChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue != e.NewValue && d is RichWindow window)
+            if (e.OldValue != e.NewValue && d is AeroWindow window)
             {
                 if (e.NewValue is not Flyout flyout)
                     return;
@@ -195,7 +195,10 @@ namespace MSB.UI
 
         private void LightDismissLayer_Pressed(object sender, MouseButtonEventArgs e)
         {
-            this.Flyout?.SetCurrentValue(Flyout.IsOpenProperty, false);
+            if (this.Flyout is null)
+                return;
+
+            this.Flyout.IsOpen = false;
         }
 
         private void OnFlyoutClosed(object sender, EventArgs args)

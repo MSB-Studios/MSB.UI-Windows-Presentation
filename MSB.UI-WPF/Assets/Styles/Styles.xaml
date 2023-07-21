@@ -1103,18 +1103,4 @@
     <!--Default 'System.Windows.Controls.ComboBox' style...-->
     <Style TargetType="ComboBox" BasedOn="{StaticResource BaseComboBoxStyle}"/>
 
-    <!--
-    ***************************************************************
-    **********     SYSTEM.WINDOWS.CONTROLS.PAGE
-    ***************************************************************
-    -->
-
-    <Style x:Key="BasePageStyle" TargetType="Page">
-        <Setter Property="Background" Value="{DynamicResource PageBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PageForeground}"/>
-    </Style>
-
-    <!--Default 'System.Windows.Controls.Page' style...-->
-    <Style TargetType="Page" BasedOn="{StaticResource BasePageStyle}"/>
-
 </ResourceDictionary>
