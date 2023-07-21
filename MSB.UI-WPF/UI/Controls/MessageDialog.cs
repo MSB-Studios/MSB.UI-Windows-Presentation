@@ -18,21 +18,21 @@ namespace MSB.UI.Controls
         #region Properties
 
         /// <summary>
-        /// Gets or sets the text to display.
+        /// Gets or sets the title bar caption to display.
         /// </summary>
-        public string Content
+        public string Title
         {
-            get => (string)GetValue(ContentProperty);
-            set => SetValue(ContentProperty, value);
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
 
         /// <summary>
-        /// Gets or sets the title bar caption to display.
+        /// Gets or sets the text to display.
         /// </summary>
-        public string Caption
+        public string Message
         {
-            get => (string)GetValue(CaptionProperty);
-            set => SetValue(CaptionProperty, value);
+            get => (string)GetValue(MessageProperty);
+            set => SetValue(MessageProperty, value);
         }
 
         /// <summary>
@@ -58,16 +58,16 @@ namespace MSB.UI.Controls
         #region Dependency properties
 
         /// <summary>
-        /// Identifies the Content dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ContentProperty =
-                DependencyProperty.Register(nameof(Content), typeof(string), typeof(MessageDialog), new PropertyMetadata(string.Empty));
-
-        /// <summary>
         /// Identifies the Caption dependency property.
         /// </summary>
-        public static readonly DependencyProperty CaptionProperty =
-                DependencyProperty.Register(nameof(Caption), typeof(string), typeof(MessageDialog), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TitleProperty =
+                DependencyProperty.Register(nameof(Title), typeof(string), typeof(MessageDialog), new PropertyMetadata(string.Empty));
+
+        /// <summary>
+        /// Identifies the Content dependency property.
+        /// </summary>
+        public static readonly DependencyProperty MessageProperty =
+                DependencyProperty.Register(nameof(Message), typeof(string), typeof(MessageDialog), new PropertyMetadata(string.Empty));
 
         /// <summary>
         /// Identifies the CustomContent dependency property.
