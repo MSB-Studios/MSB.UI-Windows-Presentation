@@ -59,7 +59,7 @@ namespace MSB.UI.Controls
         /// Identifies the FontSize dependency property.
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-                TextElement.ForegroundProperty.AddOwner(typeof(FontIcon));
+                TextElement.FontSizeProperty.AddOwner(typeof(FontIcon));
 
         /// <summary>
         /// Identifies the Glyph dependency property.
