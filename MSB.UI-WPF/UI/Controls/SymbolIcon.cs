@@ -7,17 +7,17 @@ using System.Windows;
 namespace MSB.UI.Controls
 {
     /// <summary>
-    /// Represents an icon that uses a glyph from the specified font.
+    /// Represents an icon that uses a glyph from the Segoe MDL2 Assets font as its content.
     /// </summary>
     [TemplatePart(Name = "PART_Glyph", Type = typeof(TextBlock))]
-    public sealed class FontIcon : IconElement
+    public sealed class SymbolIcon : IconElement
     {
         /// <summary>
-        /// Initializes a new instance of the FontIcon class.
+        /// Initializes a new instance of the SymbolIcon class.
         /// </summary>
-        public FontIcon() : base()
+        public SymbolIcon() : base()
         {
-            this.DefaultStyleKey = typeof(FontIcon);
+            this.DefaultStyleKey = typeof(SymbolIcon);
 
             // set 'n' add the child...
             AddVisualChild(Child = new TextBlock
@@ -51,12 +51,12 @@ namespace MSB.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets the character code that identifies the icon glyph.
+        /// Gets or sets the symbol that is displayed.
         /// </summary>
-        public string Glyph
+        public Symbol Symbol
         {
-            get => (string)GetValue(GlyphProperty);
-            set => SetValue(GlyphProperty, value);
+            get => (Symbol)GetValue(SymbolProperty);
+            set => SetValue(SymbolProperty, value);
         }
 
         #endregion
@@ -67,29 +67,29 @@ namespace MSB.UI.Controls
         /// Identifies the Foreground dependency property.
         /// </summary>
         public static readonly DependencyProperty ForegroundProperty =
-                TextElement.ForegroundProperty.AddOwner(typeof(FontIcon), new FrameworkPropertyMetadata(null));
+                TextElement.ForegroundProperty.AddOwner(typeof(SymbolIcon), new FrameworkPropertyMetadata(null));
 
         /// <summary>
         /// Identifies the FontSize dependency property.
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-                TextElement.FontSizeProperty.AddOwner(typeof(FontIcon), new FrameworkPropertyMetadata(12d));
+                TextElement.FontSizeProperty.AddOwner(typeof(SymbolIcon), new FrameworkPropertyMetadata(12d));
 
         /// <summary>
-        /// Identifies the Glyph dependency property.
+        /// Identifies the Symbol dependency property.
         /// </summary>
-        public static readonly DependencyProperty GlyphProperty =
-                DependencyProperty.Register(nameof(Glyph), typeof(string), typeof(FontIcon), new PropertyMetadata(string.Empty, GlyphChanged_Callback));
+        public static readonly DependencyProperty SymbolProperty =
+                DependencyProperty.Register(nameof(Symbol), typeof(Symbol), typeof(SymbolIcon), new PropertyMetadata(Symbol.None, SymbolChanged_Callback));
 
         #endregion
 
         #region Callbacks
 
-        private static void GlyphChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SymbolChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue != e.NewValue && d is FontIcon icon)
+            if (e.OldValue != e.NewValue && d is SymbolIcon icon)
             {
-                (icon.Child as TextBlock).Text = (string)e.NewValue;
+                (icon.Child as TextBlock).Text = $"{(char)(Symbol)e.NewValue}";
             }
         }
 
