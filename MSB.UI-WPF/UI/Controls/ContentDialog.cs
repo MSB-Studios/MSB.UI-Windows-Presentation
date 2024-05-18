@@ -3,9 +3,9 @@
 namespace MSB.UI.Controls
 {
     /// <summary>
-    /// Represents a dialog box that displays a message and returns a value.
+    /// Represents a dialog box that displays a custom content and returns a value.
     /// </summary>
-    public sealed class MessageDialog : FrameworkElement
+    public sealed class ContentDialog : FrameworkElement
     {
         #region Fields
 
@@ -14,11 +14,11 @@ namespace MSB.UI.Controls
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the 'MessageDialog' class.
+        /// Initialize a new instance of the 'ContentDialog' class.
         /// </summary>
-        public MessageDialog()
+        public ContentDialog()
         {
-            this.DefaultStyleKey = typeof(MessageDialog);
+            this.DefaultStyleKey = typeof(ContentDialog);
         }
 
         #region Properties
@@ -33,12 +33,12 @@ namespace MSB.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets the text to display.
+        /// Gets or sets the content to display.
         /// </summary>
-        public string Message
+        public UIElement Content
         {
-            get => (string)GetValue(MessageProperty);
-            set => SetValue(MessageProperty, value);
+            get => (UIElement)GetValue(ContentProperty);
+            set => SetValue(ContentProperty, value);
         }
 
         /// <summary>
@@ -55,22 +55,22 @@ namespace MSB.UI.Controls
         #region Dependency properties
 
         /// <summary>
-        /// Identifies the Caption dependency property.
+        /// Identifies the Title dependency property.
         /// </summary>
         public static readonly DependencyProperty TitleProperty =
-                DependencyProperty.Register(nameof(Title), typeof(string), typeof(MessageDialog), new PropertyMetadata(string.Empty));
-
+                DependencyProperty.Register("Title", typeof(string), typeof(ContentDialog), new PropertyMetadata(string.Empty));
+        
         /// <summary>
         /// Identifies the Content dependency property.
         /// </summary>
-        public static readonly DependencyProperty MessageProperty =
-                DependencyProperty.Register(nameof(Message), typeof(string), typeof(MessageDialog), new PropertyMetadata(string.Empty));
-
+        public static readonly DependencyProperty ContentProperty =
+                DependencyProperty.Register("Content", typeof(UIElement), typeof(ContentDialog), new PropertyMetadata(null));
+        
         /// <summary>
         /// Identifies the Buttons dependency property.
         /// </summary>
         public static readonly DependencyProperty ButtonsProperty =
-                DependencyProperty.Register(nameof(Buttons), typeof(DialogButton), typeof(MessageDialog), new PropertyMetadata(DialogButton.OK));
+                DependencyProperty.Register("Buttons", typeof(DialogButton), typeof(ContentDialog), new PropertyMetadata(DialogButton.OK));
 
         #endregion
 
