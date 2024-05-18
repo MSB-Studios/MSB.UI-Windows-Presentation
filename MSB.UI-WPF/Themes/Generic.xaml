@@ -389,9 +389,9 @@
     -->
 
     <Style TargetType="msui:DialogWindow">
-        <Setter Property="Background" Value="{DynamicResource MessageDialogBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource MessageDialogBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource MessageDialogForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource DialogBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource DialogBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DialogForeground}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -399,6 +399,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Focusable" Value="False"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
         <Setter Property="SizeToContent" Value="Height"/>
         <Setter Property="ShowInTaskbar" Value="False"/>
         <Setter Property="MinHeight" Value="200"/>
@@ -417,8 +418,8 @@
                                 <RowDefinition Height="76"/>
                             </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0" x:Name="PART_TitleBar" Panel.ZIndex="1" WindowChrome.IsHitTestVisibleInChrome="True">
-                                <Rectangle x:Name="TitleBarRect" Fill="{DynamicResource SystemControlTransparentBrush}" MinWidth="30"/>
+                            <Grid Grid.Row="0" x:Name="PART_TitleBar" Panel.ZIndex="2" WindowChrome.IsHitTestVisibleInChrome="True">
+                                <Rectangle x:Name="TitleBarRect" Fill="{DynamicResource DialogBackground}"/>
                             </Grid>
                             <Grid Grid.Row="1" x:Name="PART_Content" Margin="20, 10"
                                   TextElement.Foreground="{TemplateBinding Foreground}">

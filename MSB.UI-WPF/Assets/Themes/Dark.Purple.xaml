@@ -276,11 +276,11 @@
     ***************************************************************
     -->
 
-    <SolidColorBrush x:Key="MessageDialogBackground"
+    <SolidColorBrush x:Key="DialogBackground"
                      Color="{DynamicResource ThemeBackgroundColor}"/>
-    <SolidColorBrush x:Key="MessageDialogBorderBrush"
+    <SolidColorBrush x:Key="DialogBorderBrush"
                      Color="{DynamicResource ApplicationAccentColor}"/>
-    <SolidColorBrush x:Key="MessageDialogForeground"
+    <SolidColorBrush x:Key="DialogForeground"
                      Color="{DynamicResource ThemeForegroundColor}"/>
 
     <SolidColorBrush x:Key="FlyoutBackground"

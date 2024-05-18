@@ -1,7 +1,7 @@
 ﻿Imports MSB.UI.Controls
 
 Namespace Views
-    Class MainPage
+    Partial Class MainPage
         Public Sub New()
             InitializeComponent()
         End Sub
