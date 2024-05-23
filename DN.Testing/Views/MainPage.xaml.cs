@@ -26,6 +26,7 @@ namespace DN.Testing.Views
 
         private void OnShowMessageDialogButtonClick(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("Welcome to .NET", "Hello, World!");
             new MessageDialog()
             {
                 Title = "Hello, World!",
