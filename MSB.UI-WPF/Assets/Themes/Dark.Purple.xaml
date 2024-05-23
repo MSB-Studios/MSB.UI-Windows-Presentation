@@ -314,4 +314,13 @@
     <SolidColorBrush x:Key="NavigationViewItemForegroundDisabled"
                      Color="{DynamicResource ControlForegroundDisabledColor}"/>
 
+    <SolidColorBrush x:Key="TeachingTipBackground"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+    <SolidColorBrush x:Key="TeachingTipBorderBrush"
+                     Color="{DynamicResource ControlBorderColor}"/>
+    <SolidColorBrush x:Key="TeachingTipTitleForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="TeachingTipDescriptionForeground"
+                 Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
 </ResourceDictionary>

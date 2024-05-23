@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=netstandard"
     xmlns:msma="clr-namespace:MSB.Media.Animations"
     xmlns:msuc="clr-namespace:MSB.UI.Controls"
     xmlns:msui="clr-namespace:MSB.UI">
@@ -262,6 +263,42 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="GridRoot" Property="Background" Value="{DynamicResource CaptionButtonBackgroundDisabled}"/>
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource CaptionButtonForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TeachingTipCloseButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource ApplicationTransparentBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ButtonForeground}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="32"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Path x:Name="Icon" Width="16" Height="16" Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Content}"/>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ButtonForegroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ButtonForegroundDisabled}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1403,6 +1440,179 @@
                 <Setter Property="Template" Value="{StaticResource AppBarButonWidthRightLabelTemplate}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.CONTROLS.TEACHINGTIP' STYLE
+    ***************************************************************
+    -->
+
+    <Style TargetType="msuc:TeachingTip">
+        <Setter Property="Background" Value="{DynamicResource TeachingTipBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TeachingTipBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:TeachingTip">
+                    <Popup x:Name="PART_Popup" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Fade"
+                           Placement="{Binding TemplateSettings.Placement, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                           PlacementTarget="{Binding TemplateSettings.PlacementTarget, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                           IsOpen="{Binding IsOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                        <Popup.Resources>
+                            <Storyboard x:Key="OpenStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="ClosedToOpenStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="OpenToClosedStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+
+                            <Style x:Key="TitleTextBlockStyle" TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{DynamicResource TeachingTipTitleForeground}"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                            <Style x:Key="DescriptionTextBlockStyle" TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{DynamicResource TeachingTipDescriptionForeground}"/>
+                                <Setter Property="FontSize" Value="14"/>
+                            </Style>
+                        </Popup.Resources>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition Storyboard="{StaticResource ClosedToOpenStoryboard}"
+                                                      From="Closed" To="Open"/>
+                                    <VisualTransition Storyboard="{StaticResource OpenToClosedStoryboard}"
+                                                      From="Open" To="Closed"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Closed"/>
+                                <VisualState x:Name="Open" Storyboard="{StaticResource OpenStoryboard}"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid x:Name="GridRoot" Margin="5" RenderTransformOrigin="0.5, 0.5">
+                            <Grid.Effect>
+                                <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0.15"/>
+                            </Grid.Effect>
+                            <Grid.RenderTransform>
+                                <ScaleTransform x:Name="ContentGridScaleTransform" ScaleX="0" ScaleY="0"/>
+                            </Grid.RenderTransform>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="1" Grid.Column="1" x:Name="PART_Content" Background="{TemplateBinding Background}" MinHeight="60" MinWidth="250" MaxWidth="400"
+                                    CornerRadius="{DynamicResource OverlayCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <Border.Effect>
+                                    <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0"/>
+                                </Border.Effect>
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid Grid.Row="0" x:Name="HeroContainer" MaxHeight="240">
+                                        <Border x:Name="BorderMask" Background="{TemplateBinding Background}" BorderThickness="0"
+                                                CornerRadius="{Binding TemplateSettings.HeroContentCornerRadius, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                        <ContentPresenter  x:Name="HeroPresenter" Content="{TemplateBinding HeroContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <ContentPresenter.OpacityMask>
+                                                <VisualBrush Visual="{Binding ElementName=BorderMask}"/>
+                                            </ContentPresenter.OpacityMask>
+                                        </ContentPresenter>
+                                    </Grid>
+                                    <StackPanel Grid.Row="1" x:Name="TextPanel" Orientation="Horizontal" Margin="20, 10">
+                                        <ContentPresenter x:Name="IconPresenter" Margin="0, 0, 10, 0" TextElement.FontSize="20"
+                                                          TextElement.Foreground="{DynamicResource TeachingTipTitleForeground}" Content="{TemplateBinding Icon}"/>
+                                        <StackPanel VerticalAlignment="Top">
+                                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0, 0, 0, 5" Text="{TemplateBinding Title}"/>
+                                            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{TemplateBinding Description}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <Button Grid.Row="1" x:Name="HideButton" Margin="10" Visibility="Collapsed" Style="{StaticResource TeachingTipCloseButtonStyle}" Content="{StaticResource CloseWindowGeometry}"/>
+                                    <Grid x:Name="ButtonsContainer" Grid.Row="2" Margin="5, 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Button Grid.Column="0" x:Name="ActionButton" Margin="5, 10" MinWidth="100" Content="{TemplateBinding ActionButtonContent}"/>
+                                        <Button Grid.Column="1" x:Name="CloseButton" Margin="5, 10" MinWidth="100" Content="{TemplateBinding CloseButtonContent}"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                            <Canvas Grid.Row="0" Grid.Column="1" x:Name="TailContainer" Visibility="Collapsed" Height="20" Width="20" RenderTransformOrigin="0.5, 0.5">
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <RotateTransform Angle="-90"/>
+                                        <TranslateTransform Y="1"/>
+                                    </TransformGroup>
+                                </Canvas.RenderTransform>
+                                <Polygon Points="0,0 16,10 0,20" Fill="{TemplateBinding Background}" />
+                                <Path Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Data="M 0,0 L 16,10" />
+                                <Path Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Data="M 16,10 L 0,20" />
+                            </Canvas>
+                        </Grid>
+                    </Popup>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HeroContent" Value="{x:Null}">
+                            <Setter TargetName="HeroPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="HeroContentPlacement" Value="Bottom">
+                            <Setter TargetName="HeroContainer" Property="Grid.Row" Value="2"/>
+                            <Setter TargetName="ButtonsContainer" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="TextPanel" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="HideButton" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="BorderMask" Property="CornerRadius" Value="0, 0, 12, 12"/>
+                        </Trigger>
+                        <Trigger Property="IsLightDismissEnabled" Value="False">
+                            <Setter TargetName="HideButton" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="ActionButtonContent" Value="{x:Null}">
+                            <Setter TargetName="ActionButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="CloseButtonContent" Value="{x:Null}">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

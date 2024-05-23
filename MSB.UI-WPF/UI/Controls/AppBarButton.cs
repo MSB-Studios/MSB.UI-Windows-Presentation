@@ -42,6 +42,7 @@ namespace MSB.UI.Controls
 
         /// <summary>
         /// Gets or sets the position of the label relative to the icon.
+        /// <para>The default is **Bottom**.</para>
         /// </summary>
         public LabelPosition LabelPosition
         {

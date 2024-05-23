@@ -1,9 +1,9 @@
 ﻿using MSB.UI.Controls.Primitives;
 using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows;
 using System;
 
 namespace MSB.UI.Controls
@@ -13,6 +13,9 @@ namespace MSB.UI.Controls
     /// </summary>
     public sealed class SplitView : ContentControl
     {
+        RectangleGeometry paneClipRectangle = null;
+        Rectangle lightDismissLayer = null;
+
         /// <summary>
         /// Initializes a new instance of the SplitView class.
         /// </summary>
@@ -384,8 +387,5 @@ namespace MSB.UI.Controls
         public event TypedEventHandler<object, object> PaneOpening;
 
         #endregion
-
-        Rectangle lightDismissLayer = null;
-        RectangleGeometry paneClipRectangle = null;
     }
 }
