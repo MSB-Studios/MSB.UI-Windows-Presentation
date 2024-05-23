@@ -1,0 +1,17 @@
+﻿<Application x:Class="DN.Testing.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Application.Resources>
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <!--MSB.UI-WPF assets-->
+                <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Fonts/Fonts.xaml"/>
+                <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/Styles.xaml"/>
+                <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Themes/Light.Orange.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--other assets-->
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

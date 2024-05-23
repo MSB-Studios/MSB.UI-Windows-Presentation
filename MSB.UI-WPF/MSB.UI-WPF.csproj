@@ -2,7 +2,7 @@
 
 	<!--Project properties-->
 	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFrameworks>net48;netcoreapp3.1;net6.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<RootNamespace>MSB</RootNamespace>
 		<LangVersion>latest</LangVersion>
