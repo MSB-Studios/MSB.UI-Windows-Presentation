@@ -2,7 +2,7 @@
 
 	<!--Project properties-->
 	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFrameworks>net48;netcoreapp3.1;net6.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<RootNamespace>MSB</RootNamespace>
 		<LangVersion>latest</LangVersion>
@@ -20,7 +20,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>2.1.0</Version>
+		<Version>2.2.1</Version>
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>
 		<Description>MSB.UI (Windows Presentation) is a .NET library designed to provide WPF solutions.</Description>
