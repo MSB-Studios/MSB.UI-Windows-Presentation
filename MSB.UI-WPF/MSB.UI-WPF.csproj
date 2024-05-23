@@ -20,7 +20,7 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Version>2.0.0</Version>
+		<Version>2.1.0</Version>
 		<PackageIcon>Icon.png</PackageIcon>
 		<PackageTags>Toolkit; Controls; .NET; WPF</PackageTags>
 		<Description>MSB.UI (Windows Presentation) is a .NET library designed to provide WPF solutions.</Description>

@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies the buttons that are displayed on a message dialog.
     /// </summary>
-    public enum MessageDialogButton
+    public enum DialogButton
     {
         /// <summary>
         /// The dialog displays an OK button.

@@ -1,6 +1,6 @@
-﻿using System.Windows.Documents;
-using System.Windows.Media;
+﻿using System;
 using System.Windows;
+using System.Windows.Media;
 
 namespace MSB.UI.Controls
 {
@@ -20,49 +20,44 @@ namespace MSB.UI.Controls
         #region Properties
 
         /// <summary>
-        /// Gets or sets a brush that describes the foreground color.
+        /// Gets the count of visual child elements within this element.
         /// </summary>
-        public Brush Foreground
+        protected override int VisualChildrenCount
         {
-            get => (Brush)GetValue(ForegroundProperty);
-            set => SetValue(ForegroundProperty, value);
-        }
-
-        #endregion
-
-        #region Dependency property
-
-        /// <summary>
-        /// Identifies the Foreground dependency property.
-        /// </summary>
-        public static readonly DependencyProperty ForegroundProperty =
-                TextElement.ForegroundProperty.AddOwner(typeof(IconElement), new FrameworkPropertyMetadata(null, ForegroundChanged_Callback));
-
-        #endregion
-
-        #region Callbacks
-
-        private static void ForegroundChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.OldValue != e.NewValue && d is IconElement iconElement)
-            {
-                iconElement.OnForegroundChanged(e);
-            }
+            get => 1;
         }
 
         #endregion
 
         #region Methods
 
-        /// <summary>
-        /// Invoked when the effective property value of the Foreground property changes.
-        /// </summary>
-        /// <param name="e">The data for the event. </param>
-        protected virtual void OnForegroundChanged(DependencyPropertyChangedEventArgs e)
+        /// <inheritdoc/>
+        protected override Visual GetVisualChild(int index)
         {
+            return index is 0 ? Child : throw new ArgumentOutOfRangeException(nameof(index));
+        }
 
+        /// <inheritdoc/>
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            Child.Measure(availableSize);
+
+            return Child.DesiredSize;
+        }
+
+        /// <inheritdoc/>
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            Child.Arrange(new Rect(finalSize));
+
+            return finalSize;
         }
 
         #endregion
+
+        /// <summary>
+        /// Gets the child element.
+        /// </summary>
+        protected FrameworkElement Child = null;
     }
 }

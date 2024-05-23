@@ -2,10 +2,10 @@
 namespace MSB.UI.Controls
 {
     /// <summary>
-    /// Specifies which message dialog button that a user clicks. <see cref="MessageDialogResult"/>
+    /// Specifies which message dialog button that a user clicks. <see cref="DialogResult"/>
     /// is returned by the <see cref="MessageDialog.Show()"/> method.
     /// </summary>
-    public enum MessageDialogResult
+    public enum DialogResult
     {
         /// <summary>
         /// The dialog returns no result.

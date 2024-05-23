@@ -509,7 +509,7 @@
     -->
 
     <Style x:Key="BasePasswordBoxStyle" TargetType="PasswordBox">
-        <Setter Property="FocusVisualStyle" Value="{StaticResource DefaultFocusVisualStyle}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
         <Setter Property="PasswordChar" Value="●"/>
         <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
@@ -726,6 +726,19 @@
 
     <!--
     ***************************************************************
+    **********     SYSTEM.WINDOWS.CONTROLS.PRIMITIVES.COMBOBOX
+    ***************************************************************
+    -->
+
+    <Style x:Key="BasePopupStyle" TargetType="Popup">
+        <Setter Property="StaysOpen" Value="False"/>
+    </Style>
+
+    <!--Default 'System.Windows.Controls.Primitives.Popup' style...-->
+    <Style TargetType="Popup" BasedOn="{StaticResource BasePopupStyle}"/>
+
+    <!--
+    ***************************************************************
     **********     SYSTEM.WINDOWS.CONTROLS.SCROLLVIEWER
     ***************************************************************
     -->
@@ -903,7 +916,7 @@
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ListBoxItemBackgroundDisabled}"/>
-                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxForegroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource ListBoxItemForegroundDisabled}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -922,7 +935,7 @@
 
     <Style x:Key="BaseListBoxStyle" TargetType="ListBox">
         <Setter Property="Background" Value="{DynamicResource ApplicationTransparentBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource ControlForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ApplicationTransparentBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>

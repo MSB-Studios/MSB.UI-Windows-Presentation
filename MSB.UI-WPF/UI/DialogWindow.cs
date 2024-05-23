@@ -9,6 +9,14 @@ namespace MSB.UI
 {
     internal class DialogWindow : Window
     {
+        #region Fields
+
+        Rectangle titleBarRect;
+        Button btnOK, btnCancel, btnYes, btnNo;
+        DialogResult result;
+
+        #endregion
+
         /// <summary>
         /// Initializes a new instance of the 'DialogWindow' class.
         /// </summary>
@@ -22,7 +30,7 @@ namespace MSB.UI
         /// <summary>
         /// Gets the dialog result value, which is the value that is returned from the <see cref="MessageDialog.Show()"/> method.
         /// </summary>
-        public MessageDialogResult Result
+        public DialogResult Result
         {
             get => result;
         }
@@ -36,7 +44,7 @@ namespace MSB.UI
             base.OnApplyTemplate();
 
             if (titleBarRect is not null)
-                titleBarRect.MouseDown -= TitleBar_MouseDown;
+                titleBarRect.MouseDown -= OnTitleBarPressed;
 
             if (btnOK is not null)
                 btnOK.Click -= OnOKButtonClick;
@@ -48,14 +56,13 @@ namespace MSB.UI
                 btnCancel.Click -= OnCancelButtonClick;
 
             titleBarRect = (Rectangle)GetTemplateChild("TitleBarRect");
-
             btnOK = (Button)GetTemplateChild("BtnOK");
             btnYes = (Button)GetTemplateChild("BtnYes");
             btnNo = (Button)GetTemplateChild("BtnNo");
             btnCancel = (Button)GetTemplateChild("BtnCancel");
 
             if (titleBarRect is not null)
-                titleBarRect.MouseDown += TitleBar_MouseDown;
+                titleBarRect.MouseDown += OnTitleBarPressed;
 
             if (btnOK is not null)
                 btnOK.Click += OnOKButtonClick;
@@ -77,42 +84,38 @@ namespace MSB.UI
 
         private void OnOKButtonClick(object sender, RoutedEventArgs e)
         {
-            result = MessageDialogResult.OK;
+            result = Controls.DialogResult.OK;
 
             this.DialogResult = true;
         }
 
         private void OnYesButtonClick(object sender, RoutedEventArgs e)
         {
-            result = MessageDialogResult.Yes;
+            result = Controls.DialogResult.Yes;
 
             this.DialogResult = true;
         }
 
         private void OnNoButtonClick(object sender, RoutedEventArgs e)
         {
-            result = MessageDialogResult.No;
+            result = Controls.DialogResult.No;
 
             this.DialogResult = true;
         }
 
         private void OnCancelButtonClick(object sender, RoutedEventArgs e)
         {
-            result = MessageDialogResult.Cancel;
+            result = Controls.DialogResult.Cancel;
 
             this.DialogResult = true;
         }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        private void OnTitleBarPressed(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton is MouseButtonState.Pressed)
                 this.DragMove();
         }
 
         #endregion
-
-        Rectangle titleBarRect;
-        Button btnOK, btnCancel, btnYes, btnNo;
-        MessageDialogResult result;
     }
 }
