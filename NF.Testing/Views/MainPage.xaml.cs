@@ -20,7 +20,6 @@ namespace NF.Testing.Views
             TT.Description = "Welcome to .NET Framework";
             TT.PreferredPlacement = TeachingTipPlacementMode.Top;
             TT.VerticalOffset = 32;
-            TT.IsLightDismissEnabled = false;
             TT.IsOpen = true;
         }
 

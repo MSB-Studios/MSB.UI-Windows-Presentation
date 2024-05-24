@@ -2,7 +2,6 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows;
-using System;
 
 namespace MSB.UI.Controls.Primitives
 {
@@ -88,11 +87,7 @@ namespace MSB.UI.Controls.Primitives
                 else
                     SetValue(HeroContentCornerRadiusProperty, new CornerRadius(0, 0, (double)radius?.BottomRight, (double)radius?.BottomLeft));
             }
-
-            var offset = this._owner.popup.HorizontalOffset;
-            this._owner.popup.HorizontalOffset = offset + 1;
-            this._owner.popup.HorizontalOffset = offset;
-
+            
             this._owner.popup.CustomPopupPlacementCallback ??= PlacePopup;
         }
 

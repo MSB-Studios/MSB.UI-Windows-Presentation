@@ -11,6 +11,10 @@
     <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">12</CornerRadius>
 
+    <DataTemplate x:Key="SelectionBoxItemTemplate">
+        <ContentPresenter Content="{Binding}"/>
+    </DataTemplate>
+
     <Style x:Key="FocusVisualStyle">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -94,8 +98,8 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="26"/>
                             </Grid.ColumnDefinitions>
-                            <ContentPresenter x:Name="Content" Focusable="False" Margin="{TemplateBinding Padding}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="Content" Focusable="False" RecognizesAccessKey="True" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                             <Path x:Name="Glyph" Grid.Column="1" Width="10" Height="10" StrokeThickness="1.5" Stretch="Uniform" HorizontalAlignment="Center"
                                   Stroke="{DynamicResource ComboBoxGlyphBrush}" Data="M 1,1 L 9,9 L 18,1 "/>
                         </Grid>
@@ -1042,8 +1046,8 @@
 
     <ControlTemplate x:Key="DefaultComboBoxTemplate" TargetType="ComboBox">
         <Grid x:Name="Root" SnapsToDevicePixels="True">
-            <ToggleButton x:Name="PART_ToggleButton" Content="{TemplateBinding Text}" Style="{StaticResource ComboBoxToggleButtonStyle}"
-                          Background="{TemplateBinding Background}" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+            <ToggleButton x:Name="PART_ToggleButton" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{DynamicResource SelectionBoxItemTemplate}"
+                          Style="{StaticResource ComboBoxToggleButtonStyle}" Background="{TemplateBinding Background}" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
             <Popup x:Name="PART_Popup" IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Placement="Bottom" AllowsTransparency="True"
                    PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" VerticalOffset="5">
                 <Border x:Name="dropDownBorder" Background="{DynamicResource ComboBoxDropDownBackground}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Margin="5, 0, 5, 5" CornerRadius="{DynamicResource ControlCornerRadius}"

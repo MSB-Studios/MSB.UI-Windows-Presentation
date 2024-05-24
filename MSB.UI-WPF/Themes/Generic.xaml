@@ -1597,9 +1597,6 @@
                             <Setter TargetName="HideButton" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="BorderMask" Property="CornerRadius" Value="0, 0, 12, 12"/>
                         </Trigger>
-                        <Trigger Property="IsLightDismissEnabled" Value="False">
-                            <Setter TargetName="HideButton" Property="Visibility" Value="Visible"/>
-                        </Trigger>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>

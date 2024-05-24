@@ -12,7 +12,7 @@
 		<NeutralLanguage>en-US</NeutralLanguage>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<AssemblyName>MSB.UI-WPF</AssemblyName>
-		<NoWarn>XDG0069</NoWarn>
+		<NoWarn>XDG0069;NETSDK1138</NoWarn>
 	</PropertyGroup>
 	
 	<!--NuGet properties-->

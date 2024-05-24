@@ -20,7 +20,6 @@ namespace NC.Testing.Views
             TT.Description = "Welcome to .NET Core";
             TT.PreferredPlacement = TeachingTipPlacementMode.Top;
             TT.VerticalOffset = 32;
-            TT.IsLightDismissEnabled = false;
             TT.IsOpen = true;
         }
 

@@ -17,5 +17,10 @@
                 Style="{StaticResource AccentButtonStyle}">Show TeachingTip</Button>
         <Button Click="OnShowMessageDialogButtonClick">Show MessageDialog</Button>
         <msb:TeachingTip x:Name="TT"/>
+        <ComboBox x:Name="CB">
+            <ComboBoxItem >Item 1</ComboBoxItem>
+            <ComboBoxItem >Item 2</ComboBoxItem>
+            <ComboBoxItem >Item 3</ComboBoxItem>
+        </ComboBox>
     </StackPanel>
 </Page>
