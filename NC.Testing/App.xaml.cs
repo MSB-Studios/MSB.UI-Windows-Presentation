@@ -29,6 +29,7 @@ namespace NC.Testing
                     MinWidth = 600,
                     Height = 0,
                     Width = 0,
+                    ResizeMode = ResizeMode.NoResize,
                     Content = rootFrame,
                 };
 

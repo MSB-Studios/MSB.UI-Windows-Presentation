@@ -8,7 +8,7 @@
                 <!--MSB.UI-WPF assets-->
                 <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Fonts/Fonts.xaml"/>
                 <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Styles/Styles.xaml"/>
-                <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Themes/Light.Pink.xaml"/>
+                <ResourceDictionary Source="/MSB.UI-WPF;component/Assets/Themes/Dark.Pink.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <!--other assets-->

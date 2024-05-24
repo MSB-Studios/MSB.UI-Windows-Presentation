@@ -352,7 +352,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="144"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarRect" Fill="{DynamicResource ApplicationTransparentBrush}" MinWidth="48"/>
@@ -381,11 +381,12 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="ResizeMode" Value="NoResize">
-                            <Setter TargetName="Minimize" Property="IsEnabled" Value="False"/>
-                            <Setter TargetName="MaxRest" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="Minimize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="MaxRest" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="CanMinimize">
                             <Setter TargetName="MaxRest" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="MaxRest" Property="Opacity" Value="0.5"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="MaxRest" Property="Content" Value="{StaticResource RestoreWindowGeometry}"/>

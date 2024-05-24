@@ -29,6 +29,7 @@ namespace DN.Testing
                     MinWidth = 600,
                     Height = 0,
                     Width = 0,
+                    ResizeMode = ResizeMode.CanMinimize,
                     Content = rootFrame,
                 };
 
