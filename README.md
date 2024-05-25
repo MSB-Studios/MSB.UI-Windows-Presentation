@@ -97,6 +97,7 @@ In your `MainPage.xaml`...
 #### Fixed
 
 - `ComboBox` content `Template` has been fixed.
+- `NavigationView.FooterItems` placement has been fixed.
 
 #### Notes
 
