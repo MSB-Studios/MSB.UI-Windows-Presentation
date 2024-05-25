@@ -10,12 +10,25 @@
       Background="{DynamicResource PageBackground}" Foreground="{DynamicResource PageForeground}"
       Title="MainPage">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock FontWeight="SemiBold" TextAlignment="Center"
-               Text=".NET Testing"/>
-        <Button Click="OnShowTeachingTipButtonClick" Margin="0 8px"
-                Style="{StaticResource AccentButtonStyle}">Show TeachingTip</Button>
-        <Button Click="OnShowMessageDialogButtonClick">Show MessageDialog</Button>
-        <msb:TeachingTip x:Name="TT"/>
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock FontWeight="SemiBold" TextAlignment="Center"
+           Text=".NET Testing"/>
+            <Button Click="OnShowTeachingTipButtonClick" Margin="0 8px 0 4px"
+            Style="{StaticResource AccentButtonStyle}">Show TeachingTip</Button>
+            <Button Click="OnShowMessageDialogButtonClick" Margin="0 4px"
+            >Show MessageDialog</Button>
+            <msb:TeachingTip x:Name="TT"/>
+            <Button Click="OnShowStatusBarButtonClick" Margin="0 4px 0 6px">Show Toast</Button>
+        </StackPanel>
+
+        <msb:ToastAlert Grid.Row="2" x:Name="TA" Message="Take note to this!"
+                        Severity="Success" AutoHideEnabled="False"/>
+    </Grid>
 </Page>
