@@ -59,28 +59,44 @@ In your `MainPage.xaml`...
 </Page>
 ```
 
+## Controls
+
+- `msb:AeroWindow` ...
+- `msb:MessageDialog` ...
+- `msb:ContentDialog` ...
+- `msb:AppBarButton` ...
+- `msb:FontIcon` ...
+- `msb:PathIcon` ...
+- `msb:SymbolIcon` ...
+- `msb:ImageIcon` ...
+- `msb:NavigationView` ...
+- `msb:NavigationViewList` ...
+- `msb:NavigationViewItem` ...
+- `msb:SplitView` ...
+- `msb:TeachingTip` ...
+- `msb:ToastAlert` ...
+
 ## Release Notes
 
-### [Version 2.0.0] - 2023-07-20
+### [Version 2.4.0] - 2024-05-25
 
 #### Added
 
-- Added the `MenuItemsVisibility` and `FooterItemsVisibility` property in the `NavigationViewTemplateSettings` type. These new properties allow the `NavigationViewList` in `NavigationView` to be hidden or shown depending on whether they have items or not.
-- Introduced `ApplicationTheme` and `ApplicationAccentColor` enums to make it easier for users to manage the theme and accent color of the application, as long as 'MSB.UI' resources are used.
+- `TeachingTip` is a UI control used to provide contextual information or guidance to users. It appears as a floating box, typically with a header, content, and optional actions, and is positioned relative to a specific target element.
+- `ToastAlert` is a brief, dismissible notification that appears on the screen to inform users about events or statuses. It usually appears and disappears automatically after a short period.
 
 #### Changed
 
-- The `ModernWindow` control has been renamed to `AeroWindow`.
-- `Flyout` is now included inside `AeroWindow`, however its default value is `null`. Create a new instance and use it according to your needs.
-- Added the `CustomContentPlacement` property in the `NavigationView` type.
+- `MessageDialog` and `ContentDialog` are totally separate controls with unique purposes.
+- Now the base color of the dark theme is no longer an absolute black.
 
 #### Removed
 
-- The values `Top` and `Left` in the `LabelPosition` enum of the `AppBarButton` type were removed and its template was updated.
+- The `Flyout` control is deprecated and will be removed in future versions.
 
 #### Fixed
 
-- Fixed a bug that caused the brush in the `PathIcon` type to not update when the visual parent changed its `Foreground` property.
+- `ComboBox` content `Template` has been fixed.
 
 #### Notes
 

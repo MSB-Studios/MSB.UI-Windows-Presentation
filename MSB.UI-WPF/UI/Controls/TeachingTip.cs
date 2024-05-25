@@ -78,6 +78,7 @@ namespace MSB.UI.Controls
             set => SetValue(IconProperty, value);
         }
 
+        /*
         /// <summary>
         /// Gets or sets a value indicating whether the light dismiss is enabled.
         /// <para>The default is **true**.</para>
@@ -87,6 +88,7 @@ namespace MSB.UI.Controls
             get => (bool)GetValue(IsLightDismissEnabledProperty);
             set => SetValue(IsLightDismissEnabledProperty, value);
         }
+        */
 
         /// <summary>
         /// Gets or sets a value indicating whether the control is open.
@@ -166,7 +168,6 @@ namespace MSB.UI.Controls
             get => (UIElement)GetValue(TargetProperty);
             set => SetValue(TargetProperty, value);
         }
-        */
 
         /// <summary>
         /// Gets or sets a value indicating whether the tail is visible.
@@ -177,6 +178,7 @@ namespace MSB.UI.Controls
             get => (TailVisibility)GetValue(TailVisibilityProperty);
             set => SetValue(TailVisibilityProperty, value);
         }
+        */
 
         /// <summary>
         /// Gets an object that provides calculated values that can be referenced as **TemplateBinding** sources when defining
@@ -221,11 +223,13 @@ namespace MSB.UI.Controls
         public static readonly DependencyProperty IconProperty =
                 DependencyProperty.Register(nameof(Icon), typeof(IconElement), typeof(TeachingTip), new PropertyMetadata(null));
 
+        /*
         /// <summary>
         /// Identifies the IsLightDismissEnabled dependency property.
         /// </summary>
         public static readonly DependencyProperty IsLightDismissEnabledProperty =
                 DependencyProperty.Register(nameof(IsLightDismissEnabled), typeof(bool), typeof(TeachingTip), new PropertyMetadata(true, IsLigthDismissEnabledChanged));
+        */
 
         /// <summary>
         /// Identifies the IsOpen dependency property.
@@ -275,13 +279,13 @@ namespace MSB.UI.Controls
         /// </summary>
         public static readonly DependencyProperty TargetProperty =
                 DependencyProperty.Register(nameof(Target), typeof(UIElement), typeof(TeachingTip), new PropertyMetadata(null));
-        */
 
         /// <summary>
         /// Identifies the TailVisibility dependency property.
         /// </summary>
         public static readonly DependencyProperty TailVisibilityProperty =
                 DependencyProperty.Register(nameof(TailVisibility), typeof(TailVisibility), typeof(TeachingTip), new PropertyMetadata(TailVisibility.Auto));
+        */
 
         /// <summary>
         /// Identifies the TemplateSettings dependency property.
@@ -292,17 +296,6 @@ namespace MSB.UI.Controls
         #endregion
 
         #region Callbacks
-
-        private static void IsLigthDismissEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.OldValue != e.NewValue && d is TeachingTip tip)
-            {
-                if (tip.popup is null)
-                    return;
-
-                tip.popup.StaysOpen = !(bool)e.NewValue;
-            }
-        }
 
         private static void IsOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -327,10 +320,7 @@ namespace MSB.UI.Controls
             base.OnApplyTemplate();
 
             if (popup is not null)
-            {
                 popup.Opened -= OnPopupOpened;
-                popup.Closed -= OnPopupClosed;
-            }
 
             if (btnHide is not null)
                 btnHide.Click -= OnHideButtonClick;
@@ -345,10 +335,7 @@ namespace MSB.UI.Controls
             btnAction = (Button)GetTemplateChild("ActionButton");
 
             if (popup is not null)
-            {
                 popup.Opened += OnPopupOpened;
-                popup.Closed += OnPopupClosed;
-            }
 
             if (btnHide is not null)
                 btnHide.Click += OnHideButtonClick;
@@ -366,55 +353,9 @@ namespace MSB.UI.Controls
             VisualStateManager.GoToState(this, IsOpen ? "Open" : "Closed", true);
         }
 
-        private void OnWindowActivated(object sender, EventArgs e)
-        {
-            if (this.IsOpen)
-                VisualStateManager.GoToState(this, "Open", false);
-        }
-
-        private void OnWindowDeactivated(object sender, EventArgs e)
-        {
-            VisualStateManager.GoToState(this, "Closed", false);
-        }
-
-        private void OnWindowLocationChanged(object sender, EventArgs e)
-        {
-            if (!this.IsLightDismissEnabled)
-                this.TemplateSettings?.Update();
-        }
-
-        private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (!this.IsLightDismissEnabled)
-                this.TemplateSettings?.Update();
-        }
-
         private void OnPopupOpened(object sender, EventArgs e)
         {
-            var window = Window.GetWindow(this);
-
-            if (window is null)
-                return;
-
-            window.Activated += OnWindowActivated;
-            window.Deactivated += OnWindowDeactivated;
-            window.LocationChanged += OnWindowLocationChanged;
-            window.SizeChanged += OnWindowSizeChanged;
-
             this.TemplateSettings?.Update();
-        }
-
-        private void OnPopupClosed(object sender, EventArgs e)
-        {
-            var window = Window.GetWindow(this);
-
-            if (window is null)
-                return;
-
-            window.Activated -= OnWindowActivated;
-            window.Deactivated -= OnWindowDeactivated;
-            window.LocationChanged -= OnWindowLocationChanged;
-            window.SizeChanged -= OnWindowSizeChanged;
         }
 
         private void OnHideButtonClick(object sender, RoutedEventArgs e)

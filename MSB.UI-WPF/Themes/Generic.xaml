@@ -1,7 +1,6 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:system="clr-namespace:System;assembly=netstandard"
     xmlns:msma="clr-namespace:MSB.Media.Animations"
     xmlns:msuc="clr-namespace:MSB.UI.Controls"
     xmlns:msui="clr-namespace:MSB.UI">
@@ -284,7 +283,11 @@
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <Path x:Name="Icon" Width="16" Height="16" Fill="{TemplateBinding Foreground}" Data="{TemplateBinding Content}"/>
+                        <Path x:Name="Icon" Width="16" Height="16" Fill="{TemplateBinding Foreground}">
+                            <Path.Data>
+                                M7.116 8l-4.558 4.558.884.884L8 8.884l4.558 4.558.884-.884L8.884 8l4.558-4.558-.884-.884L8 7.116 3.442 2.558l-.884.884L7.116 8z
+                            </Path.Data>
+                        </Path>
                     </Border>
 
                     <ControlTemplate.Triggers>
@@ -295,6 +298,44 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
                             <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ButtonForegroundPressed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
+                            <Setter TargetName="Icon" Property="Fill" Value="{DynamicResource ButtonForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToastAlertCloseButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource ApplicationTransparentBrush}"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Height" Value="24"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Path x:Name="Icon" Width="10" Height="10" Stretch="UniformToFill" Fill="{TemplateBinding Foreground}">
+                            <Path.Data>
+                                M7.116 8l-4.558 4.558.884.884L8 8.884l4.558 4.558.884-.884L8.884 8l4.558-4.558-.884-.884L8 7.116 3.442 2.558l-.884.884L7.116 8z
+                            </Path.Data>
+                        </Path>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundPressed}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource ButtonBackgroundDisabled}"/>
@@ -318,6 +359,27 @@
     </PathGeometry>
     <PathGeometry x:Key="CloseWindowGeometry">
         M7.116 8l-4.558 4.558.884.884L8 8.884l4.558 4.558.884-.884L8.884 8l4.558-4.558-.884-.884L8 7.116 3.442 2.558l-.884.884L7.116 8z
+    </PathGeometry>
+    
+    <PathGeometry x:Key="InformationGeometry">
+        M10 3a7 7 0 100 14 7 7 0 000-14zm-9 7a9 9 0 1118 0 9 9 0 01-18 0zm8-4a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm.01 8a1 1 0 102 0V9a1 1 0 10-2 0v5z
+    </PathGeometry>
+    <PathGeometry x:Key="WarningGeometry">
+        M246.312928,5.62892705 C252.927596,9.40873724 258.409564,14.8907053 262.189374,21.5053731 L444.667042,340.84129 C456.358134,361.300701 449.250007,387.363834
+        428.790595,399.054926 C422.34376,402.738832 415.04715,404.676552 407.622001,404.676552 L42.6666667,404.676552 C19.1025173,404.676552 7.10542736e-15,385.574034
+        7.10542736e-15,362.009885 C7.10542736e-15,354.584736 1.93772021,347.288125 5.62162594,340.84129 L188.099293,21.5053731 C199.790385,1.04596203 225.853517,-6.06216498
+        246.312928,5.62892705 Z M224,272 C208.761905,272 197.333333,283.264 197.333333,298.282667 C197.333333,313.984 208.415584,325.248 224,325.248 C239.238095,325.248
+        250.666667,313.984 250.666667,298.624 C250.666667,283.264 239.238095,272 224,272 Z M245.333333,106.666667 L202.666667,106.666667 L202.666667,234.666667 L245.333333,234.666667 L245.333333,106.666667 Z
+    </PathGeometry>
+    <PathGeometry x:Key="ErrorGeometry">
+        M42,42z M0,0z M29.582,8.683L29.453,8.803 8.3,29.954C8.051,30.203 7.872,30.432 7.753,30.642 5.713,28.003 4.52,24.642 4.52,20.941 4.52,12.144
+        11.146,5.459 19.941,5.459 23.632,5.459 26.955,6.644 29.582,8.683z M10.937,33.704C11.126,33.587,11.325,33.417,11.543,33.197L32.694,12.046
+        32.735,12.006C34.475,14.524 35.481,17.608 35.481,21 35.481,29.785 28.785,36.541 20,36.541 16.568,36.541 13.454,35.506 10.937,33.704z
+        M0.5,21C0.5,31.775 9.235,40.5 20,40.5 30.767,40.5 39.501,31.775 39.501,21 39.501,10.225 30.767,1.5 20.001,1.5 9.235,1.5 0.5,10.225 0.5,21z
+    </PathGeometry>
+    <PathGeometry x:Key="SuccessGeometry">
+        M351.605 663.268l481.761-481.761c28.677-28.677 75.171-28.677 103.847 0s28.677 75.171 0 103.847L455.452 767.115l.539.539-58.592 58.592c-24.994 24.994-65.516
+        24.994-90.51 0L85.507 604.864c-28.677-28.677-28.677-75.171 0-103.847s75.171-28.677 103.847 0l162.25 162.25z
     </PathGeometry>
 
     <!--
@@ -352,7 +414,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="144"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarRect" Fill="{DynamicResource ApplicationTransparentBrush}" MinWidth="48"/>
@@ -381,11 +443,12 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="ResizeMode" Value="NoResize">
-                            <Setter TargetName="Minimize" Property="IsEnabled" Value="False"/>
-                            <Setter TargetName="MaxRest" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="Minimize" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="MaxRest" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="CanMinimize">
                             <Setter TargetName="MaxRest" Property="IsEnabled" Value="False"/>
+                            <Setter TargetName="MaxRest" Property="Opacity" Value="0.5"/>
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="MaxRest" Property="Content" Value="{StaticResource RestoreWindowGeometry}"/>
@@ -1464,27 +1527,30 @@
                            IsOpen="{Binding IsOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                         <Popup.Resources>
                             <Storyboard x:Key="OpenStoryboard">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleX">
                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ClosedToOpenStoryboard">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleX">
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="OpenToClosedStoryboard">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleX">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentGridScaleTransform" Storyboard.TargetProperty="ScaleY">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
 
@@ -1512,78 +1578,51 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Grid x:Name="GridRoot" Margin="5" RenderTransformOrigin="0.5, 0.5">
-                            <Grid.Effect>
+                        <Border x:Name="PART_Content" Margin="5" Background="{TemplateBinding Background}" MinHeight="60" MinWidth="250" MaxWidth="400" RenderTransformOrigin="0.5, 0.5"
+                                CornerRadius="{DynamicResource OverlayCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Border.RenderTransform>
+                                <ScaleTransform x:Name="ContentScaleTransform" ScaleX="0" ScaleY="0"/>
+                            </Border.RenderTransform>
+                            <Border.Effect>
                                 <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0.15"/>
-                            </Grid.Effect>
-                            <Grid.RenderTransform>
-                                <ScaleTransform x:Name="ContentGridScaleTransform" ScaleX="0" ScaleY="0"/>
-                            </Grid.RenderTransform>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
+                            </Border.Effect>
 
-                            <Border Grid.Row="1" Grid.Column="1" x:Name="PART_Content" Background="{TemplateBinding Background}" MinHeight="60" MinWidth="250" MaxWidth="400"
-                                    CornerRadius="{DynamicResource OverlayCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                <Border.Effect>
-                                    <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0"/>
-                                </Border.Effect>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid Grid.Row="0" x:Name="HeroContainer" MaxHeight="240">
-                                        <Border x:Name="BorderMask" Background="{TemplateBinding Background}" BorderThickness="0"
-                                                CornerRadius="{Binding TemplateSettings.HeroContentCornerRadius, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                        <ContentPresenter  x:Name="HeroPresenter" Content="{TemplateBinding HeroContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <ContentPresenter.OpacityMask>
-                                                <VisualBrush Visual="{Binding ElementName=BorderMask}"/>
-                                            </ContentPresenter.OpacityMask>
-                                        </ContentPresenter>
-                                    </Grid>
-                                    <StackPanel Grid.Row="1" x:Name="TextPanel" Orientation="Horizontal" Margin="20, 10">
-                                        <ContentPresenter x:Name="IconPresenter" Margin="0, 0, 10, 0" TextElement.FontSize="20"
-                                                          TextElement.Foreground="{DynamicResource TeachingTipTitleForeground}" Content="{TemplateBinding Icon}"/>
-                                        <StackPanel VerticalAlignment="Top">
-                                            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0, 0, 0, 5" Text="{TemplateBinding Title}"/>
-                                            <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{TemplateBinding Description}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                    <Button Grid.Row="1" x:Name="HideButton" Margin="10" Visibility="Collapsed" Style="{StaticResource TeachingTipCloseButtonStyle}" Content="{StaticResource CloseWindowGeometry}"/>
-                                    <Grid x:Name="ButtonsContainer" Grid.Row="2" Margin="5, 0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Button Grid.Column="0" x:Name="ActionButton" Margin="5, 10" MinWidth="100" Content="{TemplateBinding ActionButtonContent}"/>
-                                        <Button Grid.Column="1" x:Name="CloseButton" Margin="5, 10" MinWidth="100" Content="{TemplateBinding CloseButtonContent}"/>
-                                    </Grid>
+                                <Grid Grid.Row="0" x:Name="HeroContainer" MaxHeight="240">
+                                    <Border x:Name="BorderMask" Background="{TemplateBinding Background}" BorderThickness="0"
+                                            CornerRadius="{Binding TemplateSettings.HeroContentCornerRadius, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                    <ContentPresenter  x:Name="HeroPresenter" Content="{TemplateBinding HeroContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <ContentPresenter.OpacityMask>
+                                            <VisualBrush Visual="{Binding ElementName=BorderMask}"/>
+                                        </ContentPresenter.OpacityMask>
+                                    </ContentPresenter>
                                 </Grid>
-                            </Border>
-                            <Canvas Grid.Row="0" Grid.Column="1" x:Name="TailContainer" Visibility="Collapsed" Height="20" Width="20" RenderTransformOrigin="0.5, 0.5">
-                                <Canvas.RenderTransform>
-                                    <TransformGroup>
-                                        <RotateTransform Angle="-90"/>
-                                        <TranslateTransform Y="1"/>
-                                    </TransformGroup>
-                                </Canvas.RenderTransform>
-                                <Polygon Points="0,0 16,10 0,20" Fill="{TemplateBinding Background}" />
-                                <Path Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Data="M 0,0 L 16,10" />
-                                <Path Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}" Data="M 16,10 L 0,20" />
-                            </Canvas>
-                        </Grid>
+                                <StackPanel Grid.Row="1" x:Name="TextPanel" Orientation="Horizontal" Margin="20, 10">
+                                    <ContentPresenter x:Name="IconPresenter" Margin="0, 0, 10, 0" TextElement.FontSize="20"
+                                                      TextElement.Foreground="{DynamicResource TeachingTipTitleForeground}" Content="{TemplateBinding Icon}"/>
+                                    <StackPanel VerticalAlignment="Top">
+                                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Margin="0, 0, 0, 5" Text="{TemplateBinding Title}"/>
+                                        <TextBlock Style="{StaticResource DescriptionTextBlockStyle}" Text="{TemplateBinding Description}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Grid.Row="1" x:Name="HideButton" Margin="10" Visibility="Collapsed" Style="{StaticResource TeachingTipCloseButtonStyle}"/>
+                                <Grid x:Name="ButtonsContainer" Grid.Row="2" Margin="5, 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Button Grid.Column="0" x:Name="ActionButton" Margin="5, 10" MinWidth="100" Content="{TemplateBinding ActionButtonContent}"/>
+                                    <Button Grid.Column="1" x:Name="CloseButton" Margin="5, 10" MinWidth="100" Content="{TemplateBinding CloseButtonContent}"/>
+                                </Grid>
+                            </Grid>
+                        </Border>
                     </Popup>
 
                     <ControlTemplate.Triggers>
@@ -1597,9 +1636,6 @@
                             <Setter TargetName="HideButton" Property="Grid.Row" Value="0"/>
                             <Setter TargetName="BorderMask" Property="CornerRadius" Value="0, 0, 12, 12"/>
                         </Trigger>
-                        <Trigger Property="IsLightDismissEnabled" Value="False">
-                            <Setter TargetName="HideButton" Property="Visibility" Value="Visible"/>
-                        </Trigger>
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter TargetName="IconPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
@@ -1608,6 +1644,141 @@
                         </Trigger>
                         <Trigger Property="CloseButtonContent" Value="{x:Null}">
                             <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.CONTROLS.TOASTALERT' STYLE
+    ***************************************************************
+    -->
+
+    <Style TargetType="msuc:ToastAlert">
+        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:ToastAlert">
+                    <Border x:Name="BorderRoot" Background="#BF0091FF" CornerRadius="8" RenderTransformOrigin="0.5, 0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform x:Name="BorderRootScaleTransform" ScaleX="0" ScaleY="0"/>
+                        </Border.RenderTransform>
+                        <Border.Resources>
+                            <Storyboard x:Key="OpenStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Opacity">
+                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="ClosedToOpenStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Opacity">
+                                    <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="OpenToClosedStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Border.Resources>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition Storyboard="{StaticResource ClosedToOpenStoryboard}"
+                                                      From="Closed" To="Open"/>
+                                    <VisualTransition Storyboard="{StaticResource OpenToClosedStoryboard}"
+                                                      From="Open" To="Closed"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Closed"/>
+                                <VisualState x:Name="Open" Storyboard="{StaticResource OpenStoryboard}"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid Margin="4" Height="24">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="24"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Border x:Name="IconContainer" Grid.Column="0" Background="#FF0091FF" Padding="4" CornerRadius="6">
+                                <msuc:ImageIcon x:Name="Icon" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <msuc:ImageIcon.Source>
+                                        <DrawingImage>
+                                            <DrawingImage.Drawing>
+                                                <GeometryDrawing Geometry="{StaticResource InformationGeometry}" Brush="#FFFFFF"/>
+                                            </DrawingImage.Drawing>
+                                        </DrawingImage>
+                                    </msuc:ImageIcon.Source>
+                                </msuc:ImageIcon>
+                            </Border>
+                            <TextBlock Grid.Column="1" Margin="8 0" VerticalAlignment="Center"
+                                       Foreground="#FFFFFF" Text="{TemplateBinding Message}"/>
+                            <Button x:Name="HideButton" Grid.Column="2" Style="{StaticResource ToastAlertCloseButtonStyle}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Severity" Value="Warning">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="#BFFF9F0A"/>
+                            <Setter TargetName="IconContainer" Property="Background" Value="#FFFF9F0A"/>
+                            <Setter TargetName="Icon" Property="Source">
+                                <Setter.Value>
+                                    <DrawingImage>
+                                        <DrawingImage.Drawing>
+                                            <GeometryDrawing Geometry="{StaticResource WarningGeometry}" Brush="#FFFFFF"/>
+                                        </DrawingImage.Drawing>
+                                    </DrawingImage>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Error">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="#BFD63232"/>
+                            <Setter TargetName="IconContainer" Property="Background" Value="#FFD63232"/>
+                            <Setter TargetName="Icon" Property="Source">
+                                <Setter.Value>
+                                    <DrawingImage>
+                                        <DrawingImage.Drawing>
+                                            <GeometryDrawing Geometry="{StaticResource ErrorGeometry}" Brush="#FFFFFF"/>
+                                        </DrawingImage.Drawing>
+                                    </DrawingImage>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Severity" Value="Success">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="#BF30D158"/>
+                            <Setter TargetName="IconContainer" Property="Background" Value="#30D158"/>
+                            <Setter TargetName="IconContainer" Property="Padding" Value="6"/>
+                            <Setter TargetName="Icon" Property="Source">
+                                <Setter.Value>
+                                    <DrawingImage>
+                                        <DrawingImage.Drawing>
+                                            <GeometryDrawing Geometry="{StaticResource SuccessGeometry}" Brush="#FFFFFF"/>
+                                        </DrawingImage.Drawing>
+                                    </DrawingImage>
+                                </Setter.Value>
+                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

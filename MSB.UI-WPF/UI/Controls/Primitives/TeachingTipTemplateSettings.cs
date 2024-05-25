@@ -2,7 +2,6 @@
 using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows;
-using System;
 
 namespace MSB.UI.Controls.Primitives
 {
@@ -13,8 +12,7 @@ namespace MSB.UI.Controls.Primitives
     {
         readonly TeachingTip _owner = null;
         private Window _window = null;
-        private Border _mask = null;
-        private Grid _container = null;
+        private FrameworkElement _container = null;
         
         internal TeachingTipTemplateSettings(TeachingTip tip)
         {
@@ -67,19 +65,20 @@ namespace MSB.UI.Controls.Primitives
         internal void Update()
         {
             this._window ??= Window.GetWindow(this._owner);
-            this._mask ??= (Border)this._owner.GetChild("BorderMask");
-            this._container ??= (Grid)this._owner.GetChild("GridRoot");
+            this._container ??= (FrameworkElement)this._owner.GetChild("PART_Content");
+
+            var mask = (Border)this._owner.GetChild("BorderMask");
 
             if (this._owner.popup is null)
                 return;
 
-            var radius = this._mask?.CornerRadius;
+            var radius = mask?.CornerRadius;
 
             SetValue(PlacementTargetProperty, this._window);
 
             if (radius is null)
             {
-                SetValue(HeroContentCornerRadiusProperty, radius is null ? 0 : new CornerRadius(0));
+                SetValue(HeroContentCornerRadiusProperty, new CornerRadius(0));
             }
             else
             {
@@ -88,11 +87,7 @@ namespace MSB.UI.Controls.Primitives
                 else
                     SetValue(HeroContentCornerRadiusProperty, new CornerRadius(0, 0, (double)radius?.BottomRight, (double)radius?.BottomLeft));
             }
-
-            var offset = this._owner.popup.HorizontalOffset;
-            this._owner.popup.HorizontalOffset = offset + 1;
-            this._owner.popup.HorizontalOffset = offset;
-
+            
             this._owner.popup.CustomPopupPlacementCallback ??= PlacePopup;
         }
 

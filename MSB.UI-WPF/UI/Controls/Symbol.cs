@@ -282,7 +282,7 @@
         MailFilled = 57653,
         
         /// <summary>
-        /// E136 <img alt="Contact Info icon" src="./windows.ui.xaml.controls/images/segoe-mdl/e136.png"/>
+        /// E136 <img alt="Contact Information icon" src="./windows.ui.xaml.controls/images/segoe-mdl/e136.png"/>
         /// </summary>
         ContactInfo = 57654,
         
@@ -332,7 +332,7 @@
         Pin = 57665,
         
         /// <summary>
-        /// E142 <img alt="Music Info icon" src="./windows.ui.xaml.controls/images/segoe-mdl/e142.png"/>
+        /// E142 <img alt="Music Information icon" src="./windows.ui.xaml.controls/images/segoe-mdl/e142.png"/>
         /// </summary>
         MusicInfo = 57666,
         

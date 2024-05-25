@@ -7,7 +7,7 @@
     <Color x:Key="ApplicationAccentColor3">#FFD6292C</Color>
     <Color x:Key="ApplicationAccentColor4">#FFCB272A</Color>
 
-    <Color x:Key="ThemeBackgroundColor">#FF000000</Color>
+    <Color x:Key="ThemeBackgroundColor">#FF202020</Color>
     <Color x:Key="ThemeBorderColor">#FF696969</Color>
     <Color x:Key="ThemeForegroundColor">#FFFFFFFF</Color>
 

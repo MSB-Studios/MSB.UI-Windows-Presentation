@@ -39,7 +39,7 @@
 		{
 			"Name": "Dark",
 			"Values": {
-				"MSB.Colors.ThemeBackground": "#FF000000",
+				"MSB.Colors.ThemeBackground": "#FF202020",
 				"MSB.Colors.ThemeBorder": "#FF696969",
 				"MSB.Colors.ThemeForeground": "#FFFFFFFF",
 				"MSB.Colors.DropShadow": "#FF000000",
