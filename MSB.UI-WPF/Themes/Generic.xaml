@@ -1222,7 +1222,6 @@
         <Setter Property="SelectionMode" Value="Single"/>
         <Setter Property="Padding" Value="-1, 2"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="MinHeight" Value="96"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
