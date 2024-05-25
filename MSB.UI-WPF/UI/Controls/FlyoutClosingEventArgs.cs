@@ -5,6 +5,7 @@ namespace MSB.UI.Controls
     /// <summary>
     /// Provides event data for the <see cref="Flyout.Closing"/> event.
     /// </summary>
+    [Obsolete]
     public sealed class FlyoutClosingEventArgs : EventArgs
     {
         internal FlyoutClosingEventArgs()

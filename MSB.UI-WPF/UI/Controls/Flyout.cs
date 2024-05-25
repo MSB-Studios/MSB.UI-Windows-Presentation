@@ -8,6 +8,7 @@ namespace MSB.UI.Controls
     /// <summary>
     /// Represents a control to display content in a popup view.
     /// </summary>
+    [Obsolete]
     public sealed class Flyout : ContentControl
     {
         /// <summary>

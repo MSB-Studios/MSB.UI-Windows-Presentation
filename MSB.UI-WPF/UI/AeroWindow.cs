@@ -58,6 +58,7 @@ namespace MSB.UI
         /// <summary>
         /// Gets the flyout of the window.
         /// </summary>
+        [Obsolete]
         public Flyout Flyout
         {
             get => (Flyout)GetValue(FlyoutProperty);
@@ -97,6 +98,7 @@ namespace MSB.UI
         /// <summary>
         /// Identifies the FlyoutContent dependency property.
         /// </summary>
+        [Obsolete]
         public static readonly DependencyProperty FlyoutProperty =
                 DependencyProperty.Register(nameof(Flyout), typeof(Flyout), typeof(AeroWindow), new PropertyMetadata(null, FlyoutChanged_Callback));
 
