@@ -168,7 +168,6 @@ namespace MSB.UI.Controls
             get => (UIElement)GetValue(TargetProperty);
             set => SetValue(TargetProperty, value);
         }
-        */
 
         /// <summary>
         /// Gets or sets a value indicating whether the tail is visible.
@@ -179,6 +178,7 @@ namespace MSB.UI.Controls
             get => (TailVisibility)GetValue(TailVisibilityProperty);
             set => SetValue(TailVisibilityProperty, value);
         }
+        */
 
         /// <summary>
         /// Gets an object that provides calculated values that can be referenced as **TemplateBinding** sources when defining
@@ -279,13 +279,13 @@ namespace MSB.UI.Controls
         /// </summary>
         public static readonly DependencyProperty TargetProperty =
                 DependencyProperty.Register(nameof(Target), typeof(UIElement), typeof(TeachingTip), new PropertyMetadata(null));
-        */
 
         /// <summary>
         /// Identifies the TailVisibility dependency property.
         /// </summary>
         public static readonly DependencyProperty TailVisibilityProperty =
                 DependencyProperty.Register(nameof(TailVisibility), typeof(TailVisibility), typeof(TeachingTip), new PropertyMetadata(TailVisibility.Auto));
+        */
 
         /// <summary>
         /// Identifies the TemplateSettings dependency property.
