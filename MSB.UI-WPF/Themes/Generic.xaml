@@ -1527,27 +1527,30 @@
                            IsOpen="{Binding IsOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                         <Popup.Resources>
                             <Storyboard x:Key="OpenStoryboard">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleX">
                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ClosedToOpenStoryboard">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleX">
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="OpenToClosedStoryboard">
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Content" Storyboard.TargetProperty="Opacity">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
-                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleX">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ContentScaleTransform" Storyboard.TargetProperty="ScaleY">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
 
@@ -1578,7 +1581,7 @@
                         <Border x:Name="PART_Content" Margin="5" Background="{TemplateBinding Background}" MinHeight="60" MinWidth="250" MaxWidth="400" RenderTransformOrigin="0.5, 0.5"
                                 CornerRadius="{DynamicResource OverlayCornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                             <Border.RenderTransform>
-                                <ScaleTransform x:Name="BorderRootScaleTransform" ScaleX="0" ScaleY="0"/>
+                                <ScaleTransform x:Name="ContentScaleTransform" ScaleX="0" ScaleY="0"/>
                             </Border.RenderTransform>
                             <Border.Effect>
                                 <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="3" BlurRadius="6" Direction="270" Opacity="0.15"/>
@@ -1648,6 +1651,12 @@
         </Setter>
     </Style>
 
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.CONTROLS.TOASTALERT' STYLE
+    ***************************************************************
+    -->
+
     <Style TargetType="msuc:ToastAlert">
         <Setter Property="Margin" Value="4"/>
         <Setter Property="Template">
@@ -1682,13 +1691,13 @@
                             </Storyboard>
                             <Storyboard x:Key="OpenToClosedStoryboard">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Opacity">
-                                    <LinearDoubleKeyFrame KeyTime="0:0:0.09" Value="0"/>
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleX">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
-                                    <SplineDoubleKeyFrame KeyTime="0:0:0.12" KeySpline="0.1,0.9 0.2,1.0" Value="0"/>
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
                             </Storyboard>
                         </Border.Resources>
