@@ -6,6 +6,11 @@
     public enum NavigationViewDisplayMode
     {
         /// <summary>
+        /// The pane automatically shows and hides as needed.
+        /// </summary>
+        Auto,
+
+        /// <summary>
         /// Only the menu button remains fixed. The pane shows and hides as needed.
         /// </summary>
         Minimal,

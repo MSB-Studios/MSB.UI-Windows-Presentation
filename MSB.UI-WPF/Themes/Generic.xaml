@@ -1148,7 +1148,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0" x:Name="IconContainer" Width="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                <ContentPresenter x:Name="IconPresenter" Content="{TemplateBinding Icon}"/>
+                                <ContentPresenter x:Name="IconPresenter" Margin="{DynamicResource NavigationItemIconPadding}" Content="{TemplateBinding Icon}"/>
                             </Grid>
                             <Rectangle Grid.Column="0" RadiusX="4" RadiusY="4" Width="4" HorizontalAlignment="Left" RenderTransformOrigin="0.5, 0.5">
                                 <Rectangle.Fill>

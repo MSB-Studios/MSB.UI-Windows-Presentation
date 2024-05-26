@@ -78,12 +78,13 @@ In your `MainPage.xaml`...
 
 ## Release Notes
 
-### [Version 2.4.0] - 2024-05-25
+### [Version 2.4.2] - 2024-05-26
 
 #### Added
 
 - `TeachingTip` is a UI control used to provide contextual information or guidance to users. It appears as a floating box, typically with a header, content, and optional actions, and is positioned relative to a specific target element.
 - `ToastAlert` is a brief, dismissible notification that appears on the screen to inform users about events or statuses. It usually appears and disappears automatically after a short period.
+- `NavigationView.DisplayMode` property now has a new value `Auto` that allows the control to automatically switch between `Minimal` and `Compact` modes based on the available space.
 
 #### Changed
 
@@ -93,6 +94,7 @@ In your `MainPage.xaml`...
 #### Removed
 
 - The `Flyout` control is deprecated and will be removed in future versions.
+- `NavigationView.CustomContentPlacement` property is now deprecated and will be removed in future versions.
 
 #### Fixed
 

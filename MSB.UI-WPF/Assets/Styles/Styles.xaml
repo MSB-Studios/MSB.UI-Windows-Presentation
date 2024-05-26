@@ -8,6 +8,8 @@
     ***************************************************************
     -->
 
+    <Thickness x:Key="NavigationItemIconPadding">12</Thickness>
+
     <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">12</CornerRadius>
 

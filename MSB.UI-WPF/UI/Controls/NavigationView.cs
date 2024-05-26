@@ -1,10 +1,9 @@
-﻿using MSB.UI.Controls.Primitives;
+﻿using ItemCollection = MSB.Collections.ItemCollection;
+using MSB.UI.Controls.Primitives;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Shapes;
 using System.Windows.Input;
-using ItemCollection =
-      MSB.Collections.ItemCollection;
+using System.Windows;
 using System;
 
 namespace MSB.UI.Controls
@@ -14,6 +13,13 @@ namespace MSB.UI.Controls
     /// </summary>
     public sealed class NavigationView : ContentControl
     {
+        Rectangle titleBarRectangle;
+        NavigationViewList menuItems, footerItems;
+        Button backButton, paneToggleButton;
+        SplitView splitView;
+        StackPanel buttonsStackPanel;
+        bool isClosedByUser = false;
+
         /// <summary>
         /// Initializes a new instance of the 'NavigationView' class.
         /// </summary>
@@ -87,6 +93,7 @@ namespace MSB.UI.Controls
         /// <summary>
         /// Gets or sets the custom content placement in the pane.
         /// </summary>
+        [Obsolete]
         public PaneCustomContentPlacement CustomContentPlacement
         {
             get => (PaneCustomContentPlacement)GetValue(CustomContentPlacementProperty);
@@ -165,7 +172,7 @@ namespace MSB.UI.Controls
 
         /// <summary>
         /// Gets of sets a value that specifies how the pane and content areas of a NavigationView are shown.
-        /// <para>The default is **<see cref="NavigationViewDisplayMode.Minimal"/>**.</para>
+        /// <para>The default is **<see cref="NavigationViewDisplayMode.Auto"/>**.</para>
         /// </summary>
         public NavigationViewDisplayMode DisplayMode
         {
@@ -245,6 +252,7 @@ namespace MSB.UI.Controls
         /// <summary>
         /// Identifies the CustomContentPlacement dependency property.
         /// </summary>
+        [Obsolete]
         public static readonly DependencyProperty CustomContentPlacementProperty =
                 DependencyProperty.Register(nameof(CustomContentPlacement), typeof(PaneCustomContentPlacement), typeof(NavigationView), new PropertyMetadata(PaneCustomContentPlacement.Top));
 
@@ -294,7 +302,7 @@ namespace MSB.UI.Controls
         /// Identifies the DisplayMode dependency property.
         /// </summary>
         public static readonly DependencyProperty DisplayModeProperty =
-                DependencyProperty.Register(nameof(DisplayMode), typeof(NavigationViewDisplayMode), typeof(NavigationView), new PropertyMetadata(NavigationViewDisplayMode.Minimal, DisplayModeChanged_Callback));
+                DependencyProperty.Register(nameof(DisplayMode), typeof(NavigationViewDisplayMode), typeof(NavigationView), new PropertyMetadata(NavigationViewDisplayMode.Auto, DisplayModeChanged_Callback));
 
         /// <summary>
         /// Identifies the IsTitleBarPaddingEnabled dependency property.
@@ -354,10 +362,10 @@ namespace MSB.UI.Controls
         {
             if (e.OldValue != e.NewValue && d is NavigationView nav)
             {
-                if ((double)e.NewValue >= nav.ExpandedModeThresholdWidth || (double)e.NewValue <= 0d)
+                if ((double)e.NewValue >= nav.ExpandedModeThresholdWidth)
                 {
                     throw new ArgumentOutOfRangeException("CompactModeThresholdWidth",
-                                                          "The CompactModeThresholdWidth property cannot be greater than the ExpandedModeThresholdWidth property, and cannot be zero.");
+                                                          "The CompactModeThresholdWidth property cannot be greater than the ExpandedModeThresholdWidth property.");
                 }
             }
         }
@@ -366,10 +374,10 @@ namespace MSB.UI.Controls
         {
             if (e.OldValue != e.NewValue && d is NavigationView nav)
             {
-                if ((double)e.NewValue <= nav.CompactModeThresholdWidth || (double)e.NewValue <= 0d)
+                if ((double)e.NewValue <= nav.CompactModeThresholdWidth)
                 {
                     throw new ArgumentOutOfRangeException("ExpandedModeThresholdWidth",
-                                                          "The ExpandedModeThresholdWidth property cannot be less than the CompactModeThresholdWidth property, and cannot be zero.");
+                                                          "The ExpandedModeThresholdWidth property cannot be less than the CompactModeThresholdWidth property.");
                 }
             }
         }
@@ -378,7 +386,7 @@ namespace MSB.UI.Controls
         {
             if (e.OldValue != e.NewValue && d is NavigationView nav)
             {
-                nav.UpdateVisualState();
+                nav.TemplateSettings?.Update();
             }
         }
 
@@ -392,7 +400,7 @@ namespace MSB.UI.Controls
         {
             if (e.OldValue != e.NewValue && d is NavigationView nav)
             {
-                nav.UpdateVisualState();
+                nav.UpdateVisualState((NavigationViewDisplayMode)e.NewValue);
             }
         }
 
@@ -461,7 +469,10 @@ namespace MSB.UI.Controls
                 this.splitView.PaneClosed += SplitView_PaneClosed;
             }
 
-            UpdateVisualState();
+            if (this.DisplayMode is NavigationViewDisplayMode.Auto)
+                Render();
+            else
+                UpdateVisualState(this.DisplayMode);
         }
 
         /// <inheritdoc/>
@@ -469,7 +480,7 @@ namespace MSB.UI.Controls
         {
             base.OnInitialized(e);
 
-            this.Loaded += (sender, e) => Render();
+            this.Loaded += (sender, e) => { };
         }
 
         /// <inheritdoc />
@@ -477,25 +488,44 @@ namespace MSB.UI.Controls
         {
             base.OnRenderSizeChanged(sizeInfo);
 
-            if (sizeInfo.WidthChanged)
-                Render();
+            if (this.DisplayMode is NavigationViewDisplayMode.Auto)
+                if (sizeInfo.WidthChanged)
+                    Render();
         }
 
-        private void UpdateVisualState()
+        private void UpdateVisualState(NavigationViewDisplayMode mode)
         {
-            VisualStateManager.GoToState(this, this.DisplayMode.ToString(), false);
-
-            this.TemplateSettings?.Update();
+            switch (mode)
+            {
+                case NavigationViewDisplayMode.Auto:
+                    // no-op
+                    break;
+                case NavigationViewDisplayMode.Minimal:
+                    VisualStateManager.GoToState(this, NavigationViewDisplayMode.Minimal.ToString(), false);
+                    SetValue(IsPaneOpenProperty, false);
+                    break;
+                case NavigationViewDisplayMode.Compact:
+                    VisualStateManager.GoToState(this, NavigationViewDisplayMode.Compact.ToString(), false);
+                    SetValue(IsPaneOpenProperty, false);
+                    break;
+                case NavigationViewDisplayMode.Expanded:
+                    VisualStateManager.GoToState(this, NavigationViewDisplayMode.Expanded.ToString(), false);
+                    if (!this.isClosedByUser)
+                        SetValue(IsPaneOpenProperty, true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(mode));
+            }
         }
 
         private void SplitView_PaneOpening(object sender, object args)
         {
-            UpdateVisualState();
+            // UpdateVisualState();
         }
 
         private void SplitView_PaneClosed(object sender, object args)
         {
-            UpdateVisualState();
+            // UpdateVisualState();
         }
 
         private void MenuItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -550,20 +580,16 @@ namespace MSB.UI.Controls
         {
             if (this.ActualWidth < this.CompactModeThresholdWidth)
             {
-                SetValue(DisplayModeProperty, NavigationViewDisplayMode.Minimal);
-                SetValue(IsPaneOpenProperty, false);
+                UpdateVisualState(NavigationViewDisplayMode.Minimal);
             }
             else if (this.ActualWidth >= this.CompactModeThresholdWidth
                 && this.ActualWidth < this.ExpandedModeThresholdWidth)
             {
-                SetValue(DisplayModeProperty, NavigationViewDisplayMode.Compact);
-                SetValue(IsPaneOpenProperty, false);
+                UpdateVisualState(NavigationViewDisplayMode.Compact);
             }
             else
             {
-                SetValue(DisplayModeProperty, NavigationViewDisplayMode.Expanded);
-                if (!this.isClosedByUser)
-                    SetValue(IsPaneOpenProperty, true);
+                UpdateVisualState(NavigationViewDisplayMode.Expanded);
             }
         }
 
@@ -587,12 +613,5 @@ namespace MSB.UI.Controls
         public event TypedEventHandler<object, RoutedEventArgs> BackRequested;
 
         #endregion
-
-        Rectangle titleBarRectangle;
-        NavigationViewList menuItems, footerItems;
-        Button backButton, paneToggleButton;
-        SplitView splitView;
-        StackPanel buttonsStackPanel;
-        bool isClosedByUser = false;
     }
 }
