@@ -3,17 +3,17 @@
     /// <summary>
     /// Define constants about the type of banner alert.
     /// </summary>
-    public enum ToastAlertSeverity
+    public enum InfoBarSeverity
     {
+        /// <summary>
+        /// The alert is an information message.
+        /// </summary>
+        Informational,
+
         /// <summary>
         /// The alert is a success message.
         /// </summary>
         Success,
-
-        /// <summary>
-        /// The alert is an information message.
-        /// </summary>
-        Information,
 
         /// <summary>
         /// The alert is a warning message.

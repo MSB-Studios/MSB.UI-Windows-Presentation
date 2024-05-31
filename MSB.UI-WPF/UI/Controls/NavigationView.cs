@@ -13,11 +13,14 @@ namespace MSB.UI.Controls
     /// </summary>
     public sealed class NavigationView : ContentControl
     {
-        Rectangle titleBarRectangle;
+        Rectangle contentDrawableRectangle;
+        Rectangle paneDrawableRectangle;
         NavigationViewList menuItems, footerItems;
         Button backButton, paneToggleButton;
         SplitView splitView;
-        StackPanel buttonsStackPanel;
+        StackPanel panelButtons;
+
+        NavigationViewDisplayMode displayMode;
         bool isClosedByUser = false;
 
         /// <summary>
@@ -184,6 +187,7 @@ namespace MSB.UI.Controls
         /// Gets or sets a value that indicates whether the top padding of the pane is shown.
         /// <para>The default is **<see langword="false"/>**.</para>
         /// </summary>
+        [Obsolete("You can use **NavigationViewPanePadding** and **NavigationViewContentPadding** resources to apply margins as you like.")]
         public bool IsTitleBarPaddingEnabled
         {
             get => (bool)GetValue(IsTitleBarPaddingEnabledProperty);
@@ -194,6 +198,7 @@ namespace MSB.UI.Controls
         /// Gets or sets a value that indicates whether the NavigationView is acting as a title bar.
         /// <para>The default is **<see langword="false"/>**.</para>
         /// </summary>
+        [Obsolete("It has no effect on the control anymore.")]
         public bool IsActingAsTitleBar
         {
             get => (bool)GetValue(IsActingAsTitleBarProperty);
@@ -307,12 +312,14 @@ namespace MSB.UI.Controls
         /// <summary>
         /// Identifies the IsTitleBarPaddingEnabled dependency property.
         /// </summary>
+        [Obsolete]
         public static readonly DependencyProperty IsTitleBarPaddingEnabledProperty =
                 DependencyProperty.Register(nameof(IsTitleBarPaddingEnabled), typeof(bool), typeof(NavigationView), new PropertyMetadata(false));
 
         /// <summary>
         /// Identifies the IsActingAsTitleBar dependency property.
         /// </summary>
+        [Obsolete]
         public static readonly DependencyProperty IsActingAsTitleBarProperty =
                 DependencyProperty.Register(nameof(IsActingAsTitleBar), typeof(bool), typeof(NavigationView), new PropertyMetadata(false));
 
@@ -400,7 +407,8 @@ namespace MSB.UI.Controls
         {
             if (e.OldValue != e.NewValue && d is NavigationView nav)
             {
-                nav.UpdateVisualState((NavigationViewDisplayMode)e.NewValue);
+                nav.displayMode = (NavigationViewDisplayMode)e.NewValue;
+                nav.UpdateVisualState();
             }
         }
 
@@ -425,11 +433,11 @@ namespace MSB.UI.Controls
             if (this.footerItems != null)
                 this.footerItems.SelectionChanged -= FooterItems_SelectionChanged;
 
-            if (this.titleBarRectangle != null)
-                this.titleBarRectangle.MouseDown -= OnTitleBarDragging;
+            if (this.paneDrawableRectangle != null)
+                this.paneDrawableRectangle.MouseDown -= OnTitleBarDragging;
 
-            if (this.titleBarRectangle != null)
-                this.buttonsStackPanel.SizeChanged -= ButtonStackPanel_SizeChanged;
+            if (this.contentDrawableRectangle != null)
+                this.contentDrawableRectangle.MouseDown -= OnTitleBarDragging;
 
             if (this.splitView != null)
             {
@@ -438,12 +446,13 @@ namespace MSB.UI.Controls
             }
 
             backButton = (Button)GetTemplateChild("BackButton");
-            paneToggleButton = (Button)GetTemplateChild("PaneToggleButton");
-            titleBarRectangle = (Rectangle)GetTemplateChild("TitleBarDrawableRectangle");
+            paneToggleButton = (Button)GetTemplateChild("ToggleButton");
+            paneDrawableRectangle = (Rectangle)GetTemplateChild("TitleBarPaneRectangle");
+            contentDrawableRectangle = (Rectangle)GetTemplateChild("TitleBarContentRectangle");
             menuItems = (NavigationViewList)GetTemplateChild("MenuItems");
             footerItems = (NavigationViewList)GetTemplateChild("FooterItems");
-            buttonsStackPanel = (StackPanel)GetTemplateChild("ButtonsPanel");
-            splitView = (SplitView)GetTemplateChild("RootSplitView");
+            panelButtons = (StackPanel)GetTemplateChild("PART_Buttons");
+            splitView = (SplitView)GetTemplateChild("SplitView");
 
             if (this.backButton != null)
                 this.backButton.Click += BackButton_Click;
@@ -457,11 +466,14 @@ namespace MSB.UI.Controls
             if (this.footerItems != null)
                 this.footerItems.SelectionChanged += FooterItems_SelectionChanged;
 
-            if (this.titleBarRectangle != null)
-                this.titleBarRectangle.MouseDown += OnTitleBarDragging;
+            if (this.paneDrawableRectangle != null)
+                this.paneDrawableRectangle.MouseDown += OnTitleBarDragging;
 
-            if (this.titleBarRectangle != null)
-                this.buttonsStackPanel.SizeChanged += ButtonStackPanel_SizeChanged;
+            if (this.contentDrawableRectangle != null)
+                this.contentDrawableRectangle.MouseDown += OnTitleBarDragging;
+
+            if (this.panelButtons != null)
+                this.panelButtons.SizeChanged += PanelButtons_SizeChanged;
 
             if (this.splitView != null)
             {
@@ -472,15 +484,7 @@ namespace MSB.UI.Controls
             if (this.DisplayMode is NavigationViewDisplayMode.Auto)
                 Render();
             else
-                UpdateVisualState(this.DisplayMode);
-        }
-
-        /// <inheritdoc/>
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-
-            this.Loaded += (sender, e) => { };
+                UpdateVisualState();
         }
 
         /// <inheritdoc />
@@ -493,29 +497,33 @@ namespace MSB.UI.Controls
                     Render();
         }
 
-        private void UpdateVisualState(NavigationViewDisplayMode mode)
+        /// <inheritdoc/>
+        protected override void OnInitialized(EventArgs e)
         {
-            switch (mode)
+            base.OnInitialized(e);
+
+            this.Loaded += (s, e) =>
             {
-                case NavigationViewDisplayMode.Auto:
-                    // no-op
-                    break;
-                case NavigationViewDisplayMode.Minimal:
-                    VisualStateManager.GoToState(this, NavigationViewDisplayMode.Minimal.ToString(), false);
-                    SetValue(IsPaneOpenProperty, false);
-                    break;
-                case NavigationViewDisplayMode.Compact:
-                    VisualStateManager.GoToState(this, NavigationViewDisplayMode.Compact.ToString(), false);
-                    SetValue(IsPaneOpenProperty, false);
-                    break;
-                case NavigationViewDisplayMode.Expanded:
-                    VisualStateManager.GoToState(this, NavigationViewDisplayMode.Expanded.ToString(), false);
-                    if (!this.isClosedByUser)
-                        SetValue(IsPaneOpenProperty, true);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(mode));
-            }
+                if (Window.GetWindow(this) is AeroWindow window && window.ExtendViewIntoTitleBar)
+                {
+                    contentDrawableRectangle.Visibility = Visibility.Visible;
+                    paneDrawableRectangle.Visibility = Visibility.Visible;
+                }
+            };
+        }
+
+        private void UpdateVisualState()
+        {
+            if (this.displayMode is NavigationViewDisplayMode.Auto)
+                return;
+
+            VisualStateManager.GoToState(this, this.displayMode.ToString(), false);
+
+            if (this.displayMode is not NavigationViewDisplayMode.Expanded)
+                SetValue(IsPaneOpenProperty, false);
+            else
+                if (!this.isClosedByUser)
+                    SetValue(IsPaneOpenProperty, true);
         }
 
         private void SplitView_PaneOpening(object sender, object args)
@@ -526,6 +534,14 @@ namespace MSB.UI.Controls
         private void SplitView_PaneClosed(object sender, object args)
         {
             // UpdateVisualState();
+        }
+
+        private void PanelButtons_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            this.TemplateSettings?.SetValue(NavigationViewTemplateSettings.PaneHeaderMarginProperty,
+                this.displayMode is NavigationViewDisplayMode.Minimal
+                ? new Thickness(0, e.NewSize.Height, 0, 0)
+                : new Thickness(e.NewSize.Width, 0, 0, 0));
         }
 
         private void MenuItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -565,11 +581,6 @@ namespace MSB.UI.Controls
             SetValue(IsPaneOpenProperty, !this.IsPaneOpen);
         }
 
-        private void ButtonStackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            this.TemplateSettings?.UpdateButtonsPanelLength(e.NewSize.Height);
-        }
-
         private void OnTitleBarDragging(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton is MouseButtonState.Pressed)
@@ -580,17 +591,19 @@ namespace MSB.UI.Controls
         {
             if (this.ActualWidth < this.CompactModeThresholdWidth)
             {
-                UpdateVisualState(NavigationViewDisplayMode.Minimal);
+                this.displayMode = NavigationViewDisplayMode.Minimal;
             }
             else if (this.ActualWidth >= this.CompactModeThresholdWidth
                 && this.ActualWidth < this.ExpandedModeThresholdWidth)
             {
-                UpdateVisualState(NavigationViewDisplayMode.Compact);
+                this.displayMode = NavigationViewDisplayMode.Compact;
             }
             else
             {
-                UpdateVisualState(NavigationViewDisplayMode.Expanded);
+                this.displayMode = NavigationViewDisplayMode.Expanded;
             }
+
+            this.UpdateVisualState();
         }
 
         #endregion

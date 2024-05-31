@@ -13,6 +13,9 @@ namespace MSB.UI
     /// </summary>
     public class AeroWindow : Window
     {
+        Button minButton, maxButton, closeButton;
+        Rectangle titleBarRect;
+
         /// <summary>
         /// Initializes a new instance of the 'AeroWindow' class.
         /// </summary>
@@ -68,6 +71,7 @@ namespace MSB.UI
         /// <summary>
         /// Gets or sets a value indicating whether the flyout is open.
         /// </summary>
+        [Obsolete]
         internal bool IsFlyoutOpen
         {
             get => (bool)GetValue(IsFlyoutOpenProperty);
@@ -100,29 +104,14 @@ namespace MSB.UI
         /// </summary>
         [Obsolete]
         public static readonly DependencyProperty FlyoutProperty =
-                DependencyProperty.Register(nameof(Flyout), typeof(Flyout), typeof(AeroWindow), new PropertyMetadata(null, FlyoutChanged_Callback));
+                DependencyProperty.Register(nameof(Flyout), typeof(Flyout), typeof(AeroWindow), new PropertyMetadata(null));
 
         /// <summary>
         /// Identifies the IsFlyoutOpen dependency property.
         /// </summary>
+        [Obsolete]
         public static readonly DependencyProperty IsFlyoutOpenProperty =
                 DependencyProperty.Register(nameof(IsFlyoutOpen), typeof(bool), typeof(AeroWindow), new PropertyMetadata(false));
-
-        #endregion
-
-        #region Callbacks
-
-        static void FlyoutChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (e.OldValue != e.NewValue && d is AeroWindow window)
-            {
-                if (e.NewValue is not Flyout flyout)
-                    return;
-
-                flyout.Opened += window.OnFlyoutOpened;
-                flyout.Closed += window.OnFlyoutClosed;
-            }
-        }
 
         #endregion
 
@@ -143,14 +132,10 @@ namespace MSB.UI
             if (closeButton is not null)
                 closeButton.Click -= CloseButton_Click;
 
-            if (lightDismissLayer is not null)
-                lightDismissLayer.MouseDown -= LightDismissLayer_Pressed;
-
             titleBarRect = (Rectangle)GetTemplateChild("TitleBarRect");
             minButton = (Button)GetTemplateChild("Minimize");
             maxButton = (Button)GetTemplateChild("MaxRest");
             closeButton = (Button)GetTemplateChild("Close");
-            lightDismissLayer = (Rectangle)GetTemplateChild("LightDismissLayer");
 
             if (titleBarRect is not null)
                 titleBarRect.MouseDown += TitleBar_MouseDown;
@@ -161,9 +146,6 @@ namespace MSB.UI
                 maxButton.Click += MaxResButton_Click;
             if (closeButton is not null)
                 closeButton.Click += CloseButton_Click;
-
-            if (lightDismissLayer is not null)
-                lightDismissLayer.MouseDown += LightDismissLayer_Pressed;
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -195,27 +177,6 @@ namespace MSB.UI
                 this.DragMove();
         }
 
-        private void LightDismissLayer_Pressed(object sender, MouseButtonEventArgs e)
-        {
-            if (this.Flyout is null)
-                return;
-
-            this.Flyout.IsOpen = false;
-        }
-
-        private void OnFlyoutClosed(object sender, EventArgs args)
-        {
-            SetCurrentValue(IsFlyoutOpenProperty, false);
-        }
-
-        private void OnFlyoutOpened(object sender, EventArgs args)
-        {
-            SetCurrentValue(IsFlyoutOpenProperty, true);
-        }
-
         #endregion
-
-        Rectangle titleBarRect, lightDismissLayer;
-        Button minButton, maxButton, closeButton;
     }
 }

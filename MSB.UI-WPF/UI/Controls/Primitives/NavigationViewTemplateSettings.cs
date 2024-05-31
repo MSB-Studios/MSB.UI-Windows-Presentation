@@ -38,25 +38,33 @@ namespace MSB.UI.Controls.Primitives
         /// <summary>
         /// Gets the visibility of the left pane.
         /// </summary>
-        public Visibility LeftPaneVisibility
+        public Visibility PaneVisibility
         {
-            get => (Visibility)GetValue(LeftPaneVisibilityProperty);
-        }
-
-        /// <summary>
-        /// Gets the margin value that contains in the upper side the TitleBar length. 
-        /// </summary>
-        public Thickness TitleBarMargin
-        {
-            get => (Thickness)GetValue(TitleBarMarginProperty);
+            get => (Visibility)GetValue(PaneVisibilityProperty);
         }
 
         /// <summary>
         /// Gets the length of the buttons panel.
         /// </summary>
-        public double ButtonsPanelLength
+        public double PaneHeaderLength
         {
-            get => (double)GetValue(ButtonsPanelLengthProperty);
+            get => (double)GetValue(PaneHeaderLengthProperty);
+        }
+
+        /// <summary>
+        /// Gets the margin of the pane header.
+        /// </summary>
+        public Thickness PaneHeaderMargin
+        {
+            get => (Thickness)GetValue(PaneHeaderMarginProperty);
+        }
+
+        /// <summary>
+        /// Gets the height of the top drawable section.
+        /// </summary>
+        public double DrawableSectionLength
+        {
+            get => (double)GetValue(DrawableSectionLengthProperty);
         }
 
         /// <summary>
@@ -85,14 +93,17 @@ namespace MSB.UI.Controls.Primitives
         internal static readonly DependencyProperty PaneToggleButtonVisibilityProperty =
                 DependencyProperty.Register(nameof(PaneToggleButtonVisibility), typeof(Visibility), typeof(NavigationViewTemplateSettings), new PropertyMetadata(Visibility.Visible));
 
-        internal static readonly DependencyProperty LeftPaneVisibilityProperty =
-                DependencyProperty.Register(nameof(LeftPaneVisibility), typeof(Visibility), typeof(NavigationViewTemplateSettings), new PropertyMetadata(Visibility.Collapsed));
+        internal static readonly DependencyProperty PaneVisibilityProperty =
+                DependencyProperty.Register(nameof(PaneVisibility), typeof(Visibility), typeof(NavigationViewTemplateSettings), new PropertyMetadata(Visibility.Collapsed));
 
-        internal static readonly DependencyProperty TitleBarMarginProperty =
-                DependencyProperty.Register(nameof(TitleBarMargin), typeof(Thickness), typeof(NavigationViewTemplateSettings), new PropertyMetadata(new Thickness(0, 32, 0, 0)));
+        internal static readonly DependencyProperty PaneHeaderLengthProperty =
+                DependencyProperty.Register(nameof(PaneHeaderLength), typeof(double), typeof(NavigationViewTemplateSettings), new PropertyMetadata(48d));
 
-        internal static readonly DependencyProperty ButtonsPanelLengthProperty =
-                DependencyProperty.Register(nameof(ButtonsPanelLength), typeof(double), typeof(NavigationViewTemplateSettings), new PropertyMetadata(48d));
+        internal static readonly DependencyProperty PaneHeaderMarginProperty =
+                DependencyProperty.Register(nameof(PaneHeaderMargin), typeof(Thickness), typeof(NavigationViewTemplateSettings), new PropertyMetadata(new Thickness(0, 0, 0, 0)));
+
+        internal static readonly DependencyProperty DrawableSectionLengthProperty =
+                DependencyProperty.Register(nameof(DrawableSectionLength), typeof(double), typeof(NavigationViewTemplateSettings), new PropertyMetadata(48d));
 
         internal static readonly DependencyProperty MenuItemsVisibilityProperty =
                 DependencyProperty.Register(nameof(MenuItemsVisibility), typeof(Visibility), typeof(NavigationViewTemplateSettings), new PropertyMetadata(Visibility.Collapsed));
@@ -107,16 +118,11 @@ namespace MSB.UI.Controls.Primitives
         internal void Update()
         {
             if (this.owner.DisplayMode is NavigationViewDisplayMode.Minimal && !this.owner.IsPaneOpen)
-                SetValue(LeftPaneVisibilityProperty, Visibility.Collapsed);
+                SetValue(PaneVisibilityProperty, Visibility.Collapsed);
             else
-                SetValue(LeftPaneVisibilityProperty, Visibility.Visible);
+                SetValue(PaneVisibilityProperty, Visibility.Visible);
 
             SetValue(BackButtonVisibilityProperty, this.owner.IsBackButtonVisible ? Visibility.Visible : Visibility.Collapsed);
-        }
-
-        internal void UpdateButtonsPanelLength(double length)
-        {
-            SetValue(ButtonsPanelLengthProperty, length);
         }
 
         private void OnMenuPropertyChanged(object sender, PropertyChangedEventArgs e)

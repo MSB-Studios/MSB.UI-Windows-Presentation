@@ -389,6 +389,7 @@
     -->
 
     <Style TargetType="msui:AeroWindow">
+        <Setter Property="WindowState" Value="Maximized"/>
         <Setter Property="Background" Value="{DynamicResource WindowBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource WindowBorderBrush}"/>
         <Setter Property="Foreground" Value="{DynamicResource WindowForeground}"/>
@@ -418,9 +419,9 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarRect" Fill="{DynamicResource ApplicationTransparentBrush}" MinWidth="48"/>
-                                <StackPanel >
+                                <StackPanel Orientation="Horizontal">
                                     <ContentPresenter x:Name="IconPresenter" Width="16" Height="16" Margin="8" Content="{TemplateBinding Icon}"/>
-                                    <TextBlock x:Name="TitlePresenter" Text="{TemplateBinding Title}" Margin="15, 5"/>
+                                    <TextBlock x:Name="TitlePresenter" VerticalAlignment="Center" Text="{TemplateBinding Title}" Margin="15, 5"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                                     <Button x:Name="Minimize" Style="{StaticResource WindowCaptionButtonStyle}" Content="{StaticResource MinimizeWindowGeometry}"/>
@@ -429,15 +430,8 @@
                                 </StackPanel>
                             </Grid>
                             <Border Grid.Row="1" x:Name="PART_Content" Panel.ZIndex="0" Background="{TemplateBinding Background}">
-                                <ContentPresenter Grid.Row="1" x:Name="ContentPresenter" Content="{TemplateBinding Content}"/>
+                                <ContentPresenter x:Name="ContentPresenter" Content="{TemplateBinding Content}"/>
                             </Border>
-                            <!--Flyout-->
-                            <Grid x:Name="PART_Flyout" Grid.RowSpan="2" Panel.ZIndex="1" Visibility="Collapsed">
-                                <Rectangle x:Name="LightDismissLayer" Fill="{DynamicResource LightDismissLayerBrush}"/>
-                                <Grid MinWidth="100" MinHeight="50" Margin="50" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <ContentPresenter Margin="10" Content="{TemplateBinding Flyout}"/>
-                                </Grid>
-                            </Grid>
                         </Grid>
                     </Border>
 
@@ -471,10 +465,6 @@
                         </Trigger>
                         <Trigger Property="IsTitleVisible" Value="False">
                             <Setter TargetName="TitlePresenter" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                        <!--Flyout triggers...-->
-                        <Trigger Property="IsFlyoutOpen" Value="True">
-                            <Setter TargetName="PART_Flyout" Property="Visibility" Value="Visible"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1263,35 +1253,17 @@
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SplitView" Storyboard.TargetProperty="DisplayMode">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static msuc:SplitViewDisplayMode.CompactOverlay}"/>
                                 </ObjectAnimationUsingKeyFrames>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonsPanel" Storyboard.TargetProperty="Orientation">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Buttons" Storyboard.TargetProperty="Orientation">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Orientation.Vertical}"/>
                                 </ObjectAnimationUsingKeyFrames>
-                                <Int32AnimationUsingKeyFrames Storyboard.TargetName="PaneHeaderPresenter" Storyboard.TargetProperty="(Grid.Row)">
-                                    <DiscreteInt32KeyFrame KeyTime="0:0:0" Value="0"/>
-                                </Int32AnimationUsingKeyFrames>
-                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PaneHeaderPresenter" Storyboard.TargetProperty="Margin">
-                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="48, 0, 0, 0"/>
-                                </ThicknessAnimationUsingKeyFrames>
-                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PaneGrid" Storyboard.TargetProperty="Margin">
-                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="0"/>
-                                </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ExpandedStoryboard">
                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SplitView" Storyboard.TargetProperty="DisplayMode">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static msuc:SplitViewDisplayMode.CompactInline}"/>
                                 </ObjectAnimationUsingKeyFrames>
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ButtonsPanel" Storyboard.TargetProperty="Orientation">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_Buttons" Storyboard.TargetProperty="Orientation">
                                     <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Orientation.Vertical}"/>
                                 </ObjectAnimationUsingKeyFrames>
-                                <Int32AnimationUsingKeyFrames Storyboard.TargetName="PaneHeaderPresenter" Storyboard.TargetProperty="(Grid.Row)">
-                                    <DiscreteInt32KeyFrame KeyTime="0:0:0" Value="0"/>
-                                </Int32AnimationUsingKeyFrames>
-                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PaneHeaderPresenter" Storyboard.TargetProperty="Margin">
-                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="48, 0, 0, 0"/>
-                                </ThicknessAnimationUsingKeyFrames>
-                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="PaneGrid" Storyboard.TargetProperty="Margin">
-                                    <DiscreteThicknessKeyFrame KeyTime="0:0:0" Value="0"/>
-                                </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                         </Border.Resources>
 
@@ -1306,82 +1278,58 @@
                         </VisualStateManager.VisualStateGroups>
 
                         <Grid >
-                            <Grid x:Name="NavButtonsGrid" VerticalAlignment="Top" Panel.ZIndex="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Grid.ColumnSpan="2" x:Name="TitleBarDrawableRectangle" VerticalAlignment="Top" MinHeight="32" Fill="{DynamicResource ApplicationTransparentBrush}" Visibility="Collapsed"/>
-                                <StackPanel x:Name="ButtonsPanel" Orientation="Horizontal">
-                                    <Button x:Name="BackButton" Style="{StaticResource NavigationBackButtonStyle}" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsBackButtonEnabled}"/>
-                                    <Button x:Name="PaneToggleButton" Style="{StaticResource PaneToggleButtonStyle}"/>
-                                </StackPanel>
-                            </Grid>
+                            <StackPanel x:Name="PART_Buttons" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1">
+                                <Button x:Name="BackButton" Style="{StaticResource NavigationBackButtonStyle}" Visibility="{Binding TemplateSettings.BackButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}" IsEnabled="{TemplateBinding IsBackButtonEnabled}"/>
+                                <Button x:Name="ToggleButton" Style="{StaticResource PaneToggleButtonStyle}"/>
+                            </StackPanel>
+                            
                             <msuc:SplitView x:Name="SplitView" Panel.ZIndex="0" Background="{TemplateBinding Background}" CompactPaneLength="{TemplateBinding CompactPaneLength}" OpenPaneLength="{TemplateBinding OpenPaneLength}" IsPaneOpen="{Binding IsPaneOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
                                 <msuc:SplitView.Pane>
-                                    <DockPanel x:Name="PaneGrid" HorizontalAlignment="Left" Margin="0, 48, 0, 0" Width="{TemplateBinding CompactPaneLength}">
-                                        <Grid DockPanel.Dock="Top" Height="{Binding TemplateSettings.ButtonsPanelLength, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                            <ContentPresenter x:Name="PaneHeaderPresenter" Height="48" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"/>
-                                        </Grid>
-                                        <ContentPresenter x:Name="PaneCustomContentPresenter" DockPanel.Dock="Top" Content="{TemplateBinding PaneCustomContent}"/>
-                                        <msuc:NavigationViewList x:Name="FooterItems" ItemsSource="{TemplateBinding FooterItems}" Visibility="{Binding TemplateSettings.FooterItemsVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                                 DockPanel.Dock="Bottom" VerticalAlignment="Bottom"  Margin="0, 48, 0, 0"/>
-                                        <msuc:NavigationViewList x:Name="MenuItems" ItemsSource="{TemplateBinding MenuItems}" Visibility="{Binding TemplateSettings.MenuItemsVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                                 Margin="0, 5, 0, 0"/>
-                                    </DockPanel>
+                                    <Grid >
+                                        <Rectangle x:Name="TitleBarPaneRectangle" VerticalAlignment="Top" Fill="{DynamicResource ApplicationTransparentBrush}" Visibility="Collapsed"
+                                                   Height="{Binding TemplateSettings.DrawableSectionLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                        
+                                        <DockPanel x:Name="PART_Pane" HorizontalAlignment="Left" Width="{TemplateBinding CompactPaneLength}">
+                                            <Grid DockPanel.Dock="Top" MinHeight="{Binding ActualHeight, ElementName=PART_Buttons}">
+                                                <ContentPresenter x:Name="PaneHeaderPresenter" Grid.ColumnSpan="2" VerticalAlignment="Bottom" Content="{TemplateBinding PaneHeader}"
+                                                                  Margin="{Binding TemplateSettings.PaneHeaderMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                  Height="{Binding TemplateSettings.PaneHeaderLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                            </Grid>
+                                            
+                                            <ContentPresenter x:Name="PaneCustomContentPresenter" DockPanel.Dock="Top" Content="{TemplateBinding PaneCustomContent}"/>
+                                            <msuc:NavigationViewList x:Name="FooterItems" ItemsSource="{TemplateBinding FooterItems}" Visibility="{Binding TemplateSettings.FooterItemsVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                     DockPanel.Dock="Bottom" VerticalAlignment="Bottom"  Margin="0, 48, 0, 0"/>
+                                            <msuc:NavigationViewList x:Name="MenuItems" ItemsSource="{TemplateBinding MenuItems}" Visibility="{Binding TemplateSettings.MenuItemsVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                     Margin="0, 5, 0, 0"/>
+                                        </DockPanel>
+                                    </Grid>
                                 </msuc:SplitView.Pane>
 
-                                <Grid x:Name="ContentGrid">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-                                    <ContentPresenter x:Name="HeaderPresenter" Grid.Row="0" Focusable="False" Content="{TemplateBinding Header}"/>
-                                    <ContentPresenter x:Name="ContentPresenter" Grid.Row="1" Focusable="False" Content="{TemplateBinding Content}"/>
+                                <Grid >
+                                    <Rectangle x:Name="TitleBarContentRectangle" VerticalAlignment="Top" Fill="{DynamicResource ApplicationTransparentBrush}" Visibility="Collapsed"
+                                               Height="{Binding TemplateSettings.DrawableSectionLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                                    
+                                    <DockPanel x:Name="PART_Content" Margin="{DynamicResource NavigationViewContentGridMargin}">
+                                        <ContentPresenter x:Name="HeaderPresenter" DockPanel.Dock="Top" Focusable="False" Content="{TemplateBinding Header}"/>
+                                        <ContentPresenter x:Name="ContentPresenter" Focusable="False" Content="{TemplateBinding Content}"/>
+                                    </DockPanel>
                                 </Grid>
                             </msuc:SplitView>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <MultiTrigger >
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsTitleBarPaddingEnabled" Value="True"/>
-                                <Condition Property="IsActingAsTitleBar" Value="False"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="PaneGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="ContentGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="ButtonsPanel" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                        </MultiTrigger>
-                        <MultiTrigger >
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsTitleBarPaddingEnabled" Value="False"/>
-                                <Condition Property="IsActingAsTitleBar" Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="NavButtonsGrid" Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-                        </MultiTrigger>
-                        <MultiTrigger >
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsTitleBarPaddingEnabled" Value="True"/>
-                                <Condition Property="IsActingAsTitleBar" Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="PaneGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="ContentGrid" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="ButtonsPanel" Property="Margin" Value="{Binding TemplateSettings.TitleBarMargin, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                            <Setter TargetName="TitleBarDrawableRectangle" Property="Visibility" Value="Visible"/>
-                            <Setter TargetName="NavButtonsGrid" Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-                        </MultiTrigger>
                         <Trigger Property="IsPaneOpen" Value="True">
-                            <Setter TargetName="PaneGrid" Property="Width" Value="{Binding OpenPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="PART_Pane" Property="Width" Value="{Binding OpenPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Trigger>
+                        
+                        <Trigger Property="Header" Value="{x:Null}">
+                            <Setter TargetName="HeaderPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="PaneHeader" Value="{x:Null}">
                             <Setter TargetName="PaneHeaderPresenter" Property="Visibility" Value="Collapsed"/>
                         </Trigger>
                         <Trigger Property="PaneCustomContent" Value="{x:Null}">
                             <Setter TargetName="PaneCustomContentPresenter" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
-                        <Trigger Property="CustomContentPlacement" Value="Bottom">
-                            <Setter TargetName="PaneCustomContentPresenter" Property="DockPanel.Dock" Value="Bottom"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1656,11 +1604,11 @@
     ***************************************************************
     -->
 
-    <Style TargetType="msuc:ToastAlert">
+    <Style TargetType="msuc:InfoBar">
         <Setter Property="Margin" Value="4"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="msuc:ToastAlert">
+                <ControlTemplate TargetType="msuc:InfoBar">
                     <Border x:Name="BorderRoot" Background="#BF0091FF" CornerRadius="8" RenderTransformOrigin="0.5, 0.5">
                         <Border.RenderTransform>
                             <ScaleTransform x:Name="BorderRootScaleTransform" ScaleX="0" ScaleY="0"/>

@@ -8,17 +8,17 @@ namespace MSB.UI.Controls
     /// <summary>
     /// A control that displays a message to the user in a banner.
     /// </summary>
-    public sealed class ToastAlert : Control
+    public sealed class InfoBar : Control
     {
         readonly DispatcherTimer timer = null;
         private Button btnHide = null;
 
         /// <summary>
-        /// Initializes a new instance of the 'ToastAlert' class.
+        /// Initializes a new instance of the 'InfoBar' class.
         /// </summary>
-        public ToastAlert()
+        public InfoBar()
         {
-            DefaultStyleKey = typeof(ToastAlert);
+            DefaultStyleKey = typeof(InfoBar);
 
             this.timer = new();
             this.timer.Tick += OnTimerTick;
@@ -38,11 +38,11 @@ namespace MSB.UI.Controls
 
         /// <summary>
         /// Gets or sets the severity of the message.
-        /// <para>The default is **Information**.</para>
+        /// <para>The default is **Informational**.</para>
         /// </summary>
-        public ToastAlertSeverity Severity
+        public InfoBarSeverity Severity
         {
-            get => (ToastAlertSeverity)GetValue(SeverityProperty);
+            get => (InfoBarSeverity)GetValue(SeverityProperty);
             set => SetValue(SeverityProperty, value);
         }
 
@@ -83,31 +83,31 @@ namespace MSB.UI.Controls
         /// Identifies the Message dependency property.
         /// </summary>
         public static readonly DependencyProperty MessageProperty =
-                DependencyProperty.Register(nameof(Message), typeof(string), typeof(ToastAlert), new PropertyMetadata(string.Empty));
+                DependencyProperty.Register(nameof(Message), typeof(string), typeof(InfoBar), new PropertyMetadata(string.Empty));
 
         /// <summary>
         /// Identifies the Severity dependency property.
         /// </summary>
         public static readonly DependencyProperty SeverityProperty =
-                            DependencyProperty.Register(nameof(Severity), typeof(ToastAlertSeverity), typeof(ToastAlert), new PropertyMetadata(ToastAlertSeverity.Information));
+                            DependencyProperty.Register(nameof(Severity), typeof(InfoBarSeverity), typeof(InfoBar), new PropertyMetadata(InfoBarSeverity.Informational));
 
         /// <summary>
         /// Identifies the AutoHideEnabled dependency property.
         /// </summary>
         public static readonly DependencyProperty AutoHideEnabledProperty =
-                DependencyProperty.Register(nameof(AutoHideEnabled), typeof(bool), typeof(ToastAlert), new PropertyMetadata(true));
+                DependencyProperty.Register(nameof(AutoHideEnabled), typeof(bool), typeof(InfoBar), new PropertyMetadata(true));
 
         /// <summary>
         /// Identifies the AutoHideDelay dependency property.
         /// </summary>
         public static readonly DependencyProperty AutoHideDelayProperty =
-                DependencyProperty.Register(nameof(AutoHideDelay), typeof(int), typeof(ToastAlert), new PropertyMetadata(3000));
+                DependencyProperty.Register(nameof(AutoHideDelay), typeof(int), typeof(InfoBar), new PropertyMetadata(3000));
 
         /// <summary>
         /// 
         /// </summary>
         internal static readonly DependencyProperty IsOpenProperty =
-                DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(ToastAlert), new PropertyMetadata(false, IsOpenChanged));
+                DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(InfoBar), new PropertyMetadata(false, IsOpenChanged));
 
         #endregion
 
@@ -115,7 +115,7 @@ namespace MSB.UI.Controls
 
         private static void IsOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue != e.NewValue && d is ToastAlert toast)
+            if (e.OldValue != e.NewValue && d is InfoBar toast)
             {
                 toast.UpdateVisualState();
             }

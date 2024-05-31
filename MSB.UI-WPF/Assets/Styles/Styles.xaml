@@ -10,6 +10,8 @@
 
     <Thickness x:Key="NavigationItemIconPadding">12</Thickness>
 
+    <Thickness x:Key="NavigationViewContentGridMargin">0</Thickness>
+
     <CornerRadius x:Key="ControlCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="OverlayCornerRadius">12</CornerRadius>
 

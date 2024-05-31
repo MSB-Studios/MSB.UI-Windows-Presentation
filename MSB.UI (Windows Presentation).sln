@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSB.UI-WPF", "MSB.UI-WPF\MSB.UI-WPF.csproj", "{BC4E46D6-F00E-42E9-B6AA-E4BCD68DC1F6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sweety", "..\..\..\..\Documents\Visual Studio 2022\Projects\Sweety (Windows Presentation)\Sweety\Sweety.csproj", "{25ACFB83-2F97-4F6F-91B2-0C733714A3CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BC4E46D6-F00E-42E9-B6AA-E4BCD68DC1F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC4E46D6-F00E-42E9-B6AA-E4BCD68DC1F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC4E46D6-F00E-42E9-B6AA-E4BCD68DC1F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25ACFB83-2F97-4F6F-91B2-0C733714A3CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25ACFB83-2F97-4F6F-91B2-0C733714A3CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25ACFB83-2F97-4F6F-91B2-0C733714A3CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25ACFB83-2F97-4F6F-91B2-0C733714A3CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
