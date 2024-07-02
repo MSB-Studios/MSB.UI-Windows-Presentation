@@ -1,7 +1,6 @@
-﻿using System.Windows.Threading;
+﻿using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows;
-using System;
 
 namespace MSB.UI.Controls
 {
@@ -10,25 +9,32 @@ namespace MSB.UI.Controls
     /// </summary>
     public sealed class InfoBar : Control
     {
-        readonly DispatcherTimer timer = null;
-        private Button btnHide = null;
+        private Button btnClose = null;
 
         /// <summary>
         /// Initializes a new instance of the 'InfoBar' class.
         /// </summary>
         public InfoBar()
         {
-            DefaultStyleKey = typeof(InfoBar);
-
-            this.timer = new();
-            this.timer.Tick += OnTimerTick;
+            this.DefaultStyleKey = typeof(InfoBar);
         }
 
         #region Properties
 
         /// <summary>
+        /// Gets or sets the title of the message.
+        /// <para>The default is an empty string.</para>
+        /// </summary>
+        public string Title
+        {
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the message to display.
         /// <para>The default is an empty string.</para>
+        /// <para>The control will automatically switch to a long message style if the message is longer than **92** characters.</para>
         /// </summary>
         public string Message
         {
@@ -47,32 +53,51 @@ namespace MSB.UI.Controls
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the alert should be automatically hidden.
-        /// <para>The default is **true**.</para>
+        /// Gets or sets a value indicating whether the alert is open.
+        /// <para>The default is **false**.</para>
         /// </summary>
-        public bool AutoHideEnabled
-        {
-            get => (bool)GetValue(AutoHideEnabledProperty);
-            set => SetValue(AutoHideEnabledProperty, value);
-        }
-
-        /// <summary>
-        /// Gets or sets the delay before the alert is hidden.
-        /// <para>The default is 3000 milliseconds.</para>
-        /// </summary>
-        public int AutoHideDelay
-        {
-            get => (int)GetValue(AutoHideDelayProperty);
-            set => SetValue(AutoHideDelayProperty, value);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal bool IsOpen
+        public bool IsOpen
         {
             get => (bool)GetValue(IsOpenProperty);
             set => SetValue(IsOpenProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the icon is visible.
+        /// <para>The default is **true**.</para>
+        /// </summary>
+        public bool IsIconVisible
+        {
+            get => (bool)GetValue(IsIconVisibleProperty);
+            set => SetValue(IsIconVisibleProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the alert is closable.
+        /// <para>The default is **true**.</para>
+        /// </summary>
+        public bool IsClosable
+        {
+            get => (bool)GetValue(IsClosableProperty);
+            set => SetValue(IsClosableProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the command to execute when the close button is clicked.
+        /// </summary>
+        public ICommand CloseButtonCommand
+        {
+            get => (ICommand)GetValue(CloseButtonCommandProperty);
+            set => SetValue(CloseButtonCommandProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets the parameter to pass to the <see cref="CloseButtonCommand"/>.
+        /// </summary>
+        public object CloseButtonCommandParameter
+        {
+            get => GetValue(CloseButtonCommandParameterProperty);
+            set => SetValue(CloseButtonCommandParameterProperty, value);
         }
 
         #endregion
@@ -80,10 +105,16 @@ namespace MSB.UI.Controls
         #region Dependency properties
 
         /// <summary>
+        /// Identifies the Title dependency property.
+        /// </summary>
+        public static readonly DependencyProperty TitleProperty =
+                DependencyProperty.Register(nameof(Title), typeof(string), typeof(InfoBar), new PropertyMetadata(string.Empty));
+
+        /// <summary>
         /// Identifies the Message dependency property.
         /// </summary>
         public static readonly DependencyProperty MessageProperty =
-                DependencyProperty.Register(nameof(Message), typeof(string), typeof(InfoBar), new PropertyMetadata(string.Empty));
+                DependencyProperty.Register(nameof(Message), typeof(string), typeof(InfoBar), new PropertyMetadata(string.Empty, MessageChanged));
 
         /// <summary>
         /// Identifies the Severity dependency property.
@@ -92,32 +123,52 @@ namespace MSB.UI.Controls
                             DependencyProperty.Register(nameof(Severity), typeof(InfoBarSeverity), typeof(InfoBar), new PropertyMetadata(InfoBarSeverity.Informational));
 
         /// <summary>
-        /// Identifies the AutoHideEnabled dependency property.
-        /// </summary>
-        public static readonly DependencyProperty AutoHideEnabledProperty =
-                DependencyProperty.Register(nameof(AutoHideEnabled), typeof(bool), typeof(InfoBar), new PropertyMetadata(true));
-
-        /// <summary>
-        /// Identifies the AutoHideDelay dependency property.
-        /// </summary>
-        public static readonly DependencyProperty AutoHideDelayProperty =
-                DependencyProperty.Register(nameof(AutoHideDelay), typeof(int), typeof(InfoBar), new PropertyMetadata(3000));
-
-        /// <summary>
-        /// 
+        /// Identifies the IsOpen dependency property.
         /// </summary>
         internal static readonly DependencyProperty IsOpenProperty =
                 DependencyProperty.Register(nameof(IsOpen), typeof(bool), typeof(InfoBar), new PropertyMetadata(false, IsOpenChanged));
+
+        /// <summary>
+        /// Identifies the IsIconVisible dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsIconVisibleProperty =
+                DependencyProperty.Register(nameof(IsIconVisible), typeof(bool), typeof(InfoBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Identifies the IsClosable dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsClosableProperty =
+                DependencyProperty.Register(nameof(IsClosable), typeof(bool), typeof(InfoBar), new PropertyMetadata(true));
+
+        /// <summary>
+        /// Identifies the CloseButtonCommand dependency property.
+        /// </summary>
+        public static readonly DependencyProperty CloseButtonCommandProperty =
+                DependencyProperty.Register(nameof(CloseButtonCommand), typeof(ICommand), typeof(InfoBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Identifies the CloseButtonCommandParameter dependency property.
+        /// </summary>
+        public static readonly DependencyProperty CloseButtonCommandParameterProperty =
+                DependencyProperty.Register(nameof(CloseButtonCommandParameter), typeof(object), typeof(InfoBar), new PropertyMetadata(null));
 
         #endregion
 
         #region Callbacks
 
+        private static void MessageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue != e.NewValue && d is InfoBar bar)
+            {
+                bar.UpdateVisualState();
+            }
+        }
+
         private static void IsOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue != e.NewValue && d is InfoBar toast)
+            if (e.OldValue != e.NewValue && d is InfoBar bar)
             {
-                toast.UpdateVisualState();
+                bar.UpdateVisualState();
             }
         }
 
@@ -130,13 +181,13 @@ namespace MSB.UI.Controls
         {
             base.OnApplyTemplate();
 
-            if (btnHide is not null)
-                btnHide.Click -= OnHideButtonClick;
+            if (this.btnClose != null)
+                this.btnClose.Click -= this.OnCloseButtonClick;
 
-            btnHide = (Button)GetTemplateChild("HideButton");
+            this.btnClose = (Button)this.GetTemplateChild("CloseButton");
 
-            if (btnHide is not null)
-                btnHide.Click += OnHideButtonClick;
+            if (this.btnClose != null)
+                this.btnClose.Click += this.OnCloseButtonClick;
 
             UpdateVisualState();
         }
@@ -144,35 +195,23 @@ namespace MSB.UI.Controls
         private void UpdateVisualState()
         {
             VisualStateManager.GoToState(this, this.IsOpen ? "Open" : "Closed", true);
+            VisualStateManager.GoToState(this, this.Message.Length > 92 ? "Long" : "Short", false);
         }
 
-        private void OnHideButtonClick(object sender, RoutedEventArgs e)
-        {
-            timer.Stop();
-
-            this.IsOpen = false;
-        }
-
-        private void OnTimerTick(object sender, System.EventArgs e)
+        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
             this.IsOpen = false;
-
-            timer.Stop();
+            this.CloseButtonClick?.Invoke(this, e);
         }
+
+        #endregion
+
+        #region Events
 
         /// <summary>
-        /// Displays the alert.
+        /// Occurs when the close button is clicked.
         /// </summary>
-        public void Show()
-        {
-            this.IsOpen = true;
-
-            if (this.AutoHideEnabled)
-            {
-                timer.Interval = TimeSpan.FromMilliseconds(this.AutoHideDelay);
-                timer.Start();
-            }
-        }
+        public event TypedEventHandler<object, RoutedEventArgs> CloseButtonClick;
 
         #endregion
     }

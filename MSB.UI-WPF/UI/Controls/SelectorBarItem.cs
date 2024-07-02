@@ -5,16 +5,16 @@ using System;
 namespace MSB.UI.Controls
 {
     /// <summary>
-    /// Represents the container for an item in a NavigationView control.
+    /// Represents a control that allows the user to select from a list of items.
     /// </summary>
-    public sealed class NavigationViewItem : ListBoxItem
+    public sealed class SelectorBarItem : ListBoxItem
     {
         /// <summary>
-        /// Initializes a new instance of the 'NavigationViewItem' class.
+        /// Initializes a new instance of the 'SelectorBarItem' class.
         /// </summary>
-        public NavigationViewItem()
+        public SelectorBarItem()
         {
-            this.DefaultStyleKey = typeof(NavigationViewItem);
+            this.DefaultStyleKey = typeof(SelectorBarItem);
         }
 
         #region Properties
@@ -57,19 +57,19 @@ namespace MSB.UI.Controls
         /// Identifies the Icon dependency property.
         /// </summary>
         public static readonly DependencyProperty IconProperty =
-                    DependencyProperty.Register(nameof(Icon), typeof(IconElement), typeof(NavigationViewItem), new PropertyMetadata(null, IconChanged_Callback));
+                    DependencyProperty.Register(nameof(Icon), typeof(IconElement), typeof(SelectorBarItem), new PropertyMetadata(null, IconChanged_Callback));
 
         /// <summary>
         /// Identifies the IconPadding dependency property.
         /// </summary>
         public static readonly DependencyProperty IconPaddingProperty =
-                    DependencyProperty.Register(nameof(IconPadding), typeof(Thickness), typeof(NavigationViewItem), new PropertyMetadata(new Thickness(11)));
+                    DependencyProperty.Register(nameof(IconPadding), typeof(Thickness), typeof(SelectorBarItem), new PropertyMetadata(new Thickness(11)));
 
         /// <summary>
         /// Identifies the SourcePageType dependency property.
         /// </summary>
         public static readonly DependencyProperty SourcePageTypeProperty =
-                    DependencyProperty.Register(nameof(SourcePageType), typeof(Type), typeof(NavigationViewItem), new PropertyMetadata(null));
+                    DependencyProperty.Register(nameof(SourcePageType), typeof(Type), typeof(SelectorBarItem), new PropertyMetadata(null));
 
         #endregion
 
@@ -77,9 +77,9 @@ namespace MSB.UI.Controls
 
         private static void IconChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OldValue != e.NewValue && d is NavigationViewItem nvItem)
+            if (e.OldValue != e.NewValue && d is SelectorBarItem barItem)
             {
-                nvItem.UpdateVisualState(false);
+                barItem.UpdateVisualState(false);
             }
         }
 

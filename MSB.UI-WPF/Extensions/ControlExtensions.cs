@@ -1,11 +1,12 @@
 ﻿using System.Windows.Media;
+using System.Windows.Controls;
 using System.Windows;
 
 namespace MSB.Extensions
 {
-    internal static class FrameworkElementExtensions
+    internal static class ControlExtensions
     {
-        internal static Size GetPhysicalSize(this FrameworkElement element)
+        internal static Size GetPhysicalSize(this Control element)
         {
             var source = PresentationSource.FromVisual(element);
 

@@ -23,6 +23,7 @@ namespace MSB.UI.Controls
             AddVisualChild(Child = new TextBlock
             {
                 Name = "PART_Glyph",
+                FontSize = 14,
                 FontFamily = new FontFamily("Segoe MDL2 Assets"),
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center
@@ -73,7 +74,7 @@ namespace MSB.UI.Controls
         /// Identifies the FontSize dependency property.
         /// </summary>
         public static readonly DependencyProperty FontSizeProperty =
-                TextElement.FontSizeProperty.AddOwner(typeof(FontIcon), new FrameworkPropertyMetadata(12d));
+                TextElement.FontSizeProperty.AddOwner(typeof(FontIcon), new FrameworkPropertyMetadata(14d, FontSizeChanged_Callback));
 
         /// <summary>
         /// Identifies the Glyph dependency property.
@@ -84,6 +85,14 @@ namespace MSB.UI.Controls
         #endregion
 
         #region Callbacks
+
+        private static void FontSizeChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.OldValue != e.NewValue && d is FontIcon icon)
+            {
+                (icon.Child as TextBlock).FontSize = (double)e.NewValue;
+            }
+        }
 
         private static void GlyphChanged_Callback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

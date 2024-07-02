@@ -1,17 +1,15 @@
-﻿using System.Windows;
+﻿using System.Windows.Markup;
+using System.Windows;
 
 namespace MSB.UI.Controls
 {
     /// <summary>
     /// Represents a dialog box that displays a custom content and returns a value.
     /// </summary>
+    [ContentProperty("Content")]
     public sealed class ContentDialog : FrameworkElement
     {
-        #region Fields
-
-        DialogWindow hostWindow;
-
-        #endregion
+        DialogWindow _hostWindow;
 
         /// <summary>
         /// Initialize a new instance of the 'ContentDialog' class.
@@ -83,7 +81,7 @@ namespace MSB.UI.Controls
         /// is clicked by the user.</returns>
         public DialogResult Show()
         {
-            hostWindow = new()
+            _hostWindow = new()
             {
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 DataContext = this
@@ -93,17 +91,17 @@ namespace MSB.UI.Controls
             {
                 if (window.IsActive)
                 {
-                    hostWindow.Owner = window;
+                    _hostWindow.Owner = window;
                     break;
                 }
             }
 
-            if (hostWindow.Owner is null)
-                hostWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            if (_hostWindow.Owner is null)
+                _hostWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
-            hostWindow.ShowDialog();
+            _hostWindow.ShowDialog();
 
-            return hostWindow.Result;
+            return _hostWindow.Result;
         }
 
         #endregion

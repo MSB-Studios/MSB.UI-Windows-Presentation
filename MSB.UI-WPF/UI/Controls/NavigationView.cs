@@ -5,6 +5,7 @@ using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows;
 using System;
+using System.Runtime.CompilerServices;
 
 namespace MSB.UI.Controls
 {
@@ -13,12 +14,11 @@ namespace MSB.UI.Controls
     /// </summary>
     public sealed class NavigationView : ContentControl
     {
-        Rectangle contentDrawableRectangle;
-        Rectangle paneDrawableRectangle;
-        NavigationViewList menuItems, footerItems;
-        Button backButton, paneToggleButton;
-        SplitView splitView;
-        StackPanel panelButtons;
+        Rectangle _contentDrawableRectangle;
+        Rectangle _paneDrawableRectangle;
+        NavigationViewList _menuItems, _footerItems;
+        Button _backButton, _paneToggleButton;
+        StackPanel _panelButtons;
 
         NavigationViewDisplayMode displayMode;
         bool isClosedByUser = false;
@@ -219,7 +219,7 @@ namespace MSB.UI.Controls
         #region Dependency properties
 
         /// <summary>
-        /// Identifies the MenuItems dependency property.
+        /// Identifies the Items dependency property.
         /// </summary>
         public static readonly DependencyProperty MenuItemsProperty =
                 DependencyProperty.Register(nameof(MenuItems), typeof(ItemCollection), typeof(NavigationView), new PropertyMetadata(new ItemCollection()));
@@ -339,28 +339,32 @@ namespace MSB.UI.Controls
             {
                 if (e.NewValue is null)
                 {
-                    nav.menuItems.SelectedItem = null;
-                    nav.footerItems.SelectedItem = null;
+                    nav._menuItems.SelectedItem = null;
+                    nav._footerItems.SelectedItem = null;
 
-                    nav.SelectionChanged?.Invoke(nav, new RoutedEventArgs());
-                    return;
-                }
-
-                if (nav.menuItems.Items.Contains(e.NewValue))
-                {
-                    nav.menuItems.SelectedItem = e.NewValue;
-                    nav.footerItems.SelectedItem = null;
-
-                    nav.ItemInvoked?.Invoke(nav, new RoutedEventArgs());
                     nav.SelectionChanged?.Invoke(nav, new RoutedEventArgs());
                 }
-                else if (nav.footerItems.Items.Contains(e.NewValue))
+                else
                 {
-                    nav.menuItems.SelectedItem = null;
-                    nav.footerItems.SelectedItem = e.NewValue;
+                    if (nav._menuItems.Items.Contains(e.NewValue))
+                    {
+                        nav._menuItems.SelectedItem = e.NewValue;
+                        nav._footerItems.SelectedItem = null;
 
-                    nav.ItemInvoked?.Invoke(nav, new RoutedEventArgs());
-                    nav.SelectionChanged?.Invoke(nav, new RoutedEventArgs());
+                        nav.ItemInvoked?.Invoke(nav, new RoutedEventArgs());
+                        nav.SelectionChanged?.Invoke(nav, new RoutedEventArgs());
+                    }
+                    else if (nav._footerItems.Items.Contains(e.NewValue))
+                    {
+                        nav._menuItems.SelectedItem = null;
+                        nav._footerItems.SelectedItem = e.NewValue;
+
+                        nav.ItemInvoked?.Invoke(nav, new RoutedEventArgs());
+                        nav.SelectionChanged?.Invoke(nav, new RoutedEventArgs());
+                    }
+
+                    if (nav.displayMode != NavigationViewDisplayMode.Expanded)
+                        nav.IsPaneOpen = false;
                 }
             }
         }
@@ -421,65 +425,52 @@ namespace MSB.UI.Controls
         {
             base.OnApplyTemplate();
 
-            if (this.backButton != null)
-                this.backButton.Click -= BackButton_Click;
+            if (this._backButton != null)
+                this._backButton.Click -= BackButton_Click;
 
-            if (this.paneToggleButton != null)
-                this.paneToggleButton.Click -= PaneToggleButton_Click;
+            if (this._paneToggleButton != null)
+                this._paneToggleButton.Click -= PaneToggleButton_Click;
 
-            if (this.menuItems != null)
-                this.menuItems.SelectionChanged -= MenuItems_SelectionChanged;
+            if (this._menuItems != null)
+                this._menuItems.SelectionChanged -= MenuItems_SelectionChanged;
 
-            if (this.footerItems != null)
-                this.footerItems.SelectionChanged -= FooterItems_SelectionChanged;
+            if (this._footerItems != null)
+                this._footerItems.SelectionChanged -= FooterItems_SelectionChanged;
 
-            if (this.paneDrawableRectangle != null)
-                this.paneDrawableRectangle.MouseDown -= OnTitleBarDragging;
+            if (this._paneDrawableRectangle != null)
+                this._paneDrawableRectangle.MouseDown -= OnTitleBarDragging;
 
-            if (this.contentDrawableRectangle != null)
-                this.contentDrawableRectangle.MouseDown -= OnTitleBarDragging;
+            if (this._contentDrawableRectangle != null)
+                this._contentDrawableRectangle.MouseDown -= OnTitleBarDragging;
 
-            if (this.splitView != null)
-            {
-                this.splitView.PaneOpening -= SplitView_PaneOpening;
-                this.splitView.PaneClosed -= SplitView_PaneClosed;
-            }
+            this._backButton = (Button)GetTemplateChild("BackButton");
+            this._paneToggleButton = (Button)GetTemplateChild("ToggleButton");
+            this._paneDrawableRectangle = (Rectangle)GetTemplateChild("TitleBarPaneRectangle");
+            this._contentDrawableRectangle = (Rectangle)GetTemplateChild("TitleBarContentRectangle");
+            this._menuItems = (NavigationViewList)GetTemplateChild("MenuItems");
+            this._footerItems = (NavigationViewList)GetTemplateChild("FooterItems");
+            this._panelButtons = (StackPanel)GetTemplateChild("PART_Buttons");
 
-            backButton = (Button)GetTemplateChild("BackButton");
-            paneToggleButton = (Button)GetTemplateChild("ToggleButton");
-            paneDrawableRectangle = (Rectangle)GetTemplateChild("TitleBarPaneRectangle");
-            contentDrawableRectangle = (Rectangle)GetTemplateChild("TitleBarContentRectangle");
-            menuItems = (NavigationViewList)GetTemplateChild("MenuItems");
-            footerItems = (NavigationViewList)GetTemplateChild("FooterItems");
-            panelButtons = (StackPanel)GetTemplateChild("PART_Buttons");
-            splitView = (SplitView)GetTemplateChild("SplitView");
+            if (this._backButton != null)
+                this._backButton.Click += BackButton_Click;
 
-            if (this.backButton != null)
-                this.backButton.Click += BackButton_Click;
+            if (this._paneToggleButton != null)
+                this._paneToggleButton.Click += PaneToggleButton_Click;
 
-            if (this.paneToggleButton != null)
-                this.paneToggleButton.Click += PaneToggleButton_Click;
+            if (this._menuItems != null)
+                this._menuItems.SelectionChanged += MenuItems_SelectionChanged;
 
-            if (this.menuItems != null)
-                this.menuItems.SelectionChanged += MenuItems_SelectionChanged;
+            if (this._footerItems != null)
+                this._footerItems.SelectionChanged += FooterItems_SelectionChanged;
 
-            if (this.footerItems != null)
-                this.footerItems.SelectionChanged += FooterItems_SelectionChanged;
+            if (this._paneDrawableRectangle != null)
+                this._paneDrawableRectangle.MouseDown += OnTitleBarDragging;
 
-            if (this.paneDrawableRectangle != null)
-                this.paneDrawableRectangle.MouseDown += OnTitleBarDragging;
+            if (this._contentDrawableRectangle != null)
+                this._contentDrawableRectangle.MouseDown += OnTitleBarDragging;
 
-            if (this.contentDrawableRectangle != null)
-                this.contentDrawableRectangle.MouseDown += OnTitleBarDragging;
-
-            if (this.panelButtons != null)
-                this.panelButtons.SizeChanged += PanelButtons_SizeChanged;
-
-            if (this.splitView != null)
-            {
-                this.splitView.PaneOpening += SplitView_PaneOpening;
-                this.splitView.PaneClosed += SplitView_PaneClosed;
-            }
+            if (this._panelButtons != null)
+                this._panelButtons.SizeChanged += PanelButtons_SizeChanged;
 
             if (this.DisplayMode is NavigationViewDisplayMode.Auto)
                 Render();
@@ -506,8 +497,8 @@ namespace MSB.UI.Controls
             {
                 if (Window.GetWindow(this) is AeroWindow window && window.ExtendViewIntoTitleBar)
                 {
-                    contentDrawableRectangle.Visibility = Visibility.Visible;
-                    paneDrawableRectangle.Visibility = Visibility.Visible;
+                    _contentDrawableRectangle.Visibility = Visibility.Visible;
+                    _paneDrawableRectangle.Visibility = Visibility.Visible;
                 }
             };
         }
@@ -526,16 +517,6 @@ namespace MSB.UI.Controls
                     SetValue(IsPaneOpenProperty, true);
         }
 
-        private void SplitView_PaneOpening(object sender, object args)
-        {
-            // UpdateVisualState();
-        }
-
-        private void SplitView_PaneClosed(object sender, object args)
-        {
-            // UpdateVisualState();
-        }
-
         private void PanelButtons_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             this.TemplateSettings?.SetValue(NavigationViewTemplateSettings.PaneHeaderMarginProperty,
@@ -546,28 +527,29 @@ namespace MSB.UI.Controls
 
         private void MenuItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.menuItems.SelectedItem is null)
+            if (this._menuItems.SelectedItem is null)
             {
-                if (this.footerItems.SelectedItem is null)
+                if (this._footerItems.SelectedItem is null)
                     this.SelectedItem = null;
                 return;
             }
 
-            this.footerItems.SelectedItem = null;
-            this.SelectedItem = this.menuItems.SelectedItem;
+            this._footerItems.SelectedItem = null;
+            this.SelectedItem = this._menuItems.SelectedItem;
         }
 
         private void FooterItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.footerItems.SelectedItem is null)
+            if (this._footerItems.SelectedItem is null)
             {
-                if (this.menuItems.SelectedItem is null)
+                if (this._menuItems.SelectedItem is null)
                     this.SelectedItem = null;
+
                 return;
             }
 
-            this.menuItems.SelectedItem = null;
-            this.SelectedItem = this.footerItems.SelectedItem;
+            this._menuItems.SelectedItem = null;
+            this.SelectedItem = this._footerItems.SelectedItem;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

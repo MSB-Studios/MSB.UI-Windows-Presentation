@@ -309,11 +309,9 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ToastAlertCloseButtonStyle" TargetType="Button">
+    <Style x:Key="InfoBarCloseButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="{DynamicResource ApplicationTransparentBrush}"/>
-        <Setter Property="Foreground" Value="#FFFFFF"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Height" Value="24"/>
@@ -384,7 +382,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.RICHWINDOW' STYLE
+    **********     'MSB.UI.AeroWindow' style
     ***************************************************************
     -->
 
@@ -474,7 +472,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.DIALOGWINDOW' STYLE
+    **********     'MSB.UI.DialogWindow' style
     ***************************************************************
     -->
 
@@ -581,77 +579,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.FLYOUT' STYLE
-    ***************************************************************
-    -->
-
-    <Style TargetType="msuc:Flyout">
-        <Setter Property="Background" Value="{DynamicResource FlyoutBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource FlyoutBorderBrush}"/>
-        <Setter Property="Foreground" Value="{DynamicResource FlyoutForeground}"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="MinHeight" Value="100"/>
-        <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="msuc:Flyout">
-                    <Grid x:Name="GridRoot" Visibility="Collapsed" Opacity="0">
-                        <Grid.Resources>
-                            <Storyboard x:Key="ClosedToOpenStoryboard">
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Visibility">
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
-                                </ObjectAnimationUsingKeyFrames>
-                                <DoubleAnimation Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Opacity"
-                                                 To="1" Duration="0:0:0.15"/>
-                            </Storyboard>
-                            <Storyboard x:Key="OpenToClosedStoryboard">
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Visibility">
-                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.26" Value="{x:Static Visibility.Collapsed}"/>
-                                </ObjectAnimationUsingKeyFrames>
-                                <DoubleAnimation Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Opacity"
-                                                 To="0" Duration="0:0:0.25"/>
-                            </Storyboard>
-                            <Storyboard x:Key="OpenStoryboard">
-                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Visibility">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-                                </ObjectAnimationUsingKeyFrames>
-                                <DoubleAnimation Storyboard.TargetName="GridRoot" Storyboard.TargetProperty="Opacity"
-                                                 To="1" Duration="0:0:0"/>
-                            </Storyboard>
-                        </Grid.Resources>
-
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition From="Closed" To="Open"
-                                                      Storyboard="{StaticResource ClosedToOpenStoryboard}"/>
-                                    <VisualTransition From="Open" To="Closed"
-                                                      Storyboard="{StaticResource OpenToClosedStoryboard}"/>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Closed"/>
-                                <VisualState x:Name="Open" Storyboard="{StaticResource OpenStoryboard}"/>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}">
-                            <Border.Effect>
-                                <DropShadowEffect Color="{DynamicResource DropShadowColor}" ShadowDepth="5" BlurRadius="5" Direction="270" Opacity="0.25"/>
-                            </Border.Effect>
-                        </Border>
-                        <ContentPresenter Content="{TemplateBinding Content}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="10"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--
-    ***************************************************************
-    **********     'MSB.UI.CONTROLS.SPLITVIEW' STYLE
+    **********     'MSB.UI.Controls.SplitView' style
     ***************************************************************
     -->
 
@@ -1076,7 +1004,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.NAVIGATIONVIEWITEM' STYLE
+    **********     'MSB.UI.Controls.NavigationViewItem' style
     ***************************************************************
     -->
 
@@ -1133,7 +1061,7 @@
 
                         <Grid >
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition MinWidth="5px" Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
@@ -1197,7 +1125,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.NAVIGATIONVIEWLIST' STYLE
+    **********     'MSB.UI.Controls.NavigationViewList' style
     ***************************************************************
     -->
 
@@ -1235,7 +1163,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.NAVIGATIONVIEW' STYLE
+    **********     'MSB.UI.Controls.NavigationView' style
     ***************************************************************
     -->
 
@@ -1339,7 +1267,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.APPBARBUTTON' STYLE
+    **********     'MSB.UI.Controls.AppBarButton' style
     ***************************************************************
     -->
 
@@ -1454,7 +1382,7 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.TEACHINGTIP' STYLE
+    **********     'MSB.UI.Controls.TeachingTip' style
     ***************************************************************
     -->
 
@@ -1600,16 +1528,16 @@
 
     <!--
     ***************************************************************
-    **********     'MSB.UI.CONTROLS.TOASTALERT' STYLE
+    **********     'MSB.UI.Controls.InfoBar' style
     ***************************************************************
     -->
 
     <Style TargetType="msuc:InfoBar">
-        <Setter Property="Margin" Value="4"/>
+        <Setter Property="Foreground" Value="{DynamicResource InfoBarForeground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="msuc:InfoBar">
-                    <Border x:Name="BorderRoot" Background="#BF0091FF" CornerRadius="8" RenderTransformOrigin="0.5, 0.5">
+                    <Border x:Name="BorderRoot" Background="#260091FF" CornerRadius="{DynamicResource ControlCornerRadius}" Visibility="Collapsed" RenderTransformOrigin="0.5, 0.5">
                         <Border.RenderTransform>
                             <ScaleTransform x:Name="BorderRootScaleTransform" ScaleX="0" ScaleY="0"/>
                         </Border.RenderTransform>
@@ -1624,6 +1552,9 @@
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <DiscreteDoubleKeyFrame KeyTime="0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                                </ObjectAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="ClosedToOpenStoryboard">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Opacity">
@@ -1635,6 +1566,9 @@
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <SplineDoubleKeyFrame KeyTime="0:0:0.35" KeySpline="0.1,0.9 0.2,1.0" Value="1"/>
                                 </DoubleAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{x:Static Visibility.Visible}"/>
+                                </ObjectAnimationUsingKeyFrames>
                             </Storyboard>
                             <Storyboard x:Key="OpenToClosedStoryboard">
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Opacity">
@@ -1646,6 +1580,20 @@
                                 <DoubleAnimationUsingKeyFrames Storyboard.TargetName="BorderRootScaleTransform" Storyboard.TargetProperty="ScaleY">
                                     <DiscreteDoubleKeyFrame KeyTime="0:0:0.12" Value="0"/>
                                 </DoubleAnimationUsingKeyFrames>
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BorderRoot" Storyboard.TargetProperty="Visibility">
+                                    <DiscreteObjectKeyFrame KeyTime="0:0:0.14" Value="{x:Static Visibility.Collapsed}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="LongStoryboard">
+                                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="WrapperPanel" Storyboard.TargetProperty="Orientation">
+                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Orientation.Vertical}"/>
+                                </ObjectAnimationUsingKeyFrames>
+                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="WrapperPanel" Storyboard.TargetProperty="Margin">
+                                    <DiscreteThicknessKeyFrame KeyTime="0" Value="10"/>
+                                </ThicknessAnimationUsingKeyFrames>
+                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="TitlePresenter" Storyboard.TargetProperty="Margin">
+                                    <DiscreteThicknessKeyFrame KeyTime="0" Value="0 0 0 10"/>
+                                </ThicknessAnimationUsingKeyFrames>
                             </Storyboard>
                         </Border.Resources>
 
@@ -1660,16 +1608,20 @@
                                 <VisualState x:Name="Closed"/>
                                 <VisualState x:Name="Open" Storyboard="{StaticResource OpenStoryboard}"/>
                             </VisualStateGroup>
+                            <VisualStateGroup x:Name="MessageLengthStates">
+                                <VisualState x:Name="Short"/>
+                                <VisualState x:Name="Long" Storyboard="{StaticResource LongStoryboard}"/>
+                            </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
 
-                        <Grid Margin="4" Height="24">
+                        <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <Border x:Name="IconContainer" Grid.Column="0" Background="#FF0091FF" Padding="4" CornerRadius="6">
+                            <Border x:Name="IconContainer" Grid.Column="0" Background="#FF0091FF" Height="24" Width="24" Margin="10" Padding="4" CornerRadius="6" VerticalAlignment="Top">
                                 <msuc:ImageIcon x:Name="Icon" HorizontalAlignment="Center" VerticalAlignment="Center">
                                     <msuc:ImageIcon.Source>
                                         <DrawingImage>
@@ -1680,15 +1632,27 @@
                                     </msuc:ImageIcon.Source>
                                 </msuc:ImageIcon>
                             </Border>
-                            <TextBlock Grid.Column="1" Margin="8 0" VerticalAlignment="Center"
-                                       Foreground="#FFFFFF" Text="{TemplateBinding Message}"/>
-                            <Button x:Name="HideButton" Grid.Column="2" Style="{StaticResource ToastAlertCloseButtonStyle}"/>
+                            <StackPanel x:Name="WrapperPanel" Grid.Column="1" Margin="10 0" Orientation="Horizontal" TextElement.Foreground="{TemplateBinding Foreground}">
+                                <TextBlock x:Name="TitlePresenter" Margin="0 0 10 0" VerticalAlignment="Center" FontWeight="Bold" Text="{TemplateBinding Title}"/>
+                                <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Message}" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <Button x:Name="CloseButton" Grid.Column="2" Foreground="{TemplateBinding Foreground}" Margin="10" Style="{StaticResource InfoBarCloseButtonStyle}"
+                                    VerticalAlignment="Top" Command="{TemplateBinding CloseButtonCommand}" CommandParameter="{TemplateBinding CloseButtonCommandParameter}"/>
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsIconVisible" Value="False">
+                            <Setter TargetName="IconContainer" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="IsClosable" Value="False">
+                            <Setter TargetName="CloseButton" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <Trigger Property="Title" Value="">
+                            <Setter TargetName="TitlePresenter" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
                         <Trigger Property="Severity" Value="Warning">
-                            <Setter TargetName="BorderRoot" Property="Background" Value="#BFFF9F0A"/>
+                            <Setter TargetName="BorderRoot" Property="Background" Value="#26FF9F0A"/>
                             <Setter TargetName="IconContainer" Property="Background" Value="#FFFF9F0A"/>
                             <Setter TargetName="Icon" Property="Source">
                                 <Setter.Value>
@@ -1701,7 +1665,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="Severity" Value="Error">
-                            <Setter TargetName="BorderRoot" Property="Background" Value="#BFD63232"/>
+                            <Setter TargetName="BorderRoot" Property="Background" Value="#26D63232"/>
                             <Setter TargetName="IconContainer" Property="Background" Value="#FFD63232"/>
                             <Setter TargetName="Icon" Property="Source">
                                 <Setter.Value>
@@ -1714,7 +1678,7 @@
                             </Setter>
                         </Trigger>
                         <Trigger Property="Severity" Value="Success">
-                            <Setter TargetName="BorderRoot" Property="Background" Value="#BF30D158"/>
+                            <Setter TargetName="BorderRoot" Property="Background" Value="#2630D158"/>
                             <Setter TargetName="IconContainer" Property="Background" Value="#30D158"/>
                             <Setter TargetName="IconContainer" Property="Padding" Value="6"/>
                             <Setter TargetName="Icon" Property="Source">
@@ -1726,6 +1690,369 @@
                                     </DrawingImage>
                                 </Setter.Value>
                             </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.Controls.SelectorBarItem' style
+    ***************************************************************
+    -->
+
+    <Style TargetType="msuc:SelectorBarItem">
+        <Setter Property="FocusVisualStyle" Value="{DynamicResource FocusVisualStyle}"/>
+        <Setter Property="Background" Value="{DynamicResource SelectorBarItemBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource SelectorBarItemForeground}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Padding" Value="10, 9"/>
+        <Setter Property="Margin" Value="4, 2"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:SelectorBarItem">
+                    <Border x:Name="BorderRoot" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource ControlCornerRadius}">
+                        <Border.Resources>
+                            <Storyboard x:Key="NotchVisibleStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="NotchTransform" Storyboard.TargetProperty="ScaleX">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="1"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="NotchCollapsedToVisibleStoryboard">
+                                <DoubleAnimation Storyboard.TargetName="NotchTransform" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BackEase EasingMode="EaseOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                            <Storyboard x:Key="NotchVisibleToCollapsedStoryboard">
+                                <DoubleAnimation Storyboard.TargetName="NotchTransform" Storyboard.TargetProperty="ScaleX" To="0" Duration="0:0:0.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <BackEase EasingMode="EaseIn"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Border.Resources>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="NotchVisibilityStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="NotchCollapsed" To="NotchVisible"
+                                                  Storyboard="{StaticResource NotchCollapsedToVisibleStoryboard}"/>
+                                    <VisualTransition From="NotchVisible" To="NotchCollapsed"
+                                                  Storyboard="{StaticResource NotchVisibleToCollapsedStoryboard}"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="NotchCollapsed"/>
+                                <VisualState x:Name="NotchVisible"
+                                         Storyboard="{StaticResource NotchVisibleStoryboard}"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" Grid.Column="0" x:Name="IconContainer" Width="{Binding ActualHeight, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <ContentPresenter x:Name="IconPresenter" Margin="{DynamicResource SelectorBarItemIconPadding}" Content="{TemplateBinding Icon}"/>
+                            </Grid>
+                            <ContentPresenter Grid.Row="0" Grid.Column="1" x:Name="ContentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}"/>
+                            <Rectangle Grid.Row="1" Grid.ColumnSpan="2" RadiusX="2" RadiusY="2" Width="20" Height="4" VerticalAlignment="Bottom" RenderTransformOrigin="0.5, 0.5">
+                                <Rectangle.Fill>
+                                    <SolidColorBrush Color="{DynamicResource ApplicationAccentColor}"/>
+                                </Rectangle.Fill>
+                                <Rectangle.RenderTransform>
+                                    <ScaleTransform x:Name="NotchTransform" ScaleX="0"/>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="IconContainer" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource SelectorBarItemBackgroundPointerOver}"/>
+                            <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="False"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource SelectorBarItemBackgroundSelected}"/>
+                            <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundSelected}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundSelected}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="IsSelected" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource SelectorBarItemBackgroundSelectedPointerOver}"/>
+                            <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundSelectedPointerOver}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundSelectedPointerOver}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="BorderRoot" Property="Background" Value="{DynamicResource SelectorBarItemBackgroundDisabled}"/>
+                            <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundDisabled}"/>
+                            <Setter TargetName="ContentPresenter" Property="TextElement.Foreground" Value="{DynamicResource SelectorBarItemForegroundDisabled}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.Controls.SelectorBarList' style
+    ***************************************************************
+    -->
+
+    <Style TargetType="msuc:SelectorBarList">
+        <Setter Property="Background" Value="{DynamicResource ApplicationTransparentBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="Padding" Value="-1, 2"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:SelectorBarList">
+                    <ScrollViewer Background="{TemplateBinding Background}" Style="{StaticResource NavigationListScrollViewerStyle}" Padding="1">
+                        <StackPanel IsItemsHost="True" Orientation="Horizontal" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="{TemplateBinding Padding}"/>
+                    </ScrollViewer>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.Controls.SelectorBar' style
+    ***************************************************************
+    -->
+
+    <Style TargetType="msuc:SelectorBar">
+        <Setter Property="Background" Value="{DynamicResource ApplicationTransparentBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:SelectorBar">
+                    <Grid Background="{TemplateBinding Background}">
+                        <msuc:SelectorBarList ItemsSource="{TemplateBinding Items}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--
+    ***************************************************************
+    **********     'MSB.UI.Controls.ToggleSwitch' style
+    ***************************************************************
+    -->
+
+    <Style TargetType="msuc:ToggleSwitch">
+        <Setter Property="Background" Value="{DynamicResource ToggleSwitchBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ToggleSwitchForeground}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10, 7"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="msuc:ToggleSwitch">
+                    <Grid x:Name="GridRoot" Background="{DynamicResource ApplicationTransparentBrush}">
+                        <Grid.Resources>
+                            <Storyboard x:Key="OnStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThumbTranslateTransform" Storyboard.TargetProperty="X">
+                                    <DiscreteDoubleKeyFrame KeyTime="0:0:0" Value="14"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="OnToOffStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThumbTranslateTransform" Storyboard.TargetProperty="X">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.24" Value="-14"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="OffToOnStoryboard">
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetName="ThumbTranslateTransform" Storyboard.TargetProperty="X">
+                                    <LinearDoubleKeyFrame KeyTime="0:0:0.24" Value="14"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </Grid.Resources>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <CheckBox Grid.Column="0" x:Name="PART_CheckBox" Background="{TemplateBinding Background}" Foreground="{TemplateBinding Foreground}">
+                            <CheckBox.Style>
+                                <Style TargetType="CheckBox">
+                                    <Setter Property="Height" Value="24"/>
+                                    <Setter Property="Width" Value="52"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="CheckBox">
+                                                <Grid x:Name="BorderRoot" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualStateGroup.Transitions>
+                                                                <VisualTransition Storyboard="{StaticResource OnToOffStoryboard}"
+                                                                                  From="Checked" To="Unchecked"/>
+                                                                <VisualTransition Storyboard="{StaticResource OffToOnStoryboard}"
+                                                                                  From="Unchecked" To="Checked"/>
+                                                            </VisualStateGroup.Transitions>
+                                                            <VisualState x:Name="Unchecked"/>
+                                                            <VisualState x:Name="Checked" Storyboard="{StaticResource OnStoryboard}"/>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    
+                                                    <Rectangle x:Name="Track" RadiusX="12" RadiusY="12" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding Foreground}" StrokeThickness="1"/>
+                                                    <Ellipse x:Name="Thumb" Width="16" Height="16" Fill="{TemplateBinding Foreground}">
+                                                        <Ellipse.RenderTransform>
+                                                            <TranslateTransform x:Name="ThumbTranslateTransform" X="-14"/>
+                                                        </Ellipse.RenderTransform>
+                                                    </Ellipse>
+                                                </Grid>
+
+                                                <ControlTemplate.Triggers>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsChecked" Value="False"/>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter TargetName="Track" Property="Fill" Value="{DynamicResource CheckBoxBackgroundPointerOver}"/>
+                                                        <Setter TargetName="Track" Property="Stroke" Value="{DynamicResource CheckBoxBorderBrushPointerOver}"/>
+                                                    </MultiTrigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsChecked" Value="False"/>
+                                                            <Condition Property="IsPressed" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter TargetName="Track" Property="Fill" Value="{DynamicResource CheckBoxBackgroundPressed}"/>
+                                                        <Setter TargetName="Track" Property="Stroke" Value="{DynamicResource CheckBoxBorderBrushPressed}"/>
+                                                    </MultiTrigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsChecked" Value="True"/>
+                                                            <Condition Property="IsMouseOver" Value="False"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter TargetName="Track" Property="Fill" Value="{DynamicResource CheckBoxBackgroundChecked}"/>
+                                                        <Setter TargetName="Track" Property="Stroke" Value="{DynamicResource CheckBoxBorderBrushChecked}"/>
+                                                    </MultiTrigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsChecked" Value="True"/>
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter TargetName="Track" Property="Fill" Value="{DynamicResource CheckBoxBackgroundCheckedPointerOver}"/>
+                                                        <Setter TargetName="Track" Property="Stroke" Value="{DynamicResource CheckBoxBorderBrushCheckedPointerOver}"/>
+                                                    </MultiTrigger>
+                                                    <MultiTrigger>
+                                                        <MultiTrigger.Conditions>
+                                                            <Condition Property="IsChecked" Value="True"/>
+                                                            <Condition Property="IsPressed" Value="True"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter TargetName="Track" Property="Fill" Value="{DynamicResource CheckBoxBackgroundCheckedPressed}"/>
+                                                        <Setter TargetName="Track" Property="Stroke" Value="{DynamicResource CheckBoxBorderBrushCheckedPressed}"/>
+                                                    </MultiTrigger>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter TargetName="Track" Property="Fill" Value="{DynamicResource CheckBoxBackgroundDisabled}"/>
+                                                        <Setter TargetName="Track" Property="Stroke" Value="{DynamicResource CheckBoxBorderBrushDisabled}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsChecked" Value="True">
+                                                        <Setter TargetName="Thumb" Property="Fill" Value="{DynamicResource CheckBoxGlyphBrush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </CheckBox.Style>
+                        </CheckBox>
+                        <ContentPresenter Grid.Column="1" x:Name="PART_Content" Content="{TemplateBinding OffContent}" TextElement.Foreground="{TemplateBinding Foreground}" Margin="{TemplateBinding Padding}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsOn" Value="False"/>
+                                <Condition SourceName="PART_CheckBox" Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CheckBox" Property="Background" Value="{DynamicResource ToggleSwitchBackgroundPointerOver}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource ToggleSwitchForegroundPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsOn" Value="False"/>
+                                <Condition SourceName="PART_CheckBox" Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CheckBox" Property="Background" Value="{DynamicResource ToggleSwitchBackgroundPressed}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource ToggleSwitchForegroundPressed}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsOn" Value="True"/>
+                                <Condition SourceName="PART_CheckBox" Property="IsMouseOver" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CheckBox" Property="Background" Value="{DynamicResource ToggleSwitchBackgroundChecked}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource ToggleSwitchForegroundChecked}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsOn" Value="True"/>
+                                <Condition SourceName="PART_CheckBox" Property="IsMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CheckBox" Property="Background" Value="{DynamicResource ToggleSwitchBackgroundCheckedPointerOver}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource ToggleSwitchForegroundCheckedPointerOver}"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsOn" Value="True"/>
+                                <Condition SourceName="PART_CheckBox" Property="IsPressed" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CheckBox" Property="Background" Value="{DynamicResource ToggleSwitchBackgroundCheckedPressed}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource ToggleSwitchForegroundCheckedPressed}"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_CheckBox" Property="Background" Value="{DynamicResource ToggleSwitchBackgroundDisabled}"/>
+                            <Setter TargetName="PART_Content" Property="TextElement.Foreground" Value="{DynamicResource ToggleSwitchForegroundDisabled}"/>
+                        </Trigger>
+                        <Trigger Property="IsOn" Value="True">
+                            <Setter TargetName="PART_Content" Property="Content" Value="{Binding OnContent, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

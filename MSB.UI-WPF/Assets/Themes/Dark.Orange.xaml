@@ -270,6 +270,51 @@
     <SolidColorBrush x:Key="ComboBoxForeground"
                      Color="{DynamicResource ControlForegroundColor}"/>
 
+    <SolidColorBrush x:Key="CheckBoxBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrush"
+                     Color="{DynamicResource ControlBorderColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="CheckBoxGlyphBrush"
+                     Color="{DynamicResource ThemeBackgroundColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundPointerOver"
+                     Color="{DynamicResource ControlBackgroundHoverColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushPointerOver"
+                     Color="{DynamicResource ControlBorderHoverColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundPointerOver"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundPressed"
+                     Color="{DynamicResource ControlBackgroundPressedColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushPressed"
+                     Color="{DynamicResource ControlBorderPressedColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundPressed"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundChecked"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushChecked"
+                     Color="{DynamicResource ApplicationAccentColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundChecked"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundCheckedPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushCheckedPointerOver"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundCheckedPressed"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushCheckedPressed"
+                     Color="{DynamicResource ApplicationAccentColor2}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Opacity="0.6"
+                     Color="{DynamicResource ControlForegroundCheckedColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBackgroundDisabled"
+                     Color="{DynamicResource ControlBackgroundDisabledColor}"/>
+    <SolidColorBrush x:Key="CheckBoxBorderBrushDisabled"
+                     Color="{DynamicResource ControlBorderDisabledColor}"/>
+    <SolidColorBrush x:Key="CheckBoxForegroundDisabled"
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
     <!--
     ***************************************************************
     **********     'MSB.UI CONTROLS' BRUSHES
@@ -281,13 +326,6 @@
     <SolidColorBrush x:Key="DialogBorderBrush"
                      Color="{DynamicResource ApplicationAccentColor}"/>
     <SolidColorBrush x:Key="DialogForeground"
-                     Color="{DynamicResource ThemeForegroundColor}"/>
-
-    <SolidColorBrush x:Key="FlyoutBackground"
-                     Color="{DynamicResource ThemeBackgroundColor}"/>
-    <SolidColorBrush x:Key="FlyoutBorderBrush"
-                     Color="{DynamicResource ThemeBorderColor}"/>
-    <SolidColorBrush x:Key="FlyoutForeground"
                      Color="{DynamicResource ThemeForegroundColor}"/>
 
     <SolidColorBrush x:Key="SplitViewBackground">#FF000000</SolidColorBrush>
@@ -321,6 +359,19 @@
     <SolidColorBrush x:Key="TeachingTipTitleForeground"
                      Color="{DynamicResource ControlForegroundColor}"/>
     <SolidColorBrush x:Key="TeachingTipDescriptionForeground"
-                 Color="{DynamicResource ControlForegroundDisabledColor}"/>
+                     Color="{DynamicResource ControlForegroundDisabledColor}"/>
+
+    <SolidColorBrush x:Key="InfoBarForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+
+    <SolidColorBrush x:Key="SelectorBarItemBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="SelectorBarItemForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
+
+    <SolidColorBrush x:Key="ToggleSwitchBackground"
+                     Color="{DynamicResource ControlTransparentColor}"/>
+    <SolidColorBrush x:Key="ToggleSwitchForeground"
+                     Color="{DynamicResource ControlForegroundColor}"/>
 
 </ResourceDictionary>

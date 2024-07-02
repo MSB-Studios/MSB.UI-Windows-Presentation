@@ -12,7 +12,7 @@ namespace MSB.UI.Controls.Primitives
     {
         readonly TeachingTip _owner = null;
         private Window _window = null;
-        private FrameworkElement _container = null;
+        private Control _container = null;
         
         internal TeachingTipTemplateSettings(TeachingTip tip)
         {
@@ -65,7 +65,7 @@ namespace MSB.UI.Controls.Primitives
         internal void Update()
         {
             this._window ??= Window.GetWindow(this._owner);
-            this._container ??= (FrameworkElement)this._owner.GetChild("PART_Content");
+            this._container ??= (Control)this._owner.GetChild("PART_Content");
 
             var mask = (Border)this._owner.GetChild("BorderMask");
 

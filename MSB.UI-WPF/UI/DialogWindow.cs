@@ -1,9 +1,10 @@
-﻿using System.Windows.Controls;
-using System.Windows.Shapes;
-using System.Windows;
+﻿using MSB.UI.Controls;
+using MSB.Extensions;
 using System.ComponentModel;
 using System.Windows.Input;
-using MSB.UI.Controls;
+using System.Windows.Controls;
+using System.Windows.Shapes;
+using System.Windows;
 
 namespace MSB.UI
 {
@@ -23,6 +24,8 @@ namespace MSB.UI
         internal DialogWindow()
         {
             this.DefaultStyleKey = typeof(DialogWindow);
+
+            this.GetAssemblyIcon();
         }
 
         #region Properties

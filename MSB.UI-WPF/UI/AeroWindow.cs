@@ -1,8 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using MSB.Extensions;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 using System.Windows.Input;
 using System.Windows;
-using MSB.UI.Controls;
 using System;
 
 namespace MSB.UI
@@ -22,6 +22,8 @@ namespace MSB.UI
         public AeroWindow()
         {
             this.DefaultStyleKey = typeof(AeroWindow);
+
+            this.GetAssemblyIcon();
         }
 
         #region Properties
@@ -59,16 +61,6 @@ namespace MSB.UI
         }
 
         /// <summary>
-        /// Gets the flyout of the window.
-        /// </summary>
-        [Obsolete]
-        public Flyout Flyout
-        {
-            get => (Flyout)GetValue(FlyoutProperty);
-            set => SetValue(FlyoutProperty, value);
-        }
-
-        /// <summary>
         /// Gets or sets a value indicating whether the flyout is open.
         /// </summary>
         [Obsolete]
@@ -98,13 +90,6 @@ namespace MSB.UI
         /// </summary>
         public static readonly DependencyProperty IsTitleVisibleProperty =
                 DependencyProperty.Register(nameof(IsTitleVisible), typeof(bool), typeof(AeroWindow), new PropertyMetadata(true));
-
-        /// <summary>
-        /// Identifies the FlyoutContent dependency property.
-        /// </summary>
-        [Obsolete]
-        public static readonly DependencyProperty FlyoutProperty =
-                DependencyProperty.Register(nameof(Flyout), typeof(Flyout), typeof(AeroWindow), new PropertyMetadata(null));
 
         /// <summary>
         /// Identifies the IsFlyoutOpen dependency property.
